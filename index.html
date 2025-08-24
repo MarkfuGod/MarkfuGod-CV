@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MarkfuGod - 项目作品集</title>
+    <title>MarkfuGod - 简历</title>
     <style>
         * {
             margin: 0;
@@ -12,553 +12,345 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
-
-        .container {
-            max-width: 1200px;
+            font-family: 'Times New Roman', serif;
+            line-height: 1.4;
+            color: #000;
+            background-color: #fff;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 40px 60px;
         }
 
         .header {
             text-align: center;
-            margin-bottom: 50px;
-            color: white;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 20px;
         }
 
-        .header h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-
-        .project-card {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-
-        .project-title {
-            font-size: 1.5rem;
+        .name {
+            font-size: 2.5rem;
             font-weight: bold;
-            margin-bottom: 10px;
-            color: #2c3e50;
-        }
-
-        .project-subtitle {
-            font-size: 1rem;
-            color: #7f8c8d;
             margin-bottom: 15px;
-            font-style: italic;
-        }
-
-        .project-description {
-            margin-bottom: 20px;
-            color: #555;
-            line-height: 1.7;
-        }
-
-        .tech-stack {
-            margin-bottom: 20px;
-        }
-
-        .tech-stack h4 {
-            margin-bottom: 10px;
-            color: #2c3e50;
-        }
-
-        .tech-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .tech-tag {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .project-features {
-            margin-bottom: 20px;
-        }
-
-        .project-features h4 {
-            margin-bottom: 10px;
-            color: #2c3e50;
-        }
-
-        .project-features ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .project-features li {
-            padding: 5px 0;
-            position: relative;
-            padding-left: 20px;
-        }
-
-        .project-features li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: #27ae60;
-            font-weight: bold;
-        }
-
-        .project-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-        }
-
-        .btn-primary {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        .btn-secondary {
-            background: #ecf0f1;
-            color: #2c3e50;
-            border: 2px solid #bdc3c7;
-        }
-
-        .btn-secondary:hover {
-            background: #d5dbdb;
-            border-color: #95a5a6;
-        }
-
-        .contact-section {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        .contact-section h2 {
-            margin-bottom: 20px;
-            color: #2c3e50;
+            letter-spacing: 2px;
         }
 
         .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
+            font-size: 1rem;
+            margin-bottom: 10px;
         }
 
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #555;
+        .contact-info a {
+            color: #0066cc;
+            text-decoration: none;
         }
 
-        .icon {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
+        .contact-info a:hover {
+            text-decoration: underline;
         }
 
-        .info-section {
-            margin-bottom: 50px;
+        .section {
+            margin-bottom: 25px;
         }
 
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .info-card {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .info-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-        }
-
-        .info-card h3 {
-            font-size: 1.3rem;
-            color: #2c3e50;
-            margin-bottom: 20px;
+        .section-title {
+            font-size: 1.2rem;
             font-weight: bold;
+            text-transform: uppercase;
+            border-bottom: 1px solid #000;
+            margin-bottom: 15px;
+            padding-bottom: 3px;
+            letter-spacing: 1px;
         }
 
         .education-item {
+            margin-bottom: 20px;
+        }
+
+        .education-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 5px;
+        }
+
+        .university {
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .date {
+            font-style: italic;
+            font-size: 0.95rem;
+        }
+
+        .degree {
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+
+        .education-details {
+            margin-left: 0;
+            font-size: 0.9rem;
+        }
+
+        .education-details li {
+            margin-bottom: 3px;
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+
+        .publication-item {
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            text-align: justify;
+        }
+
+        .publication-number {
+            font-weight: bold;
+        }
+
+        .author-name {
+            font-weight: bold;
+        }
+
+        .paper-title {
+            font-style: italic;
+        }
+
+        .conference {
+            font-weight: bold;
+        }
+
+        .author-role {
+            font-style: italic;
+        }
+
+        .experience-item {
+            margin-bottom: 20px;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 5px;
+        }
+
+        .position {
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .company {
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .location {
+            font-style: italic;
+            font-size: 0.95rem;
+        }
+
+        .experience-description {
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        .project-item {
             margin-bottom: 15px;
         }
 
-        .education-main {
+        .project-title {
+            font-weight: bold;
             font-size: 1rem;
             margin-bottom: 5px;
         }
 
-        .education-details {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .project-description {
             font-size: 0.9rem;
-            color: #666;
+            margin-bottom: 5px;
         }
 
-        .gpa {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .language-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
-            flex-wrap: wrap;
-        }
-
-        .language-test {
-            font-weight: 500;
-            color: #2c3e50;
-            min-width: 120px;
-        }
-
-        .language-score {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 15px;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        .language-date {
-            font-size: 0.8rem;
-            color: #666;
+        .tech-stack {
+            font-size: 0.85rem;
+            color: #555;
             font-style: italic;
         }
 
-        .section-header {
-            text-align: center;
-            margin-bottom: 30px;
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
         }
 
-        .section-header h2 {
-            font-size: 2rem;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        .skill-category {
+            margin-bottom: 10px;
+        }
+
+        .skill-title {
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .skill-list {
+            font-size: 0.85rem;
+            line-height: 1.3;
         }
 
         @media (max-width: 768px) {
-            .header h1 {
+            body {
+                padding: 20px 30px;
+            }
+            
+            .name {
                 font-size: 2rem;
             }
             
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .project-links {
-                flex-direction: column;
-            }
-            
-            .contact-info {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .info-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .education-details {
+            .education-header,
+            .experience-header {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 5px;
             }
-
-            .language-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 5px;
+            
+            .date,
+            .location {
+                margin-top: 5px;
             }
+        }
 
-            .language-test {
-                min-width: auto;
+        @media print {
+            body {
+                padding: 20px;
+                font-size: 12px;
+            }
+            
+            .name {
+                font-size: 24px;
+            }
+            
+            .section-title {
+                font-size: 14px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <h1>MarkfuGod</h1>
-            <p>I'm currently exploring job opportunities in the AI field. If you're interested, feel free to check out the GitHub repository linked below!</p>
-        </header>
+    <div class="header">
+        <h1 class="name">MarkfuGod</h1>
+        <div class="contact-info">
+            <strong>Phone:</strong> +86 15604029747 / +852 98251473 | 
+            <strong>E-mail:</strong> <a href="mailto:MarkfuGod@outlook.com">MarkfuGod@outlook.com</a> | 
+            <strong>GitHub:</strong> <a href="https://github.com/MarkfuGod" target="_blank">github.com/MarkfuGod</a>
+        </div>
+    </div>
 
-        <!-- Education and Language Section -->
-        <div class="info-section">
-            <div class="info-grid">
-                <div class="info-card">
-                    <h3>教育经历</h3>
-                    <div class="education-item">
-                        <div class="education-main">
-                            <strong>郑州大学</strong> - BEng in Software Engineering
-                        </div>
-                        <div class="education-details">
-                            <span>2021.9 - 2025.7</span>
-                            <span class="gpa">GPA: 86.5</span>
-                        </div>
-                    </div>
-                    <div class="education-item">
-                        <div class="education-main">
-                            <strong>香港大学</strong> - MSc in Computer Science
-                        </div>
-                        <div class="education-details">
-                            <span>在读</span>
-                        </div>
-                    </div>
+    <div class="section">
+        <h2 class="section-title">Education</h2>
+        
+        <div class="education-item">
+            <div class="education-header">
+                <div>
+                    <div class="university">香港大学, 香港</div>
+                    <div class="degree">Master of Computer Science</div>
                 </div>
-                
-                <div class="info-card">
-                    <h3>语言能力</h3>
-                    <div class="language-item">
-                        <span class="language-test">CET-4/CET-6:</span>
-                        <span class="language-score">610/600</span>
-                    </div>
-                    <div class="language-item">
-                        <span class="language-test">IELTS (Academic):</span>
-                        <span class="language-score">7.5 (6.5)</span>
-                        <span class="language-date">taken in 2024.2</span>
-                    </div>
+                <div class="date">在读</div>
+            </div>
+            <ul class="education-details">
+                <li><strong>研究方向:</strong> 人工智能, 机器学习, 自然语言处理</li>
+                <li><strong>核心课程:</strong> Advanced Machine Learning, Natural Language Processing, Computer Vision, Deep Learning</li>
+            </ul>
+        </div>
+
+        <div class="education-item">
+            <div class="education-header">
+                <div>
+                    <div class="university">郑州大学, 郑州, 中国</div>
+                    <div class="degree">Bachelor of Software Engineering</div>
                 </div>
+                <div class="date">Sep 2021 - Jul 2025 (Expected)</div>
+            </div>
+            <ul class="education-details">
+                <li><strong>平均成绩:</strong> 86.5/100.0, GPA: 3.46/4.00</li>
+                <li><strong>研究领域:</strong> 人工智能代理系统, 自然语言处理, 软件工程</li>
+                <li><strong>核心课程:</strong> 高等数学, 线性代数, C语言程序设计, 数据结构, 概率论与数理统计, 离散数学, 操作系统, 数据库系统, 计算机组成原理, 计算机体系结构, 计算机网络</li>
+                <li><strong>语言能力:</strong> CET-4: 610, CET-6: 600, IELTS (Academic): 7.5 (6.5) - 2024年2月</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">Research Projects</h2>
+        
+        <div class="project-item">
+            <div class="project-title">[1] NL2BP - 自然语言到UML蓝图转换系统</div>
+            <div class="project-description">
+                创新的AI系统，通过多代理协作将自然语言需求自动转换为标准化的UML蓝图。本科毕业设计项目，主要负责文献调研、多代理平台部署、模型设计和评估工作。
+            </div>
+            <div class="tech-stack">
+                <strong>技术栈:</strong> AI Agent, NLP, PlantUML, 工作流设计, 多代理系统, CrewAI
+            </div>
+            <div class="tech-stack">
+                <strong>项目链接:</strong> <a href="https://github.com/MarkfuGod/NL2BP-Natural-Language-to-UML-Blueprints" target="_blank">github.com/MarkfuGod/NL2BP-Natural-Language-to-UML-Blueprints</a>
             </div>
         </div>
 
-        <!-- Projects Section Header -->
-        <div class="section-header">
-            <h2>项目介绍</h2>
-        </div>
-
-        <div class="projects-grid">
-            <!-- Project 1: NL2BP -->
-            <div class="project-card">
-                <h3 class="project-title">NL2BP - 自然语言到UML蓝图</h3>
-                <p class="project-subtitle">AI驱动的开发工作流设计系统</p>
-                
-                <div class="project-description">
-                    创新的AI系统，通过多代理协作将自然语言需求自动转换为标准化的UML蓝图，大幅提升软件开发效率和需求理解准确性。
-                </div>
-
-                <div class="tech-stack">
-                    <h4>技术栈</h4>
-                    <div class="tech-tags">
-                        <span class="tech-tag">AI Agent</span>
-                        <span class="tech-tag">NLP</span>
-                        <span class="tech-tag">PlantUML</span>
-                        <span class="tech-tag">工作流设计</span>
-                        <span class="tech-tag">多代理系统</span>
-                    </div>
-                </div>
-
-                <div class="project-features">
-                    <h4>核心特性</h4>
-                    <ul>
-                        <li>单代理角色切换模式</li>
-                        <li>多代理并行协作模式</li>
-                        <li>自动UML图表生成</li>
-                        <li>完整的工作流模板</li>
-                        <li>智能需求分析</li>
-                    </ul>
-                </div>
-
-                <div class="project-links">
-                    <a href="https://github.com/MarkfuGod/NL2BP-Natural-Language-to-UML-Blueprints" class="btn btn-primary" target="_blank">
-                        <svg class="icon" viewBox="0 0 24 24">
-                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                        </svg>
-                        查看源码
-                    </a>
-                </div>
+        <div class="project-item">
+            <div class="project-title">[2] 手部康复与疲劳缓解系统</div>
+            <div class="project-description">
+                结合计算机视觉和游戏化设计的创新康复系统，通过实时手势识别为用户提供个性化的手部康复训练。负责技术框架选择、游戏设计实现和团队协作领导。
             </div>
-
-            <!-- Project 2: Hand Recovery -->
-            <div class="project-card">
-                <h3 class="project-title">手部康复与疲劳缓解系统</h3>
-                <p class="project-subtitle">基于MediaPipe的智能康复训练平台</p>
-                
-                <div class="project-description">
-                    结合计算机视觉和游戏化设计的创新康复系统，通过实时手势识别为用户提供个性化的手部康复训练，有效缓解手部疲劳。
-                </div>
-
-                <div class="tech-stack">
-                    <h4>技术栈</h4>
-                    <div class="tech-tags">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">MediaPipe</span>
-                        <span class="tech-tag">OpenCV</span>
-                        <span class="tech-tag">Pygame</span>
-                        <span class="tech-tag">Vue.js</span>
-                        <span class="tech-tag">计算机视觉</span>
-                    </div>
-                </div>
-
-                <div class="project-features">
-                    <h4>核心特性</h4>
-                    <ul>
-                        <li>实时手势识别与追踪</li>
-                        <li>多种训练模式（挑战/正常/康复）</li>
-                        <li>游戏化康复体验</li>
-                        <li>个性化训练方案</li>
-                        <li>训练数据可视化</li>
-                    </ul>
-                </div>
-
-                <div class="project-links">
-                    <a href="https://github.com/MarkfuGod/Hand-Recovery-And-Fatigue-Relief-Using-Mediapipe" class="btn btn-primary" target="_blank">
-                        <svg class="icon" viewBox="0 0 24 24">
-                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                        </svg>
-                        查看源码
-                    </a>
-                </div>
+            <div class="tech-stack">
+                <strong>技术栈:</strong> Python, MediaPipe, OpenCV, Pygame
             </div>
-
-            <!-- Project 3: Commissaire -->
-            <div class="project-card">
-                <h3 class="project-title">Commissaire</h3>
-                <p class="project-subtitle">Roguelike风格Web游戏</p>
-                
-                <div class="project-description">
-                    使用现代Web技术开发的Roguelike风格游戏，具有丰富的游戏机制、精美的像素艺术风格和流畅的游戏体验。
-                </div>
-
-                <div class="tech-stack">
-                    <h4>技术栈</h4>
-                    <div class="tech-tags">
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">Node.js</span>
-                        <span class="tech-tag">HTML5 Canvas</span>
-                        <span class="tech-tag">游戏开发</span>
-                        <span class="tech-tag">Roguelike</span>
-                    </div>
-                </div>
-
-                <div class="project-features">
-                    <h4>核心特性</h4>
-                    <ul>
-                        <li>经典Roguelike游戏机制</li>
-                        <li>随机地图生成</li>
-                        <li>精美的像素艺术</li>
-                        <li>流畅的游戏体验</li>
-                        <li>支持热重载开发</li>
-                    </ul>
-                </div>
-
-                <div class="project-links">
-                    <a href="https://github.com/MarkfuGod/Commissaire" class="btn btn-primary" target="_blank">
-                        <svg class="icon" viewBox="0 0 24 24">
-                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                        </svg>
-                        查看源码
-                    </a>
-                </div>
+            <div class="tech-stack">
+                <strong>项目链接:</strong> <a href="https://github.com/MarkfuGod/Hand-Recovery-And-Fatigue-Relief-Using-Mediapipe" target="_blank">github.com/MarkfuGod/Hand-Recovery-And-Fatigue-Relief-Using-Mediapipe</a>
             </div>
         </div>
 
-        <div class="contact-section">
-            <h2>联系方式</h2>
-            <div class="contact-info">
-                <div class="contact-item">
-                    <svg class="icon" viewBox="0 0 24 24">
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                    </svg>
-                    <a href="https://github.com/MarkfuGod" target="_blank" style="color: inherit; text-decoration: none;">GitHub: MarkfuGod</a>
-                </div>
-                <div class="contact-item">
-                    <svg class="icon" viewBox="0 0 24 24">
-                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                    </svg>
-                    <a href="mailto:MarkfuGod@outlook.com" style="color: inherit; text-decoration: none;">MarkfuGod@outlook.com</a>
-                </div>
-                <div class="contact-item">
-                    <svg class="icon" viewBox="0 0 24 24">
-                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                    </svg>
-                    <span>香港大学</span>
-                </div>
+        <div class="project-item">
+            <div class="project-title">[3] Commissaire - Roguelike游戏开发</div>
+            <div class="project-description">
+                使用现代Web技术开发的Roguelike风格游戏，具有丰富的游戏机制、精美的像素艺术风格和流畅的游戏体验。负责基本框架搭建、游戏内容添加和优化。
             </div>
+            <div class="tech-stack">
+                <strong>技术栈:</strong> JavaScript, Node.js, HTML5 Canvas, 游戏开发, Roguelike
+            </div>
+            <div class="tech-stack">
+                <strong>项目链接:</strong> <a href="https://github.com/MarkfuGod/Commissaire" target="_blank">github.com/MarkfuGod/Commissaire</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">Technical Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <div class="skill-title">编程语言</div>
+                <div class="skill-list">Python, JavaScript, C/C++, Java, HTML/CSS</div>
+            </div>
+            <div class="skill-category">
+                <div class="skill-title">AI/ML框架</div>
+                <div class="skill-list">CrewAI, MediaPipe, OpenCV, TensorFlow, PyTorch</div>
+            </div>
+            <div class="skill-category">
+                <div class="skill-title">Web开发</div>
+                <div class="skill-list">Node.js, Vue.js, HTML5 Canvas, RESTful API</div>
+            </div>
+            <div class="skill-category">
+                <div class="skill-title">工具与平台</div>
+                <div class="skill-list">Git, Docker, PlantUML, Pygame, 多代理系统</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">Research Interests</h2>
+        <div class="project-description">
+            人工智能代理系统 (AI Agent Systems), 自然语言处理 (Natural Language Processing), 
+            多代理协作 (Multi-Agent Collaboration), 计算机视觉 (Computer Vision), 
+            软件工程自动化 (Software Engineering Automation), 游戏开发 (Game Development)
         </div>
     </div>
 </body>
