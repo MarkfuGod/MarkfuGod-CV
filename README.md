@@ -104,7 +104,6 @@ open index.html  # macOS
 
 ## 📞 联系方式
 
-- **电话**: +86 15604029747 / +852 98251473
 - **邮箱**: [MarkfuGod@outlook.com](mailto:MarkfuGod@outlook.com)
 - **GitHub**: [github.com/MarkfuGod](https://github.com/MarkfuGod)
 
