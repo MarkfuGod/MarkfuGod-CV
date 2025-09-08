@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NL2BP: Natural Language to UML Blueprint Conversion System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 60px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 20px;
+        }
+
+        .project-name {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .project-subtitle {
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 15px;
+            color: #666;
+        }
+
+        .project-links {
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+        }
+
+        .project-links a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .project-links a:hover {
+            text-decoration: underline;
+        }
+
+        .section {
+            margin-bottom: 35px;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-bottom: 1px solid #333;
+            margin-bottom: 20px;
+            padding-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        .abstract {
+            background-color: #f8f9fa;
+            border-left: 4px solid #0066cc;
+            padding: 20px;
+            margin: 25px 0;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .feature-item {
+            margin-bottom: 25px;
+        }
+
+        .feature-title {
+            font-weight: bold;
+            font-size: 1.05rem;
+            margin-bottom: 8px;
+        }
+
+        .feature-description {
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .tech-stack {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        .workflow-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        .workflow-card {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #fafafa;
+        }
+
+        .workflow-title {
+            font-weight: bold;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .workflow-features {
+            font-size: 0.9rem;
+        }
+
+        .workflow-features li {
+            margin-bottom: 6px;
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+
+        .agent-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .agent-category {
+            margin-bottom: 15px;
+        }
+
+        .agent-title {
+            font-weight: bold;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+
+        .agent-list {
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .highlight-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid #0066cc;
+            padding: 20px;
+            margin: 25px 0;
+        }
+
+        .highlight-title {
+            font-weight: bold;
+            font-size: 1rem;
+            margin-bottom: 12px;
+            color: #0066cc;
+        }
+
+        .highlight-content {
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .diagram-container {
+            text-align: center;
+            margin: 25px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fafafa;
+        }
+
+        .diagram-container img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .diagram-caption {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        .implementation-details {
+            background-color: #f0f8ff;
+            border: 1px solid #b0d4f1;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .implementation-title {
+            font-weight: bold;
+            font-size: 1rem;
+            margin-bottom: 10px;
+            color: #0066cc;
+        }
+
+        .code-block {
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 30px;
+            }
+            
+            .project-name {
+                font-size: 1.8rem;
+            }
+            
+            .workflow-comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media print {
+            body {
+                padding: 20px;
+                font-size: 12px;
+            }
+            
+            .project-name {
+                font-size: 20px;
+            }
+            
+            .section-title {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1 class="project-name">NL2BP</h1>
+        <div class="project-subtitle">Natural Language to UML Blueprint Conversion System</div>
+        <div class="project-links">
+            <strong>GitHub:</strong> <a href="https://github.com/MarkfuGod/NL2BP-Natural-Language-to-UML-Blueprints" target="_blank">github.com/MarkfuGod/NL2BP-Natural-Language-to-UML-Blueprints</a> | 
+            <strong>License:</strong> MIT | 
+            <strong>Framework:</strong> CrewAI, PlantUML
+        </div>
+    </div>
+
+    <div class="abstract">
+        <strong>Abstract.</strong> This project presents an AI-driven workflow system for converting natural language requirements into standardized UML blueprints. The system implements two complementary approaches: single-agent role-switching and multi-agent collaboration patterns. Through specialized AI agents with defined roles and responsibilities, the system automates the software development lifecycle from requirements analysis to UML diagram generation, providing enterprise-grade PlantUML output and comprehensive workflow templates.
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">System Architecture</h2>
+        
+        <div class="feature-item">
+            <div class="feature-title">Dual-Mode Workflow Design</div>
+            <div class="feature-description">
+                The system implements two distinct workflow patterns to accommodate different development scenarios and complexity levels. The single-agent approach utilizes role-switching mechanisms, while the multi-agent approach employs parallel collaboration patterns.
+            </div>
+        </div>
+
+        <div class="diagram-container">
+            <img src="./single_agent_workflow.drawio.svg" alt="Single-Agent Multi-Role Workflow">
+            <div class="diagram-caption">Figure 1: Single-agent multi-role workflow with 7 specialized roles</div>
+        </div>
+
+        <div class="diagram-container">
+            <img src="./multi_agent_workflow.svg" alt="Multi-Agent Collaborative Workflow">
+            <div class="diagram-caption">Figure 2: Multi-agent collaborative workflow with 9 specialized agents</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">Agent Role Specifications</h2>
+        
+        <div class="feature-item">
+            <div class="feature-title">Blueprint Designer Agent Profile</div>
+            <div class="feature-description">
+                The Blueprint Designer serves as a core component in the workflow, responsible for converting architectural designs and requirements into visual UML diagrams using PlantUML syntax.
+            </div>
+        </div>
+
+        <div class="diagram-container">
+            <img src="./BlueprintWirter_Profile.drawio.svg" alt="Blueprint Designer Agent Profile">
+            <div class="diagram-caption">Figure 3: Blueprint Designer agent profile and capabilities</div>
+        </div>
+
+        <div class="implementation-details">
+            <div class="implementation-title">Agent Capabilities</div>
+            <ul>
+                <li><strong>Input Processing:</strong> Architecture Designer and Requirement Document outputs</li>
+                <li><strong>Diagram Generation:</strong> Use Case, Class, Sequence, Activity, Component, Deployment diagrams</li>
+                <li><strong>Quality Assurance:</strong> PlantUML syntax validation and naming consistency</li>
+                <li><strong>Output Format:</strong> Standardized PlantUML code with explanatory documentation</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">Workflow Comparison</h2>
+        
+        <div class="workflow-comparison">
+            <div class="workflow-card">
+                <div class="workflow-title">Single-Agent Multi-Role</div>
+                <ul class="workflow-features">
+                    <li>Sequential role execution with 7 specialized roles</li>
+                    <li>Requirements Analyst → System Architect → Blueprint Designer → Coder → Code Reviewer → Deployer & Debugger → Code Critic</li>
+                    <li>Suitable for linear development processes</li>
+                    <li>Lower resource consumption</li>
+                    <li>Simplified debugging and control</li>
+                </ul>
+            </div>
+            
+            <div class="workflow-card">
+                <div class="workflow-title">Multi-Agent Collaboration</div>
+                <ul class="workflow-features">
+                    <li>Parallel execution with 9 specialized agents</li>
+                    <li>System Design, Requirements Analysis, Blueprint Design, Frontend/Backend Design, Version Control, Agile Dashboard, Feedback Planning, Human Collaborator</li>
+                    <li>Ideal for complex agile development</li>
+                    <li>Real-time progress monitoring</li>
+                    <li>Intelligent version management</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">Implementation Framework</h2>
+        
+        <div class="feature-item">
+            <div class="feature-title">CrewAI Integration</div>
+            <div class="feature-description">
+                The multi-agent system is implemented using CrewAI framework, providing structured agent definitions, task orchestration, and inter-agent communication mechanisms.
+            </div>
+        </div>
+
+        <div class="code-block">
+# Agent Definition Example
+from crewai import Agent, Task, Crew
+
+requirements_agent = Agent(
+    role='Requirements Analyst',
+    goal='Analyze and refine user requirements, create prioritized requirement lists',
+    backstory='Experienced requirements analyst skilled at converting vague user requirements into clear functional specifications.',
+    verbose=True
+)
+
+# Task Definition
+requirements_task = Task(
+    description='Analyze user requirements and generate structured requirement documents',
+    agent=requirements_agent
+)
+        </div>
+
+        <div class="feature-item">
+            <div class="feature-title">PlantUML Diagram Generation</div>
+            <div class="feature-description">
+                The system generates standardized PlantUML diagrams with comprehensive syntax validation and naming conventions. Each diagram includes detailed explanations and follows enterprise-grade formatting standards.
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">Generated UML Examples</h2>
+        
+        <div class="feature-item">
+            <div class="feature-title">System Architecture Diagram</div>
+            <div class="feature-description">
+                Layered architecture design demonstrating system component relationships and dependencies across presentation, API gateway, security, business logic, data access, utility, and storage layers.
+            </div>
+        </div>
+
+        <div class="diagram-container">
+            <img src="./system_architecture_layers.svg" alt="System Architecture Layers">
+            <div class="diagram-caption">Figure 4: Teacher attendance system layered architecture</div>
+        </div>
+
+        <div class="feature-item">
+            <div class="feature-title">API Interaction Sequence</div>
+            <div class="feature-description">
+                Complete API interaction flow showing authentication, check-in/check-out processes, record viewing, and statistical analysis with all system component interactions.
+            </div>
+        </div>
+
+        <div class="diagram-container">
+            <img src="./api_interaction_sequence.svg" alt="API Interaction Sequence">
+            <div class="diagram-caption">Figure 5: Complete API interaction sequence diagram</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">Technical Contributions</h2>
+        
+        <div class="highlight-box">
+            <div class="highlight-title">Workflow Design Innovation</div>
+            <div class="highlight-content">
+                • <strong>Dual-Mode Architecture:</strong> First implementation combining single-agent role-switching with multi-agent collaboration<br>
+                • <strong>Complete Development Lifecycle:</strong> End-to-end AI-driven development process from requirements to deployment<br>
+                • <strong>Enterprise-Grade Output:</strong> Standardized UML diagrams and documentation meeting industrial standards
+            </div>
+        </div>
+
+        <div class="highlight-box">
+            <div class="highlight-title">Technical Implementation</div>
+            <div class="highlight-content">
+                • <strong>Scalable Design:</strong> Modular architecture supporting easy addition of new agent roles and functionalities<br>
+                • <strong>Practical Templates:</strong> Ready-to-use prompt templates applicable to any LLM<br>
+                • <strong>Standardization:</strong> Adherence to UML standards and software engineering best practices<br>
+                • <strong>Agile Support:</strong> Iterative development process design with continuous integration
+            </div>
+        </div>
+
+        <div class="highlight-box">
+            <div class="highlight-title">Academic and Practical Value</div>
+            <div class="highlight-content">
+                • <strong>Academic Contribution:</strong> Undergraduate thesis project demonstrating AI innovation in software engineering automation<br>
+                • <strong>Efficiency Enhancement:</strong> Automated requirements analysis and system design, significantly improving development efficiency<br>
+                • <strong>Quality Assurance:</strong> Standardized design processes ensuring output quality and consistency<br>
+                • <strong>Open Source Impact:</strong> MIT-licensed solution providing reusable framework for AI+software engineering community
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">Technical Stack</h2>
+        <div class="agent-grid">
+            <div class="agent-category">
+                <div class="agent-title">AI/ML Frameworks</div>
+                <div class="agent-list">CrewAI, Multi-Agent Systems, Prompt Engineering, LLM Integration</div>
+            </div>
+            <div class="agent-category">
+                <div class="agent-title">Modeling Tools</div>
+                <div class="agent-list">PlantUML, UML Modeling, Diagram Generation, Code Automation</div>
+            </div>
+            <div class="agent-category">
+                <div class="agent-title">Development Tools</div>
+                <div class="agent-list">Python, Git, Docker, Agile Development, Version Control</div>
+            </div>
+            <div class="agent-category">
+                <div class="agent-title">Software Engineering</div>
+                <div class="agent-list">Requirements Analysis, System Design, Quality Assurance, DevOps</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">Conclusion</h2>
+        <div class="feature-description">
+            The NL2BP system represents a significant advancement in AI-driven software engineering automation. By combining single-agent role-switching with multi-agent collaboration patterns, the system provides a comprehensive solution for converting natural language requirements into standardized UML blueprints. The implementation demonstrates practical applicability in enterprise environments while contributing to the academic understanding of AI applications in software engineering. The open-source nature of the project enables further research and development in this emerging field.
+        </div>
+    </div>
+</body>
+</html>
