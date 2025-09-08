@@ -23,12 +23,12 @@
 
 ## 🚀 核心项目
 
-### [1] NL2BP - 自然语言到UML蓝图转换系统
+### [1] NL2BP - 自然语言到UML蓝图转换系统 (Supervised by Prof. Bo Ji, 姬波教授)
 - **技术栈**: AI Agent, NLP, PlantUML, CrewAI, 多代理系统
 - **描述**: 创新的AI系统，通过多代理协作将自然语言需求自动转换为标准化的UML蓝图
 - **链接**: [GitHub Repository](https://github.com/MarkfuGod/NL2BP-Natural-Language-to-UML-Blueprints)
 
-### [2] 手部康复与疲劳缓解系统
+### [2] 手部康复与疲劳缓解系统 (Supervised by Prof. Bo Ji, 姬波教授)
 - **技术栈**: Python, MediaPipe, OpenCV, Pygame
 - **描述**: 结合计算机视觉和游戏化设计的创新康复系统
 - **链接**: [GitHub Repository](https://github.com/MarkfuGod/Hand-Recovery-And-Fatigue-Relief-Using-Mediapipe)
