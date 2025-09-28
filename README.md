@@ -1,4 +1,4 @@
-# 盖一帆 (MarkfuGod) - 个人简历
+# MarkfuGod - 个人简历
 
 [![GitHub](https://img.shields.io/badge/GitHub-MarkfuGod-blue?style=flat-square&logo=github)](https://github.com/MarkfuGod)
 [![Email](https://img.shields.io/badge/Email-MarkfuGod@outlook.com-red?style=flat-square&logo=microsoft-outlook)](mailto:MarkfuGod@outlook.com)
