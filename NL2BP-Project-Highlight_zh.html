@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NL2BP: 自然语言到UML蓝图转换系统</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 60px;
+        }
+
+        .language-switch {
+            text-align: right;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .language-switch a {
+            color: #0066cc;
+            text-decoration: none;
+            padding: 5px 10px;
+            border: 1px solid #0066cc;
+            border-radius: 3px;
+        }
+
+        .language-switch a:hover {
+            background-color: #0066cc;
+            color: white;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 20px;
+        }
+
+        .project-name {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .project-subtitle {
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 15px;
+            color: #666;
+        }
+
+        .project-links {
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+        }
+
+        .project-links a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .project-links a:hover {
+            text-decoration: underline;
+        }
+
+        .section {
+            margin-bottom: 35px;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-bottom: 1px solid #333;
+            margin-bottom: 20px;
+            padding-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        .abstract {
+            background-color: #f8f9fa;
+            border-left: 4px solid #0066cc;
+            padding: 20px;
+            margin: 25px 0;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .feature-item {
+            margin-bottom: 25px;
+        }
+
+        .feature-title {
+            font-weight: bold;
+            font-size: 1.05rem;
+            margin-bottom: 8px;
+        }
+
+        .feature-description {
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .tech-stack {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        .workflow-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        .workflow-card {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #fafafa;
+        }
+
+        .workflow-title {
+            font-weight: bold;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .workflow-features {
+            font-size: 0.9rem;
+        }
+
+        .workflow-features li {
+            margin-bottom: 6px;
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+
+        .agent-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .agent-category {
+            margin-bottom: 15px;
+        }
+
+        .agent-title {
+            font-weight: bold;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+
+        .agent-list {
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .highlight-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid #0066cc;
+            padding: 20px;
+            margin: 25px 0;
+        }
+
+        .highlight-title {
+            font-weight: bold;
+            font-size: 1rem;
+            margin-bottom: 12px;
+            color: #0066cc;
+        }
+
+        .highlight-content {
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .diagram-container {
+            text-align: center;
+            margin: 25px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fafafa;
+        }
+
+        .diagram-container img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .diagram-caption {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        .implementation-details {
+            background-color: #f0f8ff;
+            border: 1px solid #b0d4f1;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .implementation-title {
+            font-weight: bold;
+            font-size: 1rem;
+            margin-bottom: 10px;
+            color: #0066cc;
+        }
+
+        .code-block {
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 30px;
+            }
+            
+            .project-name {
+                font-size: 1.8rem;
+            }
+            
+            .workflow-comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media print {
+            .language-switch {
+                display: none;
+            }
+
+            body {
+                padding: 20px;
+                font-size: 12px;
+            }
+            
+            .project-name {
+                font-size: 20px;
+            }
+            
+            .section-title {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switch">
+        <a href="NL2BP-Project-Highlight_en.html">English Version</a>
+    </div>
+
+    <div class="header">
+        <h1 class="project-name">NL2BP</h1>
+        <div class="project-subtitle">自然语言到UML蓝图转换系统</div>
+        <div class="project-links">
+            <strong>GitHub:</strong> <a href="https://github.com/MarkfuGod/NL2BP-Natural-Language-to-UML-Blueprints" target="_blank">github.com/MarkfuGod/NL2BP-Natural-Language-to-UML-Blueprints</a> | 
+            <strong>许可证:</strong> MIT | 
+            <strong>技术框架:</strong> CrewAI, PlantUML
+        </div>
+    </div>
+
+    <div class="abstract">
+        <strong>摘要.</strong> 本项目提出了一个人工智能驱动的工作流系统，用于将自然语言需求转换为标准化的UML蓝图。系统实现了两种互补的方法：单代理角色切换模式和多代理协作模式。通过具有明确角色和职责的专业化AI代理，系统自动化了从需求分析到UML图生成的整个软件开发生命周期，提供企业级的PlantUML输出和全面的工作流模板。
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">系统架构</h2>
+        
+        <div class="feature-item">
+            <div class="feature-title">双模式工作流设计</div>
+            <div class="feature-description">
+                系统实现了两种不同的工作流模式，以适应不同的开发场景和复杂度级别。单代理方法利用角色切换机制，而多代理方法采用并行协作模式。
+            </div>
+        </div>
+
+        <div class="diagram-container">
+            <img src="./single_agent_workflow.drawio.svg" alt="单代理多角色工作流">
+            <div class="diagram-caption">图1: 具有7个专业化角色的单代理多角色工作流</div>
+        </div>
+
+        <div class="diagram-container">
+            <img src="./multi_agent_workflow.svg" alt="多代理协作工作流">
+            <div class="diagram-caption">图2: 具有9个专业化代理的多代理协作工作流</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">代理角色规范</h2>
+        
+        <div class="feature-item">
+            <div class="feature-title">蓝图设计师代理配置</div>
+            <div class="feature-description">
+                蓝图设计师作为工作流中的核心组件，负责使用PlantUML语法将架构设计和需求转换为可视化的UML图表。
+            </div>
+        </div>
+
+        <div class="diagram-container">
+            <img src="./BlueprintWirter_Profile.drawio.svg" alt="蓝图设计师代理配置">
+            <div class="diagram-caption">图3: 蓝图设计师代理配置与能力</div>
+        </div>
+
+        <div class="implementation-details">
+            <div class="implementation-title">代理能力</div>
+            <ul>
+                <li><strong>输入处理:</strong> 架构设计师和需求文档的输出</li>
+                <li><strong>图表生成:</strong> 用例图、类图、序列图、活动图、组件图、部署图</li>
+                <li><strong>质量保证:</strong> PlantUML语法验证和命名一致性</li>
+                <li><strong>输出格式:</strong> 标准化的PlantUML代码和解释性文档</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">工作流对比</h2>
+        
+        <div class="workflow-comparison">
+            <div class="workflow-card">
+                <div class="workflow-title">单代理多角色</div>
+                <ul class="workflow-features">
+                    <li>7个专业化角色的顺序执行</li>
+                    <li>需求分析师 → 系统架构师 → 蓝图设计师 → 编码员 → 代码审查员 → 部署与调试员 → 代码评论员</li>
+                    <li>适用于线性开发流程</li>
+                    <li>资源消耗较低</li>
+                    <li>简化的调试和控制</li>
+                </ul>
+            </div>
+            
+            <div class="workflow-card">
+                <div class="workflow-title">多代理协作</div>
+                <ul class="workflow-features">
+                    <li>9个专业化代理的并行执行</li>
+                    <li>系统设计、需求分析、蓝图设计、前后端设计、版本控制、敏捷看板、反馈规划、人类协作者</li>
+                    <li>适用于复杂的敏捷开发</li>
+                    <li>实时进度监控</li>
+                    <li>智能版本管理</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">实现框架</h2>
+        
+        <div class="feature-item">
+            <div class="feature-title">CrewAI集成</div>
+            <div class="feature-description">
+                多代理系统使用CrewAI框架实现，提供结构化的代理定义、任务编排和代理间通信机制。
+            </div>
+        </div>
+
+        <div class="code-block">
+# 代理定义示例
+from crewai import Agent, Task, Crew
+
+requirements_agent = Agent(
+    role='需求分析师',
+    goal='分析和细化用户需求，创建优先级需求列表',
+    backstory='经验丰富的需求分析师，擅长将模糊的用户需求转化为清晰的功能规格',
+    verbose=True
+)
+
+# 任务定义
+requirements_task = Task(
+    description='分析用户需求并生成结构化需求文档',
+    agent=requirements_agent
+)
+        </div>
+
+        <div class="feature-item">
+            <div class="feature-title">PlantUML图表生成</div>
+            <div class="feature-description">
+                系统生成标准化的PlantUML图表，具有全面的语法验证和命名规范。每个图表都包含详细的解释，并遵循企业级格式标准。
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">生成的UML示例</h2>
+        
+        <div class="feature-item">
+            <div class="feature-title">系统架构图</div>
+            <div class="feature-description">
+                分层架构设计，展示了表示层、API网关、安全层、业务逻辑层、数据访问层、工具层和存储层之间的系统组件关系和依赖。
+            </div>
+        </div>
+
+        <div class="diagram-container">
+            <img src="./system_architecture_layers.svg" alt="系统架构层">
+            <div class="diagram-caption">图4: 教师考勤系统分层架构</div>
+        </div>
+
+        <div class="feature-item">
+            <div class="feature-title">API交互序列</div>
+            <div class="feature-description">
+                完整的API交互流程，展示了认证、签到/签出流程、记录查看和统计分析的所有系统组件交互。
+            </div>
+        </div>
+
+        <div class="diagram-container">
+            <img src="./api_interaction_sequence.svg" alt="API交互序列">
+            <div class="diagram-caption">图5: 完整的API交互序列图</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">技术贡献</h2>
+        
+        <div class="highlight-box">
+            <div class="highlight-title">工作流设计创新</div>
+            <div class="highlight-content">
+                • <strong>双模式架构:</strong> 首次实现将单代理角色切换与多代理协作相结合<br>
+                • <strong>完整开发生命周期:</strong> 从需求到部署的端到端AI驱动开发流程<br>
+                • <strong>企业级输出:</strong> 符合行业标准的标准化UML图表和文档
+            </div>
+        </div>
+
+        <div class="highlight-box">
+            <div class="highlight-title">技术实现</div>
+            <div class="highlight-content">
+                • <strong>可扩展设计:</strong> 模块化架构，支持轻松添加新的代理角色和功能<br>
+                • <strong>实用模板:</strong> 适用于任何LLM的即用型提示模板<br>
+                • <strong>标准化:</strong> 遵守UML标准和软件工程最佳实践<br>
+                • <strong>敏捷支持:</strong> 具有持续集成的迭代开发流程设计
+            </div>
+        </div>
+
+        <div class="highlight-box">
+            <div class="highlight-title">学术与实践价值</div>
+            <div class="highlight-content">
+                • <strong>学术贡献:</strong> 本科毕业论文项目，展示了软件工程自动化中的AI创新<br>
+                • <strong>效率提升:</strong> 自动化需求分析和系统设计，显著提高开发效率<br>
+                • <strong>质量保证:</strong> 标准化设计流程确保输出质量和一致性<br>
+                • <strong>开源影响:</strong> MIT许可的解决方案，为AI+软件工程社区提供可重用框架
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">技术栈</h2>
+        <div class="agent-grid">
+            <div class="agent-category">
+                <div class="agent-title">AI/ML框架</div>
+                <div class="agent-list">CrewAI, 多代理系统, 提示工程, LLM集成</div>
+            </div>
+            <div class="agent-category">
+                <div class="agent-title">建模工具</div>
+                <div class="agent-list">PlantUML, UML建模, 图表生成, 代码自动化</div>
+            </div>
+            <div class="agent-category">
+                <div class="agent-title">开发工具</div>
+                <div class="agent-list">Python, Git, Docker, 敏捷开发, 版本控制</div>
+            </div>
+            <div class="agent-category">
+                <div class="agent-title">软件工程</div>
+                <div class="agent-list">需求分析, 系统设计, 质量保证, DevOps</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">总结</h2>
+        <div class="feature-description">
+            NL2BP系统代表了AI驱动软件工程自动化的重大进步。通过结合单代理角色切换和多代理协作模式，系统提供了将自然语言需求转换为标准化UML蓝图的全面解决方案。该实现展示了在企业环境中的实际应用性，同时为AI在软件工程中应用的学术理解做出了贡献。项目的开源性质使这一新兴领域的进一步研究和开发成为可能。
+        </div>
+    </div>
+</body>
+</html>
+
