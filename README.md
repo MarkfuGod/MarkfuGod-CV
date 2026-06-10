@@ -1,4 +1,4 @@
-# Gaiyi Fan — CV & Profile
+# Gai Yifan — CV & Profile
 
 GitHub Pages site for resume and project write-ups.
 
