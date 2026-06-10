@@ -51,10 +51,9 @@
             </div>
             <div class="sub">HKU MSc project, supervised by Prof. Taku Komura.</div>
             <ul>
-                <li>Reproduced the released stack end to end (ZeroMQ inference server, LIBERO and RoboCasa evaluation under MuJoCo with headless EGL) and verified the official 2B checkpoint at 95.0–98.6% over 2,000 LIBERO episodes.</li>
-                <li>Recreated post-training from base weights: full fine-tune of InternVL3.5-4B with a Qwen3-4B action expert (mixture-of-transformers, flow matching) on 4 GPUs with FSDP, plus launch scripts and runbooks with auto-resume so runs survive instance preemption.</li>
-                <li>Ported the training stack to NVIDIA Blackwell (sm_120): upgraded to PyTorch 2.8 / CUDA 12.8 and fixed five blocking issues in attention, gradient checkpointing, flex-attention kernel sizing, and multi-GPU device binding.</li>
-                <li>Ran a controlled comparison showing a larger backbone cannot replace pre-training: from-base 4B reached 37.8% on LIBERO spatial at 6k steps vs. 95–98.6% for the pre-trained 2B; proposed RoboCasa and data-efficiency follow-ups.</li>
+                <li>Reproduced the first public release and verified the official 2B checkpoint at 95.0–98.6% over 2,000 LIBERO episodes.</li>
+                <li>Recreated post-training from base weights: full fine-tune of InternVL3.5-4B with a Qwen3-4B action expert (mixture-of-transformers, flow matching) on 4 GPUs with FSDP.</li>
+                <li>Ported the original training stack to NVIDIA Blackwell on RTX 6000 Pro: modified the codebase to fit the latest GPU architecture, with fixes for attention, gradient checkpointing, flex-attention kernels, and multi-GPU device binding.</li>
             </ul>
         </div>
 
@@ -63,33 +62,32 @@
                 <span class="title"><a href="https://github.com/MarkfuGod/skillios" target="_blank">Skillios (ItsMyGoal)</a> — full-stack iOS goal planner</span>
                 <span class="date">2025 – 2026</span>
             </div>
-            <div class="sub">Full-stack developer · TestFlight beta</div>
+            <div class="sub">Full-stack developer · <a href="https://testflight.apple.com/join/FVfXajpn" target="_blank">TestFlight beta</a></div>
             <ul>
-                <li>iOS client in SwiftUI/SwiftData with an on-device agent loop: ~10 tools for goal decomposition, task management, and maps/weather, concurrent tool execution, and confirm-before-save for all AI-created data.</li>
-                <li>FastAPI + SQLAlchemy backend on PostgreSQL: email-code and Sign-in-with-Apple auth, snapshot sync, and an LLM proxy with per-user daily quotas so users need no API key.</li>
-                <li>Deployed on AWS with CDK (VPC, ALB, ECS Fargate, RDS, Secrets Manager); Swift–Python plan schema pinned by XCTest and pytest.</li>
+                <li>iOS client in SwiftUI/SwiftData with an on-device agent loop: ~10 tools for goal decomposition, task management, and maps/weather; parallel tool execution.</li>
+                <li>FastAPI + SQLAlchemy backend with Apple snapshot sync; deployed on AWS.</li>
             </ul>
         </div>
 
         <div class="item">
             <div class="head">
-                <span class="title"><a href="https://github.com/MarkfuGod/KithAgent" target="_blank">KithAgent</a> — local memory layer for coding agents</span>
+                <span class="title"><a href="https://github.com/MarkfuGod/KithAgent" target="_blank">KithAgent</a> — local AI assistant runtime</span>
                 <span class="date">2025 – 2026</span>
             </div>
             <div class="sub">Sole developer · Inspired by Claude Memory</div>
             <ul>
-                <li>Local-first daemon that indexes user-chosen folders, LLM-triages files by priority, summarizes the important ones while the user is idle, and serves hybrid retrieval (exact lookup + RAG) from a SQLite memory store.</li>
-                <li>Exposes a syscall API (Unix socket + HTTP with token auth) with a Python SDK, Cursor/Claude Code skills, a web dashboard, and an Electron companion; runs on Ollama or any OpenAI-compatible API.</li>
+                <li>Local AI assistant runtime that indexes user-chosen folders, LLM-triages files by priority, and summarizes the important ones in order while the user is idle; exposes the system via Python and web.</li>
+                <li>Provides a compatible syscall API with a Python SDK for general AI agent platforms like Cursor, Claude Code, and Codex; also an Electron frontend app for normal users and a dashboard to debug functions.</li>
             </ul>
         </div>
 
         <div class="item">
             <div class="head">
-                <span class="title"><a href="https://github.com/MarkfuGod/atari-portal" target="_blank">Atari Portal</a> — nine games, one warp hub</span>
+                <span class="title"><a href="https://github.com/MarkfuGod/atari-portal" target="_blank">Atari Portal</a> — creative game creation</span>
                 <span class="date">2025</span>
             </div>
             <ul>
-                <li>Nine arcade games connected by a portal system: Phaser 3 gameplay with a Three.js VFX overlay, all art and audio generated at runtime (Canvas, Web Audio), CI deploys to GitHub Pages plus Electron desktop builds.</li>
+                <li>Nine arcade games connected by a portal system: Phaser 3 gameplay with a Three.js VFX overlay, all art and audio generated at runtime (Canvas, Web Audio).</li>
             </ul>
         </div>
 
@@ -98,8 +96,8 @@
                 <span class="title">Other projects</span>
             </div>
             <ul>
-                <li><a href="NL2BP-Project-Highlight_en.html">NL2BP</a> — BEng thesis with Prof. Bo Ji: a CrewAI multi-agent pipeline that turns natural-language requirements into PlantUML blueprints.</li>
-                <li>Hand rehabilitation system — gesture-tracked rehab training with MediaPipe and OpenCV; registered software copyright in China.</li>
+                <li><a href="NL2BP-Project-Highlight_en.html">NL2BP</a> — a multi-agent design that aims to automate coding and production process (2025).</li>
+                <li>Hand rehabilitation system — gesture-tracked rehab training with MediaPipe and OpenCV.</li>
             </ul>
         </div>
     </section>
@@ -108,11 +106,11 @@
         <h2>Skills</h2>
         <div class="skill-grid">
             <span class="k">ML &amp; training</span>
-            <span>PyTorch, FSDP, DeepSpeed, Transformers, flow matching; multi-GPU training</span>
+            <span>PyTorch; multi-GPU training</span>
             <span class="k">Agents &amp; LLM apps</span>
-            <span>tool calling, RAG, LangChain, CrewAI, OpenAI-compatible APIs</span>
+            <span>tool calling, RAG, agentic loop</span>
             <span class="k">Engineering &amp; infra</span>
-            <span>Python, Swift, TypeScript/JavaScript; FastAPI, SQLAlchemy, PostgreSQL, SQLite; AWS, Docker; Electron</span>
+            <span>Python, Swift, TypeScript, C, C++; FastAPI, SQLAlchemy, PostgreSQL; Docker, Electron</span>
         </div>
     </section>
 
@@ -120,8 +118,8 @@
         <h2>Awards</h2>
         <ul>
             <li>Robotics, Automation &amp; IoT Programme — Best Presenting Team &amp; Distinction (2024)</li>
-            <li>Zhongguancun Guest Contest — 1st Prize, Zhengzhou University (2024)</li>
-            <li>Internet+ Competition — University 1st Prize, Provincial 3rd Prize (2023)</li>
+            <li>University scholarship, Zhengzhou University (2022, 2023, 2025)</li>
+            <li>Internet<sup>+</sup> Competition — University 1st Prize, Provincial 3rd Prize (2023)</li>
             <li>Registered software copyright — Hand Rehabilitation Platform</li>
         </ul>
     </section>
