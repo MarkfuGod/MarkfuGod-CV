@@ -1,18 +1,12 @@
-# MarkfuGod CV
+# Gaiyi Fan — CV & Profile
 
-Personal resume hosted on GitHub Pages.
+GitHub Pages site for resume and project write-ups.
 
-## View
+## Pages
 
-- [English](https://markfugod.github.io/MarkfuGod-CV/index_en.html)
-- [中文](https://markfugod.github.io/MarkfuGod-CV/index_zh.html)
-
-## Highlights (2026 update)
-
-- **Being-H0.5 VLA** — post-training, inference, Blackwell GPU bring-up, LIBERO/RoboCasa eval
-- **Skillios (ItsMyGoal)** — SwiftUI iOS + AWS FastAPI backend + agent task decomposition
-- **KithAgent** — local personal memory agent with LLM file triage & RAG
-- **Atari Portal** — Phaser 3 multi-game arcade portal
+- **[Personal profile](https://markfugod.github.io/MarkfuGod-CV/)** — detailed project descriptions (`index.html`)
+- **[Resume (English)](https://markfugod.github.io/MarkfuGod-CV/index_en.html)**
+- **[简历 (中文)](https://markfugod.github.io/MarkfuGod-CV/index_zh.html)**
 
 ## Local preview
 

@@ -3,45 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MarkfuGod — Resume</title>
-    <meta http-equiv="refresh" content="0; url=index_en.html">
-    <style>
-        body {
-            font-family: system-ui, sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            margin: 0;
-            background: #f6f7f9;
-        }
-        .card {
-            background: #fff;
-            padding: 32px 40px;
-            border-radius: 8px;
-            box-shadow: 0 2px 12px rgba(0,0,0,.08);
-            text-align: center;
-        }
-        h1 { margin: 0 0 8px; font-size: 1.5rem; }
-        p { color: #555; margin: 0 0 16px; }
-        a {
-            display: inline-block;
-            margin: 0 6px;
-            padding: 8px 18px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        .en { background: #0b57d0; color: #fff; }
-        .zh { background: #fff; color: #0b57d0; border: 1px solid #0b57d0; }
-    </style>
+    <title>Gaiyi Fan</title>
+    <link rel="stylesheet" href="neurips.css">
 </head>
 <body>
-    <div class="card">
-        <h1>MarkfuGod</h1>
-        <p>Choose a language / 选择语言</p>
-        <a class="en" href="index_en.html">English Resume</a>
-        <a class="zh" href="index_zh.html">中文简历</a>
+    <nav class="nav">
+        <span>Gaiyi Fan · 盖一帆</span>
+        <span>
+            <a href="index_en.html">Resume</a> ·
+            <a href="index_zh.html">简历</a> ·
+            <a href="https://github.com/MarkfuGod" target="_blank">GitHub</a>
+        </span>
+    </nav>
+
+    <header class="doc-title">
+        <h1>Gaiyi Fan</h1>
+        <div class="subtitle">盖一帆 · MSc Computer Science, The University of Hong Kong</div>
+        <div class="meta">
+            <a href="mailto:MarkfuGod@outlook.com">MarkfuGod@outlook.com</a>
+            &nbsp;·&nbsp; github.com/MarkfuGod
+            &nbsp;·&nbsp; +852 98251473
+            &nbsp;·&nbsp; WeChat: markfugod2003
+        </div>
+    </header>
+    <hr class="top-rule">
+
+    <div class="abstract">
+        <p>I studied software engineering at Zhengzhou University and moved into machine learning around 2023 — transformers, diffusion models, and the usual training stack. I am now doing an MSc in Computer Science at the University of Hong Kong.</p>
+        <p>Most of my recent work sits at two ends: reproducing and stress-testing large embodied AI systems on real GPU clusters, and building smaller products (iOS apps, local agents, web games) where I own the full stack. I like understanding a paper well enough to run it myself, and I also like shipping things people can actually open.</p>
+        <p>I am interested in how much of recent ML progress comes from principled design versus brute-force scaling. Working through a vision-language-action pipeline from scratch made that question concrete for me.</p>
     </div>
+
+    <section>
+        <h2>Projects</h2>
+
+        <article class="project">
+            <h3>Being-H0.5 — VLA reproduction &amp; experiments</h3>
+            <div class="when">HKU MSc project · 2025 – 2026 · advised by Prof. Taku Komura</div>
+            <p class="note">Being-H0.5 is prior work from the literature, not something I designed with Prof. Komura. I read the paper, treated it as an important reference, and spent this project trying to reproduce and extend their pipeline on my own hardware.</p>
+            <p>The goal was practical: get the full vision-language-action stack running — deployment, inference, evaluation, and from-scratch post-training — so I could compare results honestly instead of trusting checkpoints at face value.</p>
+            <p>What I actually did:</p>
+            <ul>
+                <li>Set up the repo, a ZeroMQ inference server, and rollout evaluation on LIBERO and RoboCasa (MuJoCo with headless EGL rendering).</li>
+                <li>Ran from-base fine-tuning on 4 GPUs with FSDP — InternVL3.5-4B + Qwen3-4B mixture-of-transformers, flow matching, MPG — and wrote launch scripts plus runbooks so experiments could be repeated without guesswork.</li>
+                <li>Ported the training code to NVIDIA Blackwell (sm_120): PyTorch 2.8 + cu128, and a handful of fixes for attention, gradient checkpointing, and distributed setup that were blocking runs on the new cards.</li>
+                <li>Ran a controlled comparison that stuck with me: the official 2B checkpoint scored 95–98.6% on LIBERO spatial, while my 4B model trained from base for 6k steps only reached 37.8% (500 episodes). Scaling the backbone without the original Being-H pre-training was not enough.</li>
+                <li>Built a small ablation on an alternative action head (Gemma-4-E2B with cross-attention, flow matching, LoRA) and saw roughly 17% lower L1 floor than a simpler last-token MLP baseline — early signal, not a finished method.</li>
+            </ul>
+            <p>Stack: PyTorch, FSDP, DeepSpeed, Transformers, LIBERO, RoboCasa, ZeroMQ.</p>
+        </article>
+
+        <article class="project">
+            <h3><a href="https://github.com/MarkfuGod/skillios" target="_blank">Skillios (ItsMyGoal)</a> — goal-planning iOS app</h3>
+            <div class="when">Personal project · 2025 – 2026</div>
+            <p>I wanted a goal planner that felt like a game rather than a spreadsheet. The iOS client is SwiftUI + SwiftData: skill trees, quests, XP, todos, and daily routines. When you set a goal, an on-device agent breaks it into a structured plan and keeps the tree in sync as you edit tasks.</p>
+            <p>On the backend I used AWS CDK to stand up VPC, ALB, ECS Fargate, RDS PostgreSQL, and Secrets Manager. FastAPI handles sync, an LLM proxy, and LangChain agent routes. The hard part was keeping the JSON plan format stable between the phone and the server so the agent tools did not drift.</p>
+            <p>Stack: Swift, SwiftUI, SwiftData, FastAPI, SQLAlchemy, AWS CDK, LangChain.</p>
+        </article>
+
+        <article class="project">
+            <h3><a href="https://github.com/MarkfuGod/KithAgent" target="_blank">KithAgent</a> — local memory for coding agents</h3>
+            <div class="when">Personal project · 2025 – 2026</div>
+            <p>I use Cursor and similar tools daily and got tired of re-explaining context. KithAgent watches folders I choose, uses an LLM to triage files (keep, summarize later, or skip), and builds a local memory store in SQLite. When I am idle it summarizes the important stuff in the background.</p>
+            <p>Retrieval mixes exact file lookup with RAG. There is a small API so other agents can pull context into a session. The UI is Electron + React; the worker is a Python daemon with scheduled jobs and pytest coverage on the integration paths I care about.</p>
+            <p>Stack: Python, FastAPI, SQLite, Electron, React, TypeScript.</p>
+        </article>
+
+        <article class="project">
+            <h3><a href="https://github.com/MarkfuGod/atari-portal" target="_blank">Atari Portal</a> — nine games, one warp hub</h3>
+            <div class="when">Personal project · 2025</div>
+            <p>A retro arcade collection where nine classic-style games connect through a portal system (story mode, arcade mode, level select). All visuals and audio are procedural — no downloaded sprites or sound files. Phaser 3 for gameplay, Canvas for art, Web Audio for synth sounds. Deployed on GitHub Pages and packaged as an Electron desktop build.</p>
+        </article>
+    </section>
+
+    <section>
+        <h2>Earlier work</h2>
+        <ul>
+            <li><a href="NL2BP-Project-Highlight_en.html">NL2BP</a> — BEng thesis with Prof. Bo Ji. Multi-agent pipeline (CrewAI) that turns natural language into PlantUML blueprints.</li>
+            <li><a href="https://github.com/MarkfuGod/Hand-Recovery-And-Fatigue-Relief-Using-Mediapipe" target="_blank">Hand rehabilitation system</a> — MediaPipe + OpenCV + Pygame; registered software copyright in China.</li>
+            <li><a href="https://github.com/MarkfuGod/Commissaire" target="_blank">Commissaire</a> — small roguelike in the browser, plain JavaScript and Canvas.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Education</h2>
+        <p><strong>The University of Hong Kong</strong> — MSc, Computer Science (AI / ML / NLP), 2025 – present</p>
+        <p><strong>Zhengzhou University</strong> — BEng, Software Engineering, GPA 3.44/4.0, 2021 – 2025</p>
+        <p>IELTS 7.5 · CET-4 610 · CET-6 600</p>
+    </section>
 </body>
 </html>
