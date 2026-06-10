@@ -3,186 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MarkfuGod - Resume / 简历</title>
+    <title>MarkfuGod — Resume</title>
+    <meta http-equiv="refresh" content="0; url=index_en.html">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Times New Roman', serif;
+            font-family: system-ui, sans-serif;
             display: flex;
-            justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #fff;
-        }
-
-        .container {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 60px 80px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-        }
-
-        .name {
-            font-size: 3rem;
-            font-weight: bold;
-            margin-bottom: 20px;
-            letter-spacing: 3px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            margin-bottom: 50px;
-            opacity: 0.9;
-        }
-
-        .language-selector {
-            display: flex;
             justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
+            min-height: 100vh;
+            margin: 0;
+            background: #f6f7f9;
         }
-
-        .language-card {
-            background: rgba(255, 255, 255, 0.95);
-            color: #333;
-            padding: 40px 50px;
-            border-radius: 15px;
+        .card {
+            background: #fff;
+            padding: 32px 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,.08);
+            text-align: center;
+        }
+        h1 { margin: 0 0 8px; font-size: 1.5rem; }
+        p { color: #555; margin: 0 0 16px; }
+        a {
+            display: inline-block;
+            margin: 0 6px;
+            padding: 8px 18px;
+            border-radius: 6px;
             text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            min-width: 200px;
+            font-weight: 600;
         }
-
-        .language-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-            background: rgba(255, 255, 255, 1);
-        }
-
-        .language-flag {
-            font-size: 4rem;
-            margin-bottom: 15px;
-            display: block;
-        }
-
-        .language-name {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #667eea;
-        }
-
-        .language-desc {
-            font-size: 0.9rem;
-            color: #666;
-        }
-
-        .footer {
-            margin-top: 50px;
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-
-        .footer a {
-            color: #fff;
-            text-decoration: none;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-            transition: all 0.3s ease;
-        }
-
-        .footer a:hover {
-            border-bottom-color: #fff;
-            opacity: 1;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 40px 30px;
-            }
-
-            .name {
-                font-size: 2rem;
-            }
-
-            .language-selector {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            .language-card {
-                padding: 30px 40px;
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .container {
-            animation: fadeIn 0.8s ease-out;
-        }
+        .en { background: #0b57d0; color: #fff; }
+        .zh { background: #fff; color: #0b57d0; border: 1px solid #0b57d0; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1 class="name">MarkfuGod</h1>
-        <p class="subtitle">Please select your preferred language / 请选择您的语言</p>
-        
-        <div class="language-selector">
-            <a href="index_zh.html" class="language-card">
-                <span class="language-flag">🇨🇳</span>
-                <div class="language-name">中文</div>
-                <div class="language-desc">查看中文简历</div>
-            </a>
-            
-            <a href="index_en.html" class="language-card">
-                <span class="language-flag">🇬🇧</span>
-                <div class="language-name">English</div>
-                <div class="language-desc">View English Resume</div>
-            </a>
-        </div>
-
-        <div class="footer">
-            <p>
-                <a href="mailto:MarkfuGod@outlook.com">MarkfuGod@outlook.com</a> | 
-                <a href="https://github.com/MarkfuGod" target="_blank">GitHub</a>
-            </p>
-        </div>
+    <div class="card">
+        <h1>MarkfuGod</h1>
+        <p>Choose a language / 选择语言</p>
+        <a class="en" href="index_en.html">English Resume</a>
+        <a class="zh" href="index_zh.html">中文简历</a>
     </div>
-
-    <script>
-        // Auto-detect browser language and redirect (optional)
-        // Uncomment the following code if you want automatic language detection
-        /*
-        const userLang = navigator.language || navigator.userLanguage;
-        const isZh = userLang.toLowerCase().startsWith('zh');
-        
-        // Auto-redirect after 3 seconds if user doesn't choose
-        setTimeout(() => {
-            if (isZh) {
-                window.location.href = 'index_zh.html';
-            } else {
-                window.location.href = 'index_en.html';
-            }
-        }, 5000);
-        */
-    </script>
 </body>
 </html>
