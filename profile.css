@@ -1,0 +1,233 @@
+/* Profile page stylesheet — built for on-screen reading, blog-like rhythm.
+   The resume pages keep their own print-oriented stylesheet (neurips.css). */
+:root {
+    --ink: #111418;
+    --text: #25282d;
+    --muted: #6b7077;
+    --faint: #9aa0a8;
+    --accent: #0f4c81;
+    --rule: #e8eaee;
+    --chip-bg: #f4f6f8;
+    --chip-bd: #e3e6eb;
+    --selection: #dce8f4;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue",
+        Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    --serif: Charter, "Bitstream Charter", "Source Serif 4", "Source Serif Pro",
+        Georgia, "Times New Roman", "Songti SC", SimSun, serif;
+    --mono: "SF Mono", Menlo, Consolas, "Courier New", monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--text);
+    background: #fff;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 28px 24px 110px;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--selection); }
+
+a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: rgba(15, 76, 129, 0.35);
+    text-underline-offset: 3px;
+}
+a:hover { text-decoration-color: currentColor; }
+
+code {
+    font-family: var(--mono);
+    font-size: 0.85em;
+    background: var(--chip-bg);
+    border-radius: 4px;
+    padding: 1px 5px 2px;
+}
+
+strong { color: var(--ink); }
+
+/* ---- top navigation ---- */
+.nav {
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--faint);
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
+    margin-bottom: 64px;
+}
+.nav a {
+    color: var(--muted);
+    text-decoration: none;
+}
+.nav a:hover { color: var(--accent); }
+
+/* ---- hero ---- */
+.hero { margin-bottom: 64px; }
+.hero h1 {
+    font-family: var(--sans);
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 10px;
+}
+.hero .tagline {
+    font-family: var(--sans);
+    font-size: 15px;
+    color: var(--muted);
+    margin-bottom: 16px;
+}
+.hero .links {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--faint);
+}
+.hero .links a {
+    color: var(--muted);
+    text-decoration: none;
+}
+.hero .links a:hover { color: var(--accent); }
+
+/* ---- sections ---- */
+section { margin-top: 56px; }
+
+section > h2 {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border-top: 1px solid var(--rule);
+    padding-top: 28px;
+    margin-bottom: 28px;
+}
+
+p { margin-bottom: 16px; }
+p:last-child { margin-bottom: 0; }
+
+/* ---- projects ---- */
+.project { margin-bottom: 60px; }
+.project:last-child { margin-bottom: 0; }
+
+.project h3 {
+    font-family: var(--sans);
+    font-size: 21px;
+    font-weight: 750;
+    letter-spacing: -0.015em;
+    line-height: 1.3;
+    color: var(--ink);
+    margin-bottom: 6px;
+}
+.project h3 a {
+    color: inherit;
+    text-decoration: none;
+}
+.project h3 a:hover { color: var(--accent); }
+
+.project .when {
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--faint);
+    margin-bottom: 18px;
+}
+.project .when a { color: inherit; }
+.project p { margin-bottom: 14px; }
+
+ul {
+    margin: 0 0 16px 22px;
+    padding: 0;
+}
+li { margin-bottom: 8px; }
+li::marker { color: var(--faint); }
+li:last-child { margin-bottom: 0; }
+
+/* ---- stack chips ---- */
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 18px;
+}
+.chips span {
+    font-family: var(--sans);
+    font-size: 12px;
+    line-height: 1;
+    padding: 6px 11px 7px;
+    border: 1px solid var(--chip-bd);
+    background: var(--chip-bg);
+    border-radius: 999px;
+    color: var(--muted);
+    white-space: nowrap;
+}
+
+/* ---- education / list items ---- */
+.item { margin-bottom: 18px; }
+.item:last-child { margin-bottom: 0; }
+
+.head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+}
+.head .title {
+    font-family: var(--sans);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+}
+.head .date {
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--faint);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+}
+.sub {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 2px;
+}
+
+/* ---- responsive ---- */
+@media (max-width: 560px) {
+    body { padding: 20px 20px 90px; }
+    .nav { margin-bottom: 44px; }
+    .hero { margin-bottom: 48px; }
+    .hero h1 { font-size: 30px; }
+    section { margin-top: 44px; }
+    .project { margin-bottom: 48px; }
+    .head { flex-direction: column; gap: 1px; }
+}
+
+/* ---- print ---- */
+@media print {
+    @page { margin: 14mm 16mm; }
+    .nav { display: none; }
+    body {
+        max-width: 100%;
+        padding: 0;
+        font-size: 10.5pt;
+        line-height: 1.6;
+    }
+    a { color: inherit; }
+    .project { break-inside: avoid-page; }
+    section > h2 { break-after: avoid; }
+    .chips span {
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+}

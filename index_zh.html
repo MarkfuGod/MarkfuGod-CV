@@ -5,50 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>盖一帆 — 简历</title>
     <link rel="stylesheet" href="neurips.css">
-    <style>
-        body {
-            font-family: "Times New Roman", "Songti SC", "SimSun", Times, serif;
-        }
-    </style>
 </head>
-<body>
+<body class="resume">
     <nav class="nav">
         <a href="index.html">← 个人主页</a>
         <a href="index_en.html">English</a>
     </nav>
 
-    <header class="doc-title">
-        <h1>盖一帆</h1>
-        <div class="subtitle">Gaiyi Fan · 简历</div>
-        <div class="meta">
-            <a href="mailto:MarkfuGod@outlook.com">MarkfuGod@outlook.com</a>
-            &nbsp;·&nbsp; github.com/MarkfuGod
-            &nbsp;·&nbsp; +852 98251473
-            &nbsp;·&nbsp; 微信：markfugod2003
+    <header class="masthead">
+        <div>
+            <h1>盖一帆</h1>
+            <div class="tagline">Gaiyi Fan · 香港大学 计算机科学硕士在读</div>
+        </div>
+        <div class="contact">
+            <a href="mailto:MarkfuGod@outlook.com">MarkfuGod@outlook.com</a> · github.com/MarkfuGod<br>
+            +852 98251473 · 微信：markfugod2003
         </div>
     </header>
-    <hr class="top-rule">
 
     <section>
         <h2>教育背景</h2>
         <div class="item">
-            <div class="row">
-                <div class="left">
-                    <div class="title">香港大学</div>
-                    <div class="meta-line">计算机科学硕士（人工智能 / 机器学习 / NLP）</div>
-                </div>
-                <div class="date">2025 – 至今</div>
+            <div class="head">
+                <span class="title">香港大学</span>
+                <span class="date">2025 – 至今</span>
             </div>
+            <div class="sub">计算机科学硕士（人工智能 / 机器学习 / NLP）· GPA 3.52/4.3</div>
         </div>
         <div class="item">
-            <div class="row">
-                <div class="left">
-                    <div class="title">郑州大学</div>
-                    <div class="meta-line">软件工程学士 · GPA 3.44/4.0（86.12/100）</div>
-                </div>
-                <div class="date">2021 – 2025</div>
+            <div class="head">
+                <span class="title">郑州大学</span>
+                <span class="date">2021 – 2025</span>
             </div>
-            <div class="meta-line">IELTS 7.5 · CET-4 610 · CET-6 600</div>
+            <div class="sub">软件工程学士 · GPA 3.44/4.0（86.12/100）· IELTS 7.5 · CET-6 600</div>
         </div>
     </section>
 
@@ -56,66 +45,74 @@
         <h2>研究与项目</h2>
 
         <div class="item">
-            <div class="item-head">
-                <div class="title">Being-H0.5 VLA — 论文复现与后训练实验</div>
-                <div class="meta-line">港大硕士课题 · Taku Komura 教授（导师）· 2025 – 2026</div>
+            <div class="head">
+                <span class="title">Being-H0.5 VLA — 复现与后训练实验</span>
+                <span class="date">2025 – 2026</span>
             </div>
+            <div class="sub">港大硕士课题，导师 Taku Komura 教授。</div>
             <ul>
-                <li>独立复现已发表的 Being-H0.5 视觉-语言-动作系统（非与导师共同设计）：推理服务、LIBERO/RoboCasa 评测、4 卡 from-base 微调。</li>
-                <li>InternVL3.5-4B + Qwen3-4B MoT 全量微调（FSDP、flow matching）；编写并行评测脚本与实验 runbook。</li>
-                <li>将训练栈适配 NVIDIA Blackwell（PyTorch 2.8、cu128），解决 sm_120 上的注意力与分布式训练问题。</li>
-                <li>主要结论：官方 2B checkpoint 在 LIBERO spatial 上 95–98.6%，自训 4B（6k step）仅 37.8% — 预训练比单纯放大 backbone 更关键。</li>
+                <li>端到端复现官方代码栈：ZeroMQ 推理服务、MuJoCo + 无头 EGL 渲染下的 LIBERO / RoboCasa 评测，在 2000 个 LIBERO episode 上验证官方 2B checkpoint 达到 95.0–98.6%。</li>
+                <li>从 base 权重复刻后训练流程：InternVL3.5-4B + Qwen3-4B 动作专家（mixture-of-transformers、flow matching）4 卡 FSDP 全量微调，自写启动脚本与 runbook，支持 auto-resume，实例随时被回收也不丢进度。</li>
+                <li>将训练栈迁移到 NVIDIA Blackwell（sm_120）：升级 PyTorch 2.8 / CUDA 12.8，修复注意力、梯度检查点、flex-attention kernel 尺寸、多卡设备绑定等五处阻塞性问题。</li>
+                <li>设计对照实验证明「更大的 backbone 替代不了预训练」：from-base 4B 训练 6k 步在 LIBERO spatial 仅 37.8%，而预训练 2B 为 95–98.6%；据此提出 RoboCasa 与数据效率两个后续方向。</li>
             </ul>
         </div>
 
         <div class="item">
-            <div class="item-head">
-                <div class="title"><a href="https://github.com/MarkfuGod/skillios" target="_blank">Skillios（ItsMyGoal）</a> — iOS 目标规划</div>
-                <div class="meta-line">个人项目 · 2025 – 2026</div>
+            <div class="head">
+                <span class="title"><a href="https://github.com/MarkfuGod/skillios" target="_blank">Skillios（ItsMyGoal）</a> — 全栈 iOS 目标规划应用</span>
+                <span class="date">2025 – 2026</span>
             </div>
+            <div class="sub">全栈开发 · TestFlight 内测中</div>
             <ul>
-                <li>SwiftUI + SwiftData：技能树、任务、端侧 Agent 将目标分解为结构化计划。</li>
-                <li>AWS 后端（CDK、ECS Fargate、RDS）：FastAPI、LLM 代理、LangChain Agent 路由、用户同步。</li>
+                <li>SwiftUI / SwiftData 客户端，Agent 循环在端侧运行：约 10 个工具覆盖目标分解、任务管理、地图与天气，支持并发工具调用，AI 生成的数据一律先确认再入库。</li>
+                <li>FastAPI + SQLAlchemy 后端（PostgreSQL）：邮箱验证码与 Apple 登录、数据快照同步、带每用户每日额度的 LLM 代理，用户无需自备 API key。</li>
+                <li>AWS CDK 部署（VPC、ALB、ECS Fargate、RDS、Secrets Manager）；Swift 与 Python 之间的计划 JSON 契约由 XCTest 和 pytest 双侧锁定。</li>
             </ul>
         </div>
 
         <div class="item">
-            <div class="item-head">
-                <div class="title"><a href="https://github.com/MarkfuGod/KithAgent" target="_blank">KithAgent</a> — 本地记忆 Agent</div>
-                <div class="meta-line">个人项目 · 2025 – 2026</div>
+            <div class="head">
+                <span class="title"><a href="https://github.com/MarkfuGod/KithAgent" target="_blank">KithAgent</a> — 面向编程 Agent 的本地记忆层</span>
+                <span class="date">2025 – 2026</span>
             </div>
+            <div class="sub">独立开发 · 受 Claude Memory 启发</div>
             <ul>
-                <li>本地优先：索引指定目录、LLM 文件 triage、后台摘要、SQLite 存储、RAG + 精确查找。</li>
-                <li>Electron + React 界面；Python daemon，提供 Cursor/Codex 类工具可用的 API。</li>
+                <li>本地优先的 daemon：索引用户指定目录，LLM 按优先级分诊文件（high / medium / low / skip），在用户空闲时优先总结高价值文件，SQLite 记忆库支撑精确查找 + RAG 混合检索。</li>
+                <li>通过 syscall API（Unix socket + 带 token 鉴权的 HTTP）对外开放，配套 Python SDK、Cursor / Claude Code skills、Web 控制台与 Electron 伴侣应用；支持本地 Ollama 或任意 OpenAI 兼容 API。</li>
             </ul>
         </div>
 
         <div class="item">
-            <div class="item-head">
-                <div class="title"><a href="https://github.com/MarkfuGod/atari-portal" target="_blank">Atari Portal</a> — 多游戏街机</div>
-                <div class="meta-line">个人项目 · 2025</div>
+            <div class="head">
+                <span class="title"><a href="https://github.com/MarkfuGod/atari-portal" target="_blank">Atari Portal</a> — 传送门串联的九款街机游戏</span>
+                <span class="date">2025</span>
             </div>
             <ul>
-                <li>Phaser 3 串联 9 款游戏；程序化画面与音效；GitHub Pages 与 Electron 打包。</li>
+                <li>九款街机游戏由传送门系统串联：Phaser 3 负责玩法，Three.js 叠加层负责传送门与故障特效，全部美术与音效在运行时生成（Canvas、Web Audio），CI 自动部署 GitHub Pages 并打包 Electron 桌面版。</li>
             </ul>
         </div>
 
         <div class="item">
-            <div class="meta-line"><strong>其他：</strong></div>
+            <div class="head">
+                <span class="title">其他项目</span>
+            </div>
             <ul>
-                <li><a href="NL2BP-Project-Highlight_zh.html">NL2BP</a> — 本科毕设（姬波教授）：CrewAI 多 Agent 自然语言→UML</li>
-                <li>手部康复系统 — MediaPipe、OpenCV；软件著作权</li>
+                <li><a href="NL2BP-Project-Highlight_zh.html">NL2BP</a> — 本科毕设（姬波教授）：CrewAI 多 Agent 流水线，把自然语言需求转成 PlantUML 蓝图。</li>
+                <li>手部康复系统 — 基于 MediaPipe 与 OpenCV 的手势识别康复训练，已登记软件著作权。</li>
             </ul>
         </div>
     </section>
 
     <section>
         <h2>技能</h2>
-        <div class="skills">
-            <p><strong>ML / 机器人：</strong>PyTorch、FSDP、DeepSpeed、Transformers、LIBERO、MuJoCo、实验流水线、大规模模型评测</p>
-            <p><strong>Agent / LLM：</strong>LangChain、Tool Calling、RAG、多 Agent 编排（CrewAI）、OpenAI / DashScope API</p>
-            <p><strong>工程：</strong>Python、Swift、TypeScript/JavaScript、FastAPI、SQLAlchemy、PostgreSQL、SQLite、ZeroMQ、pytest</p>
-            <p><strong>基础设施 / 产品：</strong>AWS（CDK、ECS、RDS）、Docker、GitHub Actions、SwiftUI、Electron、Linux 运维</p>
+        <div class="skill-grid">
+            <span class="k">机器学习与训练</span>
+            <span>PyTorch、FSDP、DeepSpeed、Transformers、flow matching；多卡训练</span>
+            <span class="k">Agent 与 LLM 应用</span>
+            <span>Tool calling、RAG、LangChain、CrewAI、OpenAI 兼容 API</span>
+            <span class="k">工程与基础设施</span>
+            <span>Python、Swift、TypeScript/JavaScript；FastAPI、SQLAlchemy、PostgreSQL、SQLite；AWS、Docker；Electron</span>
         </div>
     </section>
 
@@ -124,7 +121,7 @@
         <ul>
             <li>机器人、自动化与物联网项目 — 最佳展示团队 &amp; Distinction（2024）</li>
             <li>中关村创客大赛 — 郑州大学赛区一等奖（2024）</li>
-            <li>互联网+ 竞赛 — 校级一等奖、省级三等奖（2023）</li>
+            <li>「互联网+」大赛 — 校级一等奖、省级三等奖（2023）</li>
             <li>软件著作权 — 手部康复平台</li>
         </ul>
     </section>

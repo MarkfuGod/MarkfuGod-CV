@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gaiyi Fan</title>
-    <link rel="stylesheet" href="neurips.css">
+    <link rel="stylesheet" href="profile.css">
 </head>
-<body>
+<body class="profile">
     <nav class="nav">
         <span>Gaiyi Fan · 盖一帆</span>
         <span>
@@ -16,80 +16,89 @@
         </span>
     </nav>
 
-    <header class="doc-title">
+    <header class="hero">
         <h1>Gaiyi Fan</h1>
-        <div class="subtitle">盖一帆 · MSc Computer Science, The University of Hong Kong</div>
-        <div class="meta">
+        <p class="tagline">盖一帆 · MSc Computer Science, The University of Hong Kong</p>
+        <p class="links">
             <a href="mailto:MarkfuGod@outlook.com">MarkfuGod@outlook.com</a>
-            &nbsp;·&nbsp; github.com/MarkfuGod
+            &nbsp;·&nbsp; <a href="https://github.com/MarkfuGod" target="_blank">github.com/MarkfuGod</a>
             &nbsp;·&nbsp; +852 98251473
             &nbsp;·&nbsp; WeChat: markfugod2003
-        </div>
+        </p>
     </header>
-    <hr class="top-rule">
 
-    <div class="abstract">
-        <p>I studied software engineering at Zhengzhou University and moved into machine learning around 2023 — transformers, diffusion models, and the usual training stack. I am now doing an MSc in Computer Science at the University of Hong Kong.</p>
-        <p>Most of my recent work sits at two ends: reproducing and stress-testing large embodied AI systems on real GPU clusters, and building smaller products (iOS apps, local agents, web games) where I own the full stack. I like understanding a paper well enough to run it myself, and I also like shipping things people can actually open.</p>
-        <p>I am interested in how much of recent ML progress comes from principled design versus brute-force scaling. Working through a vision-language-action pipeline from scratch made that question concrete for me.</p>
-    </div>
+    <section class="intro">
+        <p>I am an MSc student in Computer Science at the University of Hong Kong. Before that I studied software engineering at Zhengzhou University, and since 2023 most of my time has gone into machine learning: transformers, diffusion models, and the training and evaluation pipelines around them.</p>
+        <p>This page is the long version of my <a href="index_en.html">resume</a>. For each project I try to explain what the thing is, what I personally did, and what came out of it. One question runs through the recent work: how much of current progress in ML comes from careful design, and how much from compute? The first project below is where that question became concrete for me.</p>
+    </section>
 
     <section>
         <h2>Projects</h2>
 
         <article class="project">
-            <h3>Being-H0.5 — VLA reproduction &amp; experiments</h3>
-            <div class="when">HKU MSc project · 2025 – 2026 · advised by Prof. Taku Komura</div>
-            <p class="note">Being-H0.5 is prior work from the literature, not something I designed with Prof. Komura. I read the paper, treated it as an important reference, and spent this project trying to reproduce and extend their pipeline on my own hardware.</p>
-            <p>The goal was practical: get the full vision-language-action stack running — deployment, inference, evaluation, and from-scratch post-training — so I could compare results honestly instead of trusting checkpoints at face value.</p>
-            <p>What I actually did:</p>
-            <ul>
-                <li>Set up the repo, a ZeroMQ inference server, and rollout evaluation on LIBERO and RoboCasa (MuJoCo with headless EGL rendering).</li>
-                <li>Ran from-base fine-tuning on 4 GPUs with FSDP — InternVL3.5-4B + Qwen3-4B mixture-of-transformers, flow matching, MPG — and wrote launch scripts plus runbooks so experiments could be repeated without guesswork.</li>
-                <li>Ported the training code to NVIDIA Blackwell (sm_120): PyTorch 2.8 + cu128, and a handful of fixes for attention, gradient checkpointing, and distributed setup that were blocking runs on the new cards.</li>
-                <li>Ran a controlled comparison that stuck with me: the official 2B checkpoint scored 95–98.6% on LIBERO spatial, while my 4B model trained from base for 6k steps only reached 37.8% (500 episodes). Scaling the backbone without the original Being-H pre-training was not enough.</li>
-                <li>Built a small ablation on an alternative action head (Gemma-4-E2B with cross-attention, flow matching, LoRA) and saw roughly 17% lower L1 floor than a simpler last-token MLP baseline — early signal, not a finished method.</li>
-            </ul>
-            <p>Stack: PyTorch, FSDP, DeepSpeed, Transformers, LIBERO, RoboCasa, ZeroMQ.</p>
+            <h3>Being-H0.5 — reproducing a frontier VLA model, and testing what pre-training buys</h3>
+            <div class="when">MSc project at HKU, supervised by Prof. Taku Komura · 2025 – 2026</div>
+            <p>The first stage was reproduction. I brought the released codebase up from a fresh clone on a rented GPU server: the ZeroMQ inference server, the LIBERO benchmark under MuJoCo with headless EGL rendering, and later RoboCasa v0.2 with its pinned mujoco and numpy versions and mirrored assets. The released code had a few breakages along the way (an endpoint registered with the wrong signature, a missing <code>modality_config</code> method, float64 states crashing the server-side transforms), which I fixed and wrote up as an upstream patch. With the chain working, I evaluated the official 2B LIBERO checkpoint over 2,000 episodes: 98.6% on spatial, 97.0% on object, 98.0% on goal, and 95.0% on libero-10, in line with the paper.</p>
+            <p>The second stage was recreating post-training from base weights, without touching the released checkpoint. That meant a full fine-tune of InternVL3.5-4B (Qwen3-4B language backbone) with a Qwen3-4B action expert in the mixture-of-transformers layout and a flow-matching action head, on 4 GPUs with FSDP and gradient checkpointing. I wrote the launch scripts and runbooks myself, including auto-resume and checkpoint-saving policies, because rented instances can be stopped at any moment and an unsaved run is a lost run. I learned that one the hard way, once.</p>
+            <p>Midway through, the server moved to 4× RTX PRO 6000 Blackwell cards (compute capability sm_120), which the stock environment could not use at all. I migrated the stack to PyTorch 2.8 with CUDA 12.8 and changed five places in the model and training code to make it run on the new architecture: flash-attn became optional, attention switched to SDPA, the packed Qwen3 model got a gradient-checkpointing implementation it never had, flex-attention kernels got smaller block sizes to fit Blackwell's smaller shared memory, and a missing <code>set_device</code> call that put every rank on GPU 0 was fixed. After that, 4-card FSDP training ran stably at about 0.3 steps/s with roughly 92 GB in use per card.</p>
+            <p>The experiment I care most about came last. I wanted to test whether a larger backbone can make up for skipping the original human-centric pre-training, so I trained the 4B model from base weights and compared it with the official pre-trained 2B checkpoint. At 6k steps the from-base 4B reached 37.8% on LIBERO spatial; the pre-trained 2B sits at 95–98.6%. Doubling the parameters did not close the gap. My reading is that post-training alone cannot substitute for the pre-training stage, and I proposed follow-ups to separate the two effects cleanly: moving the comparison to RoboCasa, where scores are far from saturated, and measuring data-efficiency curves instead of a single end point. That RoboCasa run is in progress now.</p>
+            <p>On the side I also built a small proof of concept with Gemma-4-E2B as a frozen backbone plus a trained state encoder and action head. It settled two questions quickly: a prompt-only VLM is not a robot policy, and a small bolted-on action head is not enough either.</p>
+            <div class="chips"><span>PyTorch</span><span>FSDP</span><span>DeepSpeed</span><span>Transformers</span><span>Flow matching</span><span>LIBERO</span><span>RoboCasa</span><span>MuJoCo / EGL</span><span>ZeroMQ</span><span>Linux server ops</span></div>
         </article>
 
         <article class="project">
-            <h3><a href="https://github.com/MarkfuGod/skillios" target="_blank">Skillios (ItsMyGoal)</a> — goal-planning iOS app</h3>
+            <h3><a href="https://github.com/MarkfuGod/skillios" target="_blank">Skillios (ItsMyGoal)</a> — an iOS goal planner with an agent inside</h3>
+            <div class="when">Personal project · 2025 – 2026 · TestFlight beta</div>
+            <p>ItsMyGoal is a gamified goal planner. You give it a goal, an agent decomposes it into a skill tree of quests with prerequisites and XP, and the app tracks your todos, routines, and character progress on top. There is also a chat agent that plans real-world activities: it checks the weather, searches places, gets directions, and produces an itinerary that you confirm before anything is saved.</p>
+            <p>I built the whole product. The iOS client is SwiftUI with SwiftData as the source of truth. The agent loop runs on the device: it talks to an OpenAI-compatible model, handles tool calls across about ten tools (tree generation, quest management, todos and routines, weather, place search, directions), and runs read-only tools concurrently while keeping database-mutating tools serial. AI-created tasks always go through a confirmation sheet before they touch the database, and confirmed tasks can sync to Apple Calendar through EventKit.</p>
+            <p>The backend is FastAPI with SQLAlchemy on PostgreSQL. It handles email-code and Sign-in-with-Apple auth, snapshot sync of user data, and an LLM proxy with per-user daily quotas so new users do not need their own API key. Google Maps and weather calls go through server-side proxies, which keeps third-party keys out of the app. Everything is deployed on AWS through CDK: VPC, ALB, ECS Fargate, RDS, and Secrets Manager, with a separate migration task for schema changes.</p>
+            <p>The part that took the most discipline was keeping the plan JSON schema stable between Swift and Python, since two generation paths share it and either side can drift quietly. Those contracts are pinned by XCTest on the iOS side and pytest on the backend.</p>
+            <div class="chips"><span>Swift</span><span>SwiftUI</span><span>SwiftData</span><span>FastAPI</span><span>SQLAlchemy</span><span>PostgreSQL</span><span>AWS CDK</span><span>ECS Fargate</span><span>RDS</span><span>LangChain</span></div>
+        </article>
+
+        <article class="project">
+            <h3><a href="https://github.com/MarkfuGod/KithAgent" target="_blank">KithAgent</a> — a local memory layer for agents</h3>
             <div class="when">Personal project · 2025 – 2026</div>
-            <p>I wanted a goal planner that felt like a game rather than a spreadsheet. The iOS client is SwiftUI + SwiftData: skill trees, quests, XP, todos, and daily routines. When you set a goal, an on-device agent breaks it into a structured plan and keeps the tree in sync as you edit tasks.</p>
-            <p>On the backend I used AWS CDK to stand up VPC, ALB, ECS Fargate, RDS PostgreSQL, and Secrets Manager. FastAPI handles sync, an LLM proxy, and LangChain agent routes. The hard part was keeping the JSON plan format stable between the phone and the server so the agent tools did not drift.</p>
-            <p>Stack: Swift, SwiftUI, SwiftData, FastAPI, SQLAlchemy, AWS CDK, LangChain.</p>
+            <p>Kith comes from a daily annoyance: tools like Cursor and Claude Code forget who you are between sessions, while the context that actually describes you lives in files on your machine. Kith is a memory system that runs locally. You choose which folders it may scan; it indexes them, asks an LLM to triage every file into high, medium, low, or skip, and then spends its summarization budget by priority. Files that reveal your projects and preferences get understood first; caches, build artifacts, and vendor code get skipped instead of wasting tokens.</p>
+            <p>The daemon watches whether you are active and schedules its own background work, so the heavy summarization runs while you are away from the machine. Memory lives in a local SQLite store under <code>~/.agent_sys</code>, and retrieval is hybrid: exact file lookup when you know what you want, RAG when you do not. Everything is exposed through a local syscall API over Unix socket and HTTP with token auth, plus a Python client SDK, so any agent can ask what you have been working on and what matters now. I also wrote Cursor and Claude Code skills that plug into it, a web dashboard for triage and RAG control, and an Electron companion app.</p>
+            <p>It works with local Ollama models or any OpenAI-compatible or Anthropic API. Nothing leaves the machine except the model calls you configure, and the optional browser ingestion reads only titles and bookmarks, never cookies, sessions, or passwords.</p>
+            <div class="chips"><span>Python</span><span>asyncio</span><span>SQLite</span><span>HTTP + Unix socket API</span><span>Electron</span><span>React</span><span>Ollama / OpenAI-compatible APIs</span></div>
         </article>
 
         <article class="project">
-            <h3><a href="https://github.com/MarkfuGod/KithAgent" target="_blank">KithAgent</a> — local memory for coding agents</h3>
-            <div class="when">Personal project · 2025 – 2026</div>
-            <p>I use Cursor and similar tools daily and got tired of re-explaining context. KithAgent watches folders I choose, uses an LLM to triage files (keep, summarize later, or skip), and builds a local memory store in SQLite. When I am idle it summarizes the important stuff in the background.</p>
-            <p>Retrieval mixes exact file lookup with RAG. There is a small API so other agents can pull context into a session. The UI is Electron + React; the worker is a Python daemon with scheduled jobs and pytest coverage on the integration paths I care about.</p>
-            <p>Stack: Python, FastAPI, SQLite, Electron, React, TypeScript.</p>
-        </article>
-
-        <article class="project">
-            <h3><a href="https://github.com/MarkfuGod/atari-portal" target="_blank">Atari Portal</a> — nine games, one warp hub</h3>
-            <div class="when">Personal project · 2025</div>
-            <p>A retro arcade collection where nine classic-style games connect through a portal system (story mode, arcade mode, level select). All visuals and audio are procedural — no downloaded sprites or sound files. Phaser 3 for gameplay, Canvas for art, Web Audio for synth sounds. Deployed on GitHub Pages and packaged as an Electron desktop build.</p>
+            <h3><a href="https://github.com/MarkfuGod/atari-portal" target="_blank">Atari Portal</a> — nine arcade games joined by a portal</h3>
+            <div class="when">Personal project · 2025 · <a href="https://markfugod.github.io/atari-portal/" target="_blank">play in browser</a></div>
+            <p>A retro arcade collection where nine classic-style games (Pac-Man, Breakout, Space Invaders, Frogger, Asteroids, Tetris, and three originals) connect through a portal system. Each game has its own trigger condition; meet it and a portal opens that warps you into the next game. On top of that sit story, arcade, and free-play modes, a coin economy with a small shop, a speed-boost mechanic for scoring streaks, and a global difficulty curve that climbs with every traversal.</p>
+            <p>Gameplay runs on Phaser 3, and the portal and glitch effects run on a Three.js overlay above it. Every texture is drawn with the Canvas API at boot and every sound is synthesized with the Web Audio API at runtime, so the build ships with no image or audio files at all. It deploys to GitHub Pages through GitHub Actions and also packages as an Electron desktop app for Windows and macOS.</p>
+            <div class="chips"><span>Phaser 3</span><span>Three.js</span><span>Vite</span><span>Canvas</span><span>Web Audio</span><span>Electron</span><span>GitHub Actions</span></div>
         </article>
     </section>
 
     <section>
         <h2>Earlier work</h2>
         <ul>
-            <li><a href="NL2BP-Project-Highlight_en.html">NL2BP</a> — BEng thesis with Prof. Bo Ji. Multi-agent pipeline (CrewAI) that turns natural language into PlantUML blueprints.</li>
+            <li><a href="NL2BP-Project-Highlight_en.html">NL2BP</a> — BEng thesis with Prof. Bo Ji: a multi-agent pipeline (CrewAI) that turns natural-language requirements into PlantUML blueprints.</li>
             <li><a href="https://github.com/MarkfuGod/Hand-Recovery-And-Fatigue-Relief-Using-Mediapipe" target="_blank">Hand rehabilitation system</a> — MediaPipe + OpenCV + Pygame; registered software copyright in China.</li>
-            <li><a href="https://github.com/MarkfuGod/Commissaire" target="_blank">Commissaire</a> — small roguelike in the browser, plain JavaScript and Canvas.</li>
+            <li><a href="https://github.com/MarkfuGod/Commissaire" target="_blank">Commissaire</a> — a small browser roguelike in plain JavaScript and Canvas.</li>
         </ul>
     </section>
 
     <section>
         <h2>Education</h2>
-        <p><strong>The University of Hong Kong</strong> — MSc, Computer Science (AI / ML / NLP), 2025 – present</p>
-        <p><strong>Zhengzhou University</strong> — BEng, Software Engineering, GPA 3.44/4.0, 2021 – 2025</p>
-        <p>IELTS 7.5 · CET-4 610 · CET-6 600</p>
+        <div class="item">
+            <div class="head">
+                <span class="title">The University of Hong Kong</span>
+                <span class="date">2025 – present</span>
+            </div>
+            <div class="sub">MSc, Computer Science (AI / ML / NLP) · GPA 3.52/4.3</div>
+        </div>
+        <div class="item">
+            <div class="head">
+                <span class="title">Zhengzhou University</span>
+                <span class="date">2021 – 2025</span>
+            </div>
+            <div class="sub">BEng, Software Engineering · GPA 3.44/4.0 · IELTS 7.5</div>
+        </div>
     </section>
 </body>
 </html>

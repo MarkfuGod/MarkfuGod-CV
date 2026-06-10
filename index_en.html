@@ -6,44 +6,38 @@
     <title>Gaiyi Fan — Resume</title>
     <link rel="stylesheet" href="neurips.css">
 </head>
-<body>
+<body class="resume">
     <nav class="nav">
         <a href="index.html">← Profile</a>
         <a href="index_zh.html">中文</a>
     </nav>
 
-    <header class="doc-title">
-        <h1>Gaiyi Fan</h1>
-        <div class="subtitle">盖一帆 · Curriculum Vitae</div>
-        <div class="meta">
-            <a href="mailto:MarkfuGod@outlook.com">MarkfuGod@outlook.com</a>
-            &nbsp;·&nbsp; github.com/MarkfuGod
-            &nbsp;·&nbsp; +852 98251473
-            &nbsp;·&nbsp; WeChat: markfugod2003
+    <header class="masthead">
+        <div>
+            <h1>Gaiyi Fan</h1>
+            <div class="tagline">盖一帆 · MSc Computer Science, The University of Hong Kong</div>
+        </div>
+        <div class="contact">
+            <a href="mailto:MarkfuGod@outlook.com">MarkfuGod@outlook.com</a> · github.com/MarkfuGod<br>
+            +852 98251473 · WeChat: markfugod2003
         </div>
     </header>
-    <hr class="top-rule">
 
     <section>
         <h2>Education</h2>
         <div class="item">
-            <div class="row">
-                <div class="left">
-                    <div class="title">The University of Hong Kong</div>
-                    <div class="meta-line">MSc, Computer Science (AI / ML / NLP)</div>
-                </div>
-                <div class="date">2025 – Present</div>
+            <div class="head">
+                <span class="title">The University of Hong Kong</span>
+                <span class="date">2025 – present</span>
             </div>
+            <div class="sub">MSc, Computer Science (AI / ML / NLP) · GPA 3.52/4.3</div>
         </div>
         <div class="item">
-            <div class="row">
-                <div class="left">
-                    <div class="title">Zhengzhou University</div>
-                    <div class="meta-line">BEng, Software Engineering · GPA 3.44/4.0 (86.12/100)</div>
-                </div>
-                <div class="date">2021 – 2025</div>
+            <div class="head">
+                <span class="title">Zhengzhou University</span>
+                <span class="date">2021 – 2025</span>
             </div>
-            <div class="meta-line">IELTS 7.5 · CET-4 610 · CET-6 600</div>
+            <div class="sub">BEng, Software Engineering · GPA 3.44/4.0 (86.12/100) · IELTS 7.5 · CET-6 600</div>
         </div>
     </section>
 
@@ -51,66 +45,74 @@
         <h2>Research &amp; Projects</h2>
 
         <div class="item">
-            <div class="item-head">
-                <div class="title">Being-H0.5 VLA — reproduction &amp; post-training experiments</div>
-                <div class="meta-line">HKU MSc project · Prof. Taku Komura (advisor) · 2025 – 2026</div>
+            <div class="head">
+                <span class="title">Being-H0.5 VLA — reproduction and post-training experiments</span>
+                <span class="date">2025 – 2026</span>
             </div>
+            <div class="sub">HKU MSc project, supervised by Prof. Taku Komura.</div>
             <ul>
-                <li>Independent reproduction of the published Being-H0.5 VLA stack: inference server, LIBERO/RoboCasa eval, and from-base fine-tuning on 4 GPUs.</li>
-                <li>Full fine-tune (InternVL3.5-4B + Qwen3-4B MoT, FSDP, flow matching) plus parallel eval scripts and written runbooks for repeatable experiments.</li>
-                <li>Adapted training to NVIDIA Blackwell GPUs (PyTorch 2.8, cu128) after debugging attention and distributed-training issues on sm_120.</li>
-                <li>Key result: official 2B checkpoint 95–98.6% vs. from-base 4B at 6k steps 37.8% on LIBERO spatial — pre-training mattered more than backbone size.</li>
+                <li>Reproduced the released stack end to end (ZeroMQ inference server, LIBERO and RoboCasa evaluation under MuJoCo with headless EGL) and verified the official 2B checkpoint at 95.0–98.6% over 2,000 LIBERO episodes.</li>
+                <li>Recreated post-training from base weights: full fine-tune of InternVL3.5-4B with a Qwen3-4B action expert (mixture-of-transformers, flow matching) on 4 GPUs with FSDP, plus launch scripts and runbooks with auto-resume so runs survive instance preemption.</li>
+                <li>Ported the training stack to NVIDIA Blackwell (sm_120): upgraded to PyTorch 2.8 / CUDA 12.8 and fixed five blocking issues in attention, gradient checkpointing, flex-attention kernel sizing, and multi-GPU device binding.</li>
+                <li>Ran a controlled comparison showing a larger backbone cannot replace pre-training: from-base 4B reached 37.8% on LIBERO spatial at 6k steps vs. 95–98.6% for the pre-trained 2B; proposed RoboCasa and data-efficiency follow-ups.</li>
             </ul>
         </div>
 
         <div class="item">
-            <div class="item-head">
-                <div class="title"><a href="https://github.com/MarkfuGod/skillios" target="_blank">Skillios (ItsMyGoal)</a> — iOS goal planner</div>
-                <div class="meta-line">Personal · 2025 – 2026</div>
+            <div class="head">
+                <span class="title"><a href="https://github.com/MarkfuGod/skillios" target="_blank">Skillios (ItsMyGoal)</a> — full-stack iOS goal planner</span>
+                <span class="date">2025 – 2026</span>
             </div>
+            <div class="sub">Full-stack developer · TestFlight beta</div>
             <ul>
-                <li>SwiftUI + SwiftData app with skill trees, quests, and an on-device agent that decomposes goals into structured plans.</li>
-                <li>AWS backend (CDK, ECS Fargate, RDS): FastAPI, LLM proxy, LangChain agent routes, user sync.</li>
+                <li>iOS client in SwiftUI/SwiftData with an on-device agent loop: ~10 tools for goal decomposition, task management, and maps/weather, concurrent tool execution, and confirm-before-save for all AI-created data.</li>
+                <li>FastAPI + SQLAlchemy backend on PostgreSQL: email-code and Sign-in-with-Apple auth, snapshot sync, and an LLM proxy with per-user daily quotas so users need no API key.</li>
+                <li>Deployed on AWS with CDK (VPC, ALB, ECS Fargate, RDS, Secrets Manager); Swift–Python plan schema pinned by XCTest and pytest.</li>
             </ul>
         </div>
 
         <div class="item">
-            <div class="item-head">
-                <div class="title"><a href="https://github.com/MarkfuGod/KithAgent" target="_blank">KithAgent</a> — local memory agent</div>
-                <div class="meta-line">Personal · 2025 – 2026</div>
+            <div class="head">
+                <span class="title"><a href="https://github.com/MarkfuGod/KithAgent" target="_blank">KithAgent</a> — local memory layer for coding agents</span>
+                <span class="date">2025 – 2026</span>
             </div>
+            <div class="sub">Sole developer · Inspired by Claude Memory</div>
             <ul>
-                <li>Local-first agent: indexes chosen folders, LLM triage, background summarization, SQLite store, RAG + file lookup.</li>
-                <li>Electron + React UI; Python daemon with API for Cursor/Codex-style tooling.</li>
+                <li>Local-first daemon that indexes user-chosen folders, LLM-triages files by priority, summarizes the important ones while the user is idle, and serves hybrid retrieval (exact lookup + RAG) from a SQLite memory store.</li>
+                <li>Exposes a syscall API (Unix socket + HTTP with token auth) with a Python SDK, Cursor/Claude Code skills, a web dashboard, and an Electron companion; runs on Ollama or any OpenAI-compatible API.</li>
             </ul>
         </div>
 
         <div class="item">
-            <div class="item-head">
-                <div class="title"><a href="https://github.com/MarkfuGod/atari-portal" target="_blank">Atari Portal</a> — multi-game arcade</div>
-                <div class="meta-line">Personal · 2025</div>
+            <div class="head">
+                <span class="title"><a href="https://github.com/MarkfuGod/atari-portal" target="_blank">Atari Portal</a> — nine games, one warp hub</span>
+                <span class="date">2025</span>
             </div>
             <ul>
-                <li>Nine linked games in Phaser 3; procedural graphics and audio; GitHub Pages + Electron builds.</li>
+                <li>Nine arcade games connected by a portal system: Phaser 3 gameplay with a Three.js VFX overlay, all art and audio generated at runtime (Canvas, Web Audio), CI deploys to GitHub Pages plus Electron desktop builds.</li>
             </ul>
         </div>
 
         <div class="item">
-            <div class="meta-line"><strong>Also:</strong></div>
+            <div class="head">
+                <span class="title">Other projects</span>
+            </div>
             <ul>
-                <li><a href="NL2BP-Project-Highlight_en.html">NL2BP</a> — BEng thesis (Prof. Bo Ji): multi-agent NL→UML with CrewAI</li>
-                <li>Hand rehab system — MediaPipe, OpenCV; Chinese software copyright</li>
+                <li><a href="NL2BP-Project-Highlight_en.html">NL2BP</a> — BEng thesis with Prof. Bo Ji: a CrewAI multi-agent pipeline that turns natural-language requirements into PlantUML blueprints.</li>
+                <li>Hand rehabilitation system — gesture-tracked rehab training with MediaPipe and OpenCV; registered software copyright in China.</li>
             </ul>
         </div>
     </section>
 
     <section>
         <h2>Skills</h2>
-        <div class="skills">
-            <p><strong>ML / robotics:</strong> PyTorch, FSDP, DeepSpeed, Transformers, LIBERO, MuJoCo, experiment pipelines, model eval at scale</p>
-            <p><strong>Agents / LLM:</strong> LangChain, tool-calling, RAG, multi-agent orchestration (CrewAI), API integration (OpenAI, DashScope)</p>
-            <p><strong>Engineering:</strong> Python, Swift, TypeScript/JavaScript, FastAPI, SQLAlchemy, PostgreSQL, SQLite, ZeroMQ, pytest</p>
-            <p><strong>Infra / product:</strong> AWS (CDK, ECS, RDS), Docker, GitHub Actions, SwiftUI, Electron, Linux server ops</p>
+        <div class="skill-grid">
+            <span class="k">ML &amp; training</span>
+            <span>PyTorch, FSDP, DeepSpeed, Transformers, flow matching; multi-GPU training</span>
+            <span class="k">Agents &amp; LLM apps</span>
+            <span>tool calling, RAG, LangChain, CrewAI, OpenAI-compatible APIs</span>
+            <span class="k">Engineering &amp; infra</span>
+            <span>Python, Swift, TypeScript/JavaScript; FastAPI, SQLAlchemy, PostgreSQL, SQLite; AWS, Docker; Electron</span>
         </div>
     </section>
 
@@ -119,8 +121,8 @@
         <ul>
             <li>Robotics, Automation &amp; IoT Programme — Best Presenting Team &amp; Distinction (2024)</li>
             <li>Zhongguancun Guest Contest — 1st Prize, Zhengzhou University (2024)</li>
-            <li>Internet+ Competition — University 1st, Provincial 3rd (2023)</li>
-            <li>Software Copyright — Hand Rehabilitation Platform</li>
+            <li>Internet+ Competition — University 1st Prize, Provincial 3rd Prize (2023)</li>
+            <li>Registered software copyright — Hand Rehabilitation Platform</li>
         </ul>
     </section>
 </body>
