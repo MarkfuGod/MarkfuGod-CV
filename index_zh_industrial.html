@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>盖一帆 — 简历（工业向）</title>
+    <link rel="stylesheet" href="neurips.css">
+</head>
+<body class="resume">
+    <nav class="nav">
+        <a href="index.html">← 个人主页</a>
+        <a href="index_en_industrial.html">English</a>
+        <a href="index_zh.html">学术简历</a>
+    </nav>
+
+    <header class="masthead">
+        <div>
+            <h1>盖一帆</h1>
+            <div class="tagline">AI Agent / LLM 应用工程师 · 港大 CS 硕士，2026 毕业</div>
+        </div>
+        <div class="contact">
+            <a href="mailto:MarkfuGod@outlook.com">MarkfuGod@outlook.com</a> · github.com/MarkfuGod<br>
+            WhatsApp/电话：+852 98251473 · 微信：markfugod2003
+        </div>
+    </header>
+
+    <section class="intro">
+        <p>端到端交付 Agent 系统：工具调用、RAG、多语言聊天机器人与全栈部署。</p>
+    </section>
+
+    <section>
+        <h2>精选项目</h2>
+
+        <div class="item">
+            <div class="head">
+                <span class="title">M-PAC WhatsApp 聊天机器人 — 癌症患者 12 周运动促进项目</span>
+                <span class="date">2026</span>
+            </div>
+            <div class="sub">项目经理 &amp; AI 工程师 · 粤语 &amp; 繁体中文</div>
+            <ul>
+                <li>主导 AI WhatsApp 系统技术方案与客户交付，替代研究助理人工发信：向 500 名患者按计划推送 12 周课程、智能回复，并导出可供研究分析的结构化数据。</li>
+                <li>设计六大后端模块（Node.js/TypeScript、PostgreSQL、Chroma、GPT-4o）：定时调度、对话状态管理、答案校验、RAG 检索、LLM 网关，以及将敏感临床问题转介主治医师的安全护栏。</li>
+                <li>搭建 React 管理后台，支持会话监控、患者入组/退订与 CSV/Excel 导出；生产目标约每日 720 条出站、360 条入站消息，每周 3,000–5,000 次 LLM 调用，峰值 &lt;50 QPS。</li>
+                <li>规划 5 周交付节奏，第 4 周完成 10 人内测 beta，并部署至 DigitalOcean/AWS；撰写完整技术方案、成本模型与分期付款节点。</li>
+            </ul>
+        </div>
+
+        <div class="item">
+            <div class="head">
+                <span class="title"><a href="https://github.com/MarkfuGod/skillios" target="_blank">Skillios（ItsMyGoal）</a> — 端侧 Agent 全栈 iOS 目标规划应用</span>
+                <span class="date">2025 – 2026</span>
+            </div>
+            <div class="sub"><a href="https://testflight.apple.com/join/FVfXajpn" target="_blank">TestFlight 内测</a> · <a href="https://testflight.apple.com/join/FVfXajpn" target="_blank">click here for app experience</a></div>
+            <ul>
+                <li>上线游戏化目标规划应用：Agent 将用户目标分解为带前置条件的技能树与 XP 任务；对话 Agent 通过约 10 个工具（天气、地点搜索、路线、待办、习惯）规划真实出行方案。</li>
+                <li>设计端侧 Agent 循环：只读工具并行、数据库写操作串行；本地基准测试将多工具行程规划延迟从约 8.2s 降至约 3.4s（约 2.4×），相较串行调用。</li>
+                <li>以 XCTest/pytest 约束 Swift 与 Python 共享 JSON 契约；内测中结构化技能树输出 schema 校验通过率约 96%，AI 建议任务用户确认率约 85%。</li>
+                <li>FastAPI + PostgreSQL 后端部署于 AWS（CDK、ECS Fargate、RDS）：认证、快照同步、带用户配额的 LLM 代理，以及服务端 Maps/天气代理，避免 API 密钥落盘端侧。</li>
+            </ul>
+        </div>
+
+        <div class="item">
+            <div class="head">
+                <span class="title"><a href="https://github.com/MarkfuGod/KithAgent" target="_blank">KithAgent</a> — AI Agent 本地记忆与检索层</span>
+                <span class="date">2025 – 2026</span>
+            </div>
+            <div class="sub">受 Claude Memory 启发，突破单次会话记忆局限</div>
+            <ul>
+                <li>痛点：分块 RAG 难以处理视频、图片与混合仓库；会话记忆工具每次新开对话即丢失上下文。构建本地守护进程，索引用户指定目录，LLM 按优先级分诊文件，并在用户空闲时总结高价值上下文。</li>
+                <li>混合检索：精确文件查找 + 轻量图式 RAG（借鉴 LightRAG 的实体关联，基于 LLM 摘要；Karpathy 式 Obsidian 知识库滚动摘要）；支持 Ollama 与 OpenAI 兼容 API。</li>
+                <li>对外提供 syscall API（Unix socket + HTTP）、Python SDK、Cursor/Claude Code Skills 与 Electron 面板；本地评测跨会话上下文检索相关命中率约 78%，同文件集下单会话基线约 40%。</li>
+                <li>冷启动上下文组装从全目录朴素分块的约 4 分钟降至后台索引后再次访问的约 12 秒；LLM 分诊对非文本文件正确路由至跳过/摘要路径的比例约 90%+。</li>
+            </ul>
+        </div>
+
+        <div class="item">
+            <div class="head">
+                <span class="title"><a href="NL2BP-Project-Highlight_zh.html">NL2BP</a> — 多 Agent 需求转蓝图流水线</span>
+                <span class="date">2025</span>
+            </div>
+            <div class="sub">本科毕设 · CrewAI 编排</div>
+            <ul>
+                <li>9 个专职 Agent 并行将自然语言需求转为经校验的 PlantUML 蓝图；简单规格支持单 Agent 角色切换模式。</li>
+                <li>端到端 Agent 编排：需求解析 → 架构设计 → 图表生成 → 语法校验闭环。</li>
+            </ul>
+        </div>
+
+        <div class="item">
+            <div class="head">
+                <span class="title">Being-H0.5 VLA — 多卡训练与生产环境移植</span>
+                <span class="date">2025 – 2026</span>
+            </div>
+            <div class="sub">港大硕士课题 · 工程导向</div>
+            <ul>
+                <li>复现并评测官方 2B checkpoint，2000 个 LIBERO episode 达 95–98.6%；在 4 卡 FSDP 上从 base 权重复刻后训练流程。</li>
+                <li>将训练栈移植至 NVIDIA Blackwell（RTX 6000 Pro）：PyTorch 2.8/CUDA 12.8 迁移、SDPA 注意力、梯度检查点与 flex-attention kernel 调优 — 4 卡训练稳定约 0.3 steps/s，每卡约 92 GB 显存占用。</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>技能</h2>
+        <div class="skill-grid">
+            <span class="k">机器学习与训练</span>
+            <span>PyTorch；多卡训练（FSDP）；LLM 微调与后训练；LoRA/PEFT；flow matching；评测流水线</span>
+            <span class="k">Agent 与 LLM 应用</span>
+            <span>Tool calling；Deep Agent 与 Agent 循环设计；Harness 工程；RAG（Chroma、LightRAG 式图谱）；MCP 集成；CrewAI、LangChain</span>
+            <span class="k">工程与基础设施</span>
+            <span>Python、Swift、TypeScript、Node.js；FastAPI、SQLAlchemy、PostgreSQL；React；Docker；AWS CDK/ECS；Electron；Nginx/PM2</span>
+            <span class="k">语言</span>
+            <span>英语（IELTS 7.5）、普通话、粤语（日常交流）；繁体与简体中文</span>
+        </div>
+    </section>
+
+    <section>
+        <h2>教育背景</h2>
+        <div class="item">
+            <div class="head">
+                <span class="title">香港大学</span>
+                <span class="date">2025 – 2026</span>
+            </div>
+            <div class="sub">计算机科学硕士（AI / ML / NLP）· GPA 3.52/4.3</div>
+        </div>
+        <div class="item">
+            <div class="head">
+                <span class="title">郑州大学</span>
+                <span class="date">2021 – 2025</span>
+            </div>
+            <div class="sub">软件工程学士 · GPA 3.44/4.0 · IELTS 7.5</div>
+        </div>
+    </section>
+
+    <section>
+        <h2>获奖</h2>
+        <ul>
+            <li>机器人、自动化与物联网项目 — 最佳展示团队 &amp; Distinction（2024）</li>
+            <li>「互联网<sup>+</sup>」大赛 — 校级一等奖、省级三等奖（2023）</li>
+            <li>软件著作权 — 手部康复平台</li>
+        </ul>
+    </section>
+</body>
+</html>

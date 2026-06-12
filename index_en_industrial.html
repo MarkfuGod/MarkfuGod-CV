@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gai Yifan — Resume (Industry)</title>
+    <link rel="stylesheet" href="neurips.css">
+</head>
+<body class="resume">
+    <nav class="nav">
+        <a href="index.html">← Profile</a>
+        <a href="index_en.html">Academic resume</a>
+        <a href="index_zh_industrial.html">中文</a>
+    </nav>
+
+    <header class="masthead">
+        <div>
+            <h1>Gai Yifan</h1>
+            <div class="tagline">AI Agent &amp; LLM Application Engineer · HKU MSc CS, graduating 2026</div>
+        </div>
+        <div class="contact">
+            <a href="mailto:MarkfuGod@outlook.com">MarkfuGod@outlook.com</a> · github.com/MarkfuGod<br>
+            WhatsApp/Phone: +852 98251473 · WeChat: markfugod2003
+        </div>
+    </header>
+
+    <section class="intro">
+        <p>Shipping agent systems end-to-end: tool calling, RAG, multilingual chatbots, and full-stack deployment.</p>
+    </section>
+
+    <section>
+        <h2>Selected Projects</h2>
+
+        <div class="item">
+            <div class="head">
+                <span class="title">M-PAC WhatsApp Chatbot — 12-week exercise program for cancer survivors</span>
+                <span class="date">2026</span>
+            </div>
+            <div class="sub">Project Manager &amp; AI Engineer · Cantonese &amp; Traditional Chinese</div>
+            <ul>
+                <li>Led technical design and client delivery for an AI WhatsApp system replacing manual RA messaging: scheduled 12-week curriculum delivery to 500 patients, intelligent replies, and research-ready data export.</li>
+                <li>Architected six backend modules (Node.js/TypeScript, PostgreSQL, Chroma, GPT-4o): scheduler, dialogue state manager, answer validator, RAG retriever, LLM gateway, and clinical safety guardrails that redirect sensitive questions to physicians.</li>
+                <li>Built React admin dashboard for conversation monitoring, patient enrol/opt-out, and CSV/Excel export; production target ~720 outbound and ~360 inbound messages/day, 3,000–5,000 LLM calls/week at &lt;50 QPS peak.</li>
+                <li>Scoped 5-week delivery with 10-patient internal beta (Week 4) and cloud deployment on DigitalOcean/AWS; authored full technical proposal, cost model, and payment milestones.</li>
+            </ul>
+        </div>
+
+        <div class="item">
+            <div class="head">
+                <span class="title"><a href="https://github.com/MarkfuGod/skillios" target="_blank">Skillios (ItsMyGoal)</a> — full-stack iOS goal planner with on-device agents</span>
+                <span class="date">2025 – 2026</span>
+            </div>
+            <div class="sub"><a href="https://testflight.apple.com/join/FVfXajpn" target="_blank">TestFlight beta</a> · <a href="https://testflight.apple.com/join/FVfXajpn" target="_blank">click here for app experience</a></div>
+            <ul>
+                <li>Shipped gamified goal planner: agent decomposes user goals into prerequisite skill trees and XP quests; chat agent plans real-world itineraries via ~10 tools (weather, place search, directions, todos, routines).</li>
+                <li>Designed on-device agent loop with parallel execution for read-only tools and serial execution for DB mutations; local benchmarks cut multi-tool itinerary latency from ~8.2s to ~3.4s (~2.4×) vs sequential calls.</li>
+                <li>Enforced shared JSON contracts across Swift and Python with XCTest/pytest; structured skill-tree output passes schema validation ~96% of the time in beta, with ~85% user confirmation on AI-suggested tasks.</li>
+                <li>FastAPI + PostgreSQL backend on AWS (CDK, ECS Fargate, RDS): auth, snapshot sync, LLM proxy with per-user quotas, and server-side Maps/weather proxies to keep API keys off-device.</li>
+            </ul>
+        </div>
+
+        <div class="item">
+            <div class="head">
+                <span class="title"><a href="https://github.com/MarkfuGod/KithAgent" target="_blank">KithAgent</a> — local memory &amp; retrieval layer for AI agents</span>
+                <span class="date">2025 – 2026</span>
+            </div>
+            <div class="sub">Inspired by Claude Memory; extends beyond session-only recall</div>
+            <ul>
+                <li>Problem: chunk-based RAG handles text poorly across video, images, and mixed repos; session memory tools reset context on every new agent chat. Built a local daemon that indexes user-chosen folders, LLM-triages files by priority, and summarizes high-value context while the user is idle.</li>
+                <li>Hybrid retrieval: exact file lookup + lightweight graph-style RAG (LightRAG-inspired entity linking over LLM-generated summaries, Karpathy-style Obsidian knowledge base via rolling summarization); supports Ollama and OpenAI-compatible APIs.</li>
+                <li>Exposes syscall API (Unix socket + HTTP), Python SDK, Cursor/Claude Code skills, and Electron dashboard; cross-session context retrieval ~78% relevant-hit rate in local eval vs ~40% for session-only baselines on the same file sets.</li>
+                <li>Cold-start context assembly drops from ~4 min (full-folder naive chunking) to ~12s on revisit after background indexing; non-text files routed correctly to skip/summarize paths ~90%+ of the time via LLM triage.</li>
+            </ul>
+        </div>
+
+        <div class="item">
+            <div class="head">
+                <span class="title"><a href="NL2BP-Project-Highlight_en.html">NL2BP</a> — multi-agent requirements-to-blueprint pipeline</span>
+                <span class="date">2025</span>
+            </div>
+            <div class="sub">BEng thesis · CrewAI orchestration</div>
+            <ul>
+                <li>9 specialized agents in parallel convert natural-language requirements into validated PlantUML blueprints; role-switching single-agent mode for simpler specs.</li>
+                <li>End-to-end agent harness: requirement parsing → architecture design → diagram generation → syntax validation loop.</li>
+            </ul>
+        </div>
+
+        <div class="item">
+            <div class="head">
+                <span class="title">Being-H0.5 VLA — multi-GPU training &amp; production porting</span>
+                <span class="date">2025 – 2026</span>
+            </div>
+            <div class="sub">HKU MSc project · Engineering focus</div>
+            <ul>
+                <li>Reproduced and evaluated official 2B checkpoint at 95–98.6% over 2,000 LIBERO episodes; recreated post-training from base weights on 4 GPUs with FSDP.</li>
+                <li>Ported training stack to NVIDIA Blackwell (RTX 6000 Pro): PyTorch 2.8/CUDA 12.8 migration, SDPA attention, gradient checkpointing, flex-attention kernel tuning — stable 4-GPU training at ~0.3 steps/s, ~92 GB/card.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>Skills</h2>
+        <div class="skill-grid">
+            <span class="k">ML &amp; training</span>
+            <span>PyTorch; multi-GPU training (FSDP); LLM fine-tuning &amp; post-training; LoRA/PEFT; flow matching; evaluation pipelines</span>
+            <span class="k">Agents &amp; LLM apps</span>
+            <span>Tool calling; deep agents &amp; agent-loop design; harness engineering; RAG (Chroma, LightRAG-style graphs); MCP integration; CrewAI, LangChain</span>
+            <span class="k">Engineering &amp; infra</span>
+            <span>Python, Swift, TypeScript, Node.js; FastAPI, SQLAlchemy, PostgreSQL; React; Docker; AWS CDK/ECS; Electron; Nginx/PM2</span>
+            <span class="k">Languages</span>
+            <span>English (IELTS 7.5), Mandarin, Cantonese (conversational); Traditional &amp; Simplified Chinese</span>
+        </div>
+    </section>
+
+    <section>
+        <h2>Education</h2>
+        <div class="item">
+            <div class="head">
+                <span class="title">The University of Hong Kong</span>
+                <span class="date">2025 – 2026</span>
+            </div>
+            <div class="sub">MSc, Computer Science (AI / ML / NLP) · GPA 3.52/4.3</div>
+        </div>
+        <div class="item">
+            <div class="head">
+                <span class="title">Zhengzhou University</span>
+                <span class="date">2021 – 2025</span>
+            </div>
+            <div class="sub">BEng, Software Engineering · GPA 3.44/4.0 · IELTS 7.5</div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Awards</h2>
+        <ul>
+            <li>Robotics, Automation &amp; IoT Programme — Best Presenting Team &amp; Distinction (2024)</li>
+            <li>Internet<sup>+</sup> Competition — University 1st Prize, Provincial 3rd Prize (2023)</li>
+            <li>Registered software copyright — Hand Rehabilitation Platform</li>
+        </ul>
+    </section>
+</body>
+</html>
