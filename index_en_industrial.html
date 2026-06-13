@@ -25,7 +25,7 @@
     </header>
 
     <section class="intro">
-        <p>Shipping agent systems end-to-end: tool calling, RAG, multilingual chatbots, and full-stack deployment.</p>
+        <p>Shipping agent systems end-to-end: tool calling, RAG, multilingual chatbots, finance research agents, and full-stack deployment.</p>
     </section>
 
     <section>
@@ -36,9 +36,9 @@
                 <span class="title">M-PAC WhatsApp Chatbot — 12-week exercise program for cancer survivors</span>
                 <span class="date">2026</span>
             </div>
-            <div class="sub">Project Manager &amp; AI Engineer · Cantonese &amp; Traditional Chinese</div>
+            <div class="sub">Project Lead &amp; AI Engineer · Cantonese &amp; Traditional Chinese</div>
             <ul>
-                <li>Led technical design and client delivery for an AI WhatsApp system replacing manual RA messaging: scheduled 12-week curriculum delivery to 500 patients, intelligent replies, and research-ready data export.</li>
+                <li>Led cross-functional delivery as PM &amp; AI engineer: routed backend, frontend, and RAG work by stack; delivered an AI WhatsApp system for 500 cancer survivors with scheduled 12-week curriculum, intelligent replies, and research-ready export.</li>
                 <li>Architected six backend modules (Node.js/TypeScript, PostgreSQL, Chroma, GPT-4o): scheduler, dialogue state manager, answer validator, RAG retriever, LLM gateway, and clinical safety guardrails that redirect sensitive questions to physicians.</li>
                 <li>Built React admin dashboard for conversation monitoring, patient enrol/opt-out, and CSV/Excel export; production target ~720 outbound and ~360 inbound messages/day, 3,000–5,000 LLM calls/week at &lt;50 QPS peak.</li>
                 <li>Scoped 5-week delivery with 10-patient internal beta (Week 4) and cloud deployment on DigitalOcean/AWS; authored full technical proposal, cost model, and payment milestones.</li>
@@ -50,12 +50,12 @@
                 <span class="title"><a href="https://github.com/MarkfuGod/skillios" target="_blank">Skillios (ItsMyGoal)</a> — full-stack iOS goal planner with on-device agents</span>
                 <span class="date">2025 – 2026</span>
             </div>
-            <div class="sub"><a href="https://testflight.apple.com/join/FVfXajpn" target="_blank">TestFlight beta</a> · <a href="https://testflight.apple.com/join/FVfXajpn" target="_blank">click here for app experience</a></div>
+            <div class="sub"><a href="https://testflight.apple.com/join/FVfXajpn" target="_blank">TestFlight beta</a> · Group Leader</div>
             <ul>
-                <li>Shipped gamified goal planner: agent decomposes user goals into prerequisite skill trees and XP quests; chat agent plans real-world itineraries via ~10 tools (weather, place search, directions, todos, routines).</li>
-                <li>Designed on-device agent loop with parallel execution for read-only tools and serial execution for DB mutations; local benchmarks cut multi-tool itinerary latency from ~8.2s to ~3.4s (~2.4×) vs sequential calls.</li>
-                <li>Enforced shared JSON contracts across Swift and Python with XCTest/pytest; structured skill-tree output passes schema validation ~96% of the time in beta, with ~85% user confirmation on AI-suggested tasks.</li>
-                <li>FastAPI + PostgreSQL backend on AWS (CDK, ECS Fargate, RDS): auth, snapshot sync, LLM proxy with per-user quotas, and server-side Maps/weather proxies to keep API keys off-device.</li>
+                <li>Led team delivery by skill stack — iOS UI to mobile teammates, backend/DB and AWS deployment to backend owners, testing and docs to others; owned AI agent architecture and final integration.</li>
+                <li>Owned AI agent architecture end-to-end: on-device tool loop (~10 tools), Dream Architect decomposition, shared Swift/Python JSON contracts, and final integration before TestFlight.</li>
+                <li>Designed parallel read-only tool execution with serial DB mutations; local benchmarks cut multi-tool itinerary latency from ~8.2s to ~3.4s (~2.4×) vs sequential calls.</li>
+                <li>FastAPI + PostgreSQL on AWS (CDK, ECS Fargate, RDS): auth, snapshot sync, LLM proxy with per-user quotas, and server-side Maps/weather proxies.</li>
             </ul>
         </div>
 
@@ -75,13 +75,15 @@
 
         <div class="item">
             <div class="head">
-                <span class="title"><a href="NL2BP-Project-Highlight_en.html">NL2BP</a> — multi-agent requirements-to-blueprint pipeline</span>
-                <span class="date">2025</span>
+                <span class="title"><a href="Vibe-Trading-Project-Highlight_en.html">Vibe-Trading</a> — finance research agent with swarm teams</span>
+                <span class="date">2026</span>
             </div>
-            <div class="sub">BEng thesis · CrewAI orchestration</div>
+            <div class="sub"><a href="https://vibetrading.wiki/home/" target="_blank">vibetrading.wiki</a> · HKUDS open source · hands-on training &amp; contribution</div>
             <ul>
-                <li>9 specialized agents in parallel convert natural-language requirements into validated PlantUML blueprints; role-switching single-agent mode for simpler specs.</li>
-                <li>End-to-end agent harness: requirement parsing → architecture design → diagram generation → syntax validation loop.</li>
+                <li>Orchestrated preset swarm teams (investment committee, quant desk, risk, macro, crypto): parallel specialist workers debate and synthesize research reports with evidence, metrics, and caveats.</li>
+                <li>Built agent harness workflows: route natural-language prompts → market data → backtests/factor analysis → reproducible run cards with tool traces.</li>
+                <li>Ran multi-engine backtests across equities, crypto, futures, forex, and options; shadow-account journal parsing for counterfactual analysis.</li>
+                <li>Applied Hermes Agent gateway/session patterns from deep architecture study to local agent infrastructure (KithAgent).</li>
             </ul>
         </div>
 
@@ -104,7 +106,9 @@
             <span class="k">ML &amp; training</span>
             <span>PyTorch; multi-GPU training (FSDP); LLM fine-tuning &amp; post-training; LoRA/PEFT; flow matching; evaluation pipelines</span>
             <span class="k">Agents &amp; LLM apps</span>
-            <span>Tool calling; deep agents &amp; agent-loop design; harness engineering; RAG (Chroma, LightRAG-style graphs); MCP integration; CrewAI, LangChain</span>
+            <span>Tool calling; deep agents &amp; agent-loop design; harness engineering; RAG (Chroma, LightRAG-style graphs); MCP integration; CrewAI, LangChain; finance research swarms (Vibe-Trading)</span>
+            <span class="k">AI dev tools</span>
+            <span>Cursor, Claude Code, Codex, OpenCode — daily use for harness engineering from research and production projects; Hermes Agent &amp; OpenClaw gateway architecture studied in depth</span>
             <span class="k">Engineering &amp; infra</span>
             <span>Python, Swift, TypeScript, Node.js; FastAPI, SQLAlchemy, PostgreSQL; React; Docker; AWS CDK/ECS; Electron; Nginx/PM2</span>
             <span class="k">Languages</span>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe-Trading: Finance Research Agent with Swarm Teams</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Times New Roman', serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 60px;
+        }
+        .language-switch { text-align: right; margin-bottom: 10px; font-size: 0.9rem; }
+        .language-switch a {
+            color: #0066cc; text-decoration: none; padding: 5px 10px;
+            border: 1px solid #0066cc; border-radius: 3px;
+        }
+        .language-switch a:hover { background-color: #0066cc; color: white; }
+        .header {
+            text-align: center; margin-bottom: 40px;
+            border-bottom: 2px solid #333; padding-bottom: 20px;
+        }
+        .project-name { font-size: 2.2rem; font-weight: bold; margin-bottom: 10px; }
+        .project-subtitle { font-size: 1.1rem; font-style: italic; margin-bottom: 15px; color: #666; }
+        .project-links { font-size: 0.95rem; margin-bottom: 10px; }
+        .project-links a { color: #0066cc; text-decoration: none; }
+        .project-links a:hover { text-decoration: underline; }
+        .section { margin-bottom: 35px; }
+        .section-title {
+            font-size: 1.3rem; font-weight: bold; text-transform: uppercase;
+            border-bottom: 1px solid #333; margin-bottom: 20px; padding-bottom: 5px;
+        }
+        .abstract {
+            background-color: #f8f9fa; border-left: 4px solid #0066cc;
+            padding: 20px; margin: 25px 0; font-size: 0.95rem; line-height: 1.7;
+        }
+        .feature-item { margin-bottom: 25px; }
+        .feature-title { font-weight: bold; font-size: 1.05rem; margin-bottom: 8px; }
+        .feature-description { font-size: 0.95rem; line-height: 1.6; }
+        .workflow-comparison {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin: 25px 0;
+        }
+        .workflow-card {
+            border: 1px solid #ddd; padding: 20px; border-radius: 5px; background-color: #fafafa;
+        }
+        .workflow-title { font-weight: bold; font-size: 1rem; margin-bottom: 15px; text-align: center; }
+        .workflow-features { font-size: 0.9rem; margin-left: 20px; }
+        .workflow-features li { margin-bottom: 6px; }
+        .code-block {
+            background-color: #f5f5f5; border: 1px solid #ddd; padding: 15px;
+            margin: 10px 0; border-radius: 3px; font-family: 'Courier New', monospace;
+            font-size: 0.85rem; overflow-x: auto;
+        }
+        .highlight-box {
+            background-color: #f0f8ff; border: 1px solid #b0d4f1;
+            padding: 20px; margin: 20px 0; border-radius: 5px;
+        }
+        .nav-back { margin-bottom: 20px; font-size: 0.9rem; }
+        .nav-back a { color: #0066cc; }
+        @media (max-width: 768px) {
+            body { padding: 20px 30px; }
+            .workflow-comparison { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switch">
+        <a href="Vibe-Trading-Project-Highlight_zh.html">中文版本</a>
+    </div>
+    <div class="nav-back"><a href="index_en_industrial.html">← Back to resume</a></div>
+
+    <div class="header">
+        <h1 class="project-name">Vibe-Trading</h1>
+        <div class="project-subtitle">Open-Source Finance Research Agent with Multi-Agent Swarm Teams</div>
+        <div class="project-links">
+            <strong>Wiki:</strong> <a href="https://vibetrading.wiki/home/" target="_blank">vibetrading.wiki</a> |
+            <strong>GitHub:</strong> <a href="https://github.com/HKUDS/Vibe-Trading" target="_blank">HKUDS/Vibe-Trading</a> |
+            <strong>PyPI:</strong> <a href="https://pypi.org/project/vibe-trading-ai/" target="_blank">vibe-trading-ai</a>
+        </div>
+    </div>
+
+    <div class="abstract">
+        <strong>Summary.</strong> Vibe-Trading turns natural-language market questions into runnable research: route skills and data sources, ground on live market data or broker journals, run backtests and factor analysis, and deliver reproducible run cards with evidence, metrics, and caveats. My hands-on work focuses on orchestrating preset swarm teams, designing agent harness workflows, and connecting this finance agent stack to broader agent-tooling research (Cursor, Codex, Hermes Agent).
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">Research Loop</h2>
+        <div class="workflow-comparison">
+            <div class="workflow-card">
+                <div class="workflow-title">Route → Ground</div>
+                <ul class="workflow-features">
+                    <li>Select skills, data sources, tools, and swarm teams from the user prompt</li>
+                    <li>Fetch equities, crypto, futures, forex, documents, URLs, or broker journals at runtime</li>
+                </ul>
+            </div>
+            <div class="workflow-card">
+                <div class="workflow-title">Test → Deliver</div>
+                <ul class="workflow-features">
+                    <li>Run backtests, factor analysis, options checks, and validation</li>
+                    <li>Return run cards, exports, tool traces, and caveats for the next session</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">Swarm Teams for Trading Research</h2>
+        <div class="feature-item">
+            <div class="feature-title">Preset research teams</div>
+            <div class="feature-description">
+                Parallel specialist workers collaborate on a single research question. Preset teams include investment committee, quant desk, risk review, macro, crypto, and catalyst analysts — each with a defined role, evidence requirements, and synthesis step.
+            </div>
+        </div>
+        <div class="code-block">$ vibe-trading --swarm-run investment_committee
+workers: macro, quant, risk, catalyst
+report saved with evidence, metrics, and caveats</div>
+        <div class="feature-item">
+            <div class="feature-title">Single-agent and team modes</div>
+            <div class="feature-description">
+                Simple prompts route to a single research agent with tool-batched runs; complex questions spawn a team where workers debate bull/bear views before a lead synthesizes the final report. This mirrors the multi-agent orchestration patterns I previously explored in NL2BP, applied to finance research instead of UML blueprint generation.
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">Capabilities I Work With</h2>
+        <div class="feature-item">
+            <div class="feature-title">Agent harness</div>
+            <div class="feature-description">Persistent memory, session search, editable skills, context compression, and tool-batched research runs.</div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-title">Backtesting</div>
+            <div class="feature-description">Seven engines across equities, crypto, futures, forex, composites, and options portfolios.</div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-title">Shadow account</div>
+            <div class="feature-description">Parse broker journals, extract implicit rules, run counterfactual backtests, and render audit reports.</div>
+        </div>
+        <div class="code-block">$ vibe-trading run -p "Backtest BTC-USDT 20/50 MA for 2024"
+route: crypto data -> strategy -> backtest -> run card
+return +18.6%  max drawdown -7.4%</div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">Related Agent Tooling</h2>
+        <div class="highlight-box">
+            <p><strong>AI dev tools:</strong> Daily use of Cursor, Claude Code, Codex, and OpenCode for harness engineering, skill authoring, and reproducible agent runs — not just prompting, but wiring tools, traces, and evaluation loops.</p>
+            <p style="margin-top: 12px;"><strong>Hermes Agent:</strong> Deep architecture study (<a href="https://github.com/NousResearch/hermes-agent" target="_blank">NousResearch/hermes-agent</a>) of gateway/session routing, messaging adapters, and model switching — applied to local agent infrastructure in <a href="https://github.com/MarkfuGod/KithAgent" target="_blank">KithAgent</a>.</p>
+            <p style="margin-top: 12px;"><strong>Live product data:</strong> <a href="https://testflight.apple.com/join/FVfXajpn" target="_blank">Skillios TestFlight</a> · Portfolio: <a href="https://github.com/MarkfuGod" target="_blank">github.com/MarkfuGod</a></p>
+        </div>
+    </div>
+</body>
+</html>

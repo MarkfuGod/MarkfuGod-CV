@@ -25,7 +25,7 @@
     </header>
 
     <section class="intro">
-        <p>端到端交付 Agent 系统：工具调用、RAG、多语言聊天机器人与全栈部署。</p>
+        <p>端到端交付 Agent 系统：工具调用、RAG、多语言聊天机器人、金融研究 Agent 与全栈部署。</p>
     </section>
 
     <section>
@@ -36,9 +36,9 @@
                 <span class="title">M-PAC WhatsApp 聊天机器人 — 癌症患者 12 周运动促进项目</span>
                 <span class="date">2026</span>
             </div>
-            <div class="sub">项目经理 &amp; AI 工程师 · 粤语 &amp; 繁体中文</div>
+            <div class="sub">项目负责人 &amp; AI 工程师 · 粤语 &amp; 繁体中文</div>
             <ul>
-                <li>主导 AI WhatsApp 系统技术方案与客户交付，替代研究助理人工发信：向 500 名患者按计划推送 12 周课程、智能回复，并导出可供研究分析的结构化数据。</li>
+                <li>作为 PM 与 AI 工程师带领跨职能交付：按技能栈分工（后端、前端、RAG）；向 500 名癌症患者交付 AI WhatsApp 系统 — 12 周课程推送、智能回复与可导出研究数据。</li>
                 <li>设计六大后端模块（Node.js/TypeScript、PostgreSQL、Chroma、GPT-4o）：定时调度、对话状态管理、答案校验、RAG 检索、LLM 网关，以及将敏感临床问题转介主治医师的安全护栏。</li>
                 <li>搭建 React 管理后台，支持会话监控、患者入组/退订与 CSV/Excel 导出；生产目标约每日 720 条出站、360 条入站消息，每周 3,000–5,000 次 LLM 调用，峰值 &lt;50 QPS。</li>
                 <li>规划 5 周交付节奏，第 4 周完成 10 人内测 beta，并部署至 DigitalOcean/AWS；撰写完整技术方案、成本模型与分期付款节点。</li>
@@ -50,12 +50,12 @@
                 <span class="title"><a href="https://github.com/MarkfuGod/skillios" target="_blank">Skillios（ItsMyGoal）</a> — 端侧 Agent 全栈 iOS 目标规划应用</span>
                 <span class="date">2025 – 2026</span>
             </div>
-            <div class="sub"><a href="https://testflight.apple.com/join/FVfXajpn" target="_blank">TestFlight 内测</a> · <a href="https://testflight.apple.com/join/FVfXajpn" target="_blank">click here for app experience</a></div>
+            <div class="sub"><a href="https://testflight.apple.com/join/FVfXajpn" target="_blank">TestFlight 内测</a> · 组长</div>
             <ul>
-                <li>上线游戏化目标规划应用：Agent 将用户目标分解为带前置条件的技能树与 XP 任务；对话 Agent 通过约 10 个工具（天气、地点搜索、路线、待办、习惯）规划真实出行方案。</li>
-                <li>设计端侧 Agent 循环：只读工具并行、数据库写操作串行；本地基准测试将多工具行程规划延迟从约 8.2s 降至约 3.4s（约 2.4×），相较串行调用。</li>
-                <li>以 XCTest/pytest 约束 Swift 与 Python 共享 JSON 契约；内测中结构化技能树输出 schema 校验通过率约 96%，AI 建议任务用户确认率约 85%。</li>
-                <li>FastAPI + PostgreSQL 后端部署于 AWS（CDK、ECS Fargate、RDS）：认证、快照同步、带用户配额的 LLM 代理，以及服务端 Maps/天气代理，避免 API 密钥落盘端侧。</li>
+                <li>按技能栈带领团队交付 — iOS 界面交给移动端同学，后端/数据库与 AWS 部署交给后端同学，测试与文档交给其他同学；负责 AI Agent 架构与最终集成。</li>
+                <li>端到端负责 AI Agent 架构：端侧工具循环（约 10 个工具）、Dream Architect 分解、Swift/Python 共享 JSON 契约，以及 TestFlight 前最终集成。</li>
+                <li>设计只读工具并行、数据库写操作串行的 Agent 循环；本地基准测试将多工具行程规划延迟从约 8.2s 降至约 3.4s（约 2.4×）。</li>
+                <li>FastAPI + PostgreSQL 部署于 AWS（CDK、ECS Fargate、RDS）：认证、快照同步、带用户配额的 LLM 代理，以及服务端 Maps/天气代理。</li>
             </ul>
         </div>
 
@@ -75,13 +75,15 @@
 
         <div class="item">
             <div class="head">
-                <span class="title"><a href="NL2BP-Project-Highlight_zh.html">NL2BP</a> — 多 Agent 需求转蓝图流水线</span>
-                <span class="date">2025</span>
+                <span class="title"><a href="Vibe-Trading-Project-Highlight_zh.html">Vibe-Trading</a> — 金融研究 Agent 与 Swarm 团队</span>
+                <span class="date">2026</span>
             </div>
-            <div class="sub">本科毕设 · CrewAI 编排</div>
+            <div class="sub"><a href="https://vibetrading.wiki/home/" target="_blank">vibetrading.wiki</a> · HKUDS 开源 · 动手训练与实践</div>
             <ul>
-                <li>9 个专职 Agent 并行将自然语言需求转为经校验的 PlantUML 蓝图；简单规格支持单 Agent 角色切换模式。</li>
-                <li>端到端 Agent 编排：需求解析 → 架构设计 → 图表生成 → 语法校验闭环。</li>
+                <li>编排预设 swarm 团队（investment committee、quant desk、risk、macro、crypto）：专职 worker 并行协作，多空辩论后合成带证据链、指标与风险提示的研究报告。</li>
+                <li>搭建 Agent harness 工作流：自然语言 prompt → 行情数据 → 回测/因子分析 → 可复现 run card 与工具 trace。</li>
+                <li>运行多引擎回测（股票、 crypto、期货、外汇、期权）；Shadow account 流水解析与反事实分析。</li>
+                <li>将 Hermes Agent gateway/会话架构的深入研究应用于本地 Agent 基础设施（KithAgent）。</li>
             </ul>
         </div>
 
@@ -104,7 +106,9 @@
             <span class="k">机器学习与训练</span>
             <span>PyTorch；多卡训练（FSDP）；LLM 微调与后训练；LoRA/PEFT；flow matching；评测流水线</span>
             <span class="k">Agent 与 LLM 应用</span>
-            <span>Tool calling；Deep Agent 与 Agent 循环设计；Harness 工程；RAG（Chroma、LightRAG 式图谱）；MCP 集成；CrewAI、LangChain</span>
+            <span>Tool calling；Deep Agent 与 Agent 循环设计；Harness 工程；RAG（Chroma、LightRAG 式图谱）；MCP 集成；CrewAI、LangChain；金融研究 swarm（Vibe-Trading）</span>
+            <span class="k">AI 开发工具</span>
+            <span>Cursor、Claude Code、Codex、OpenCode — 日常用于 harness 工程，来自研究与真实项目经验；Hermes Agent、OpenClaw gateway 架构深入研究</span>
             <span class="k">工程与基础设施</span>
             <span>Python、Swift、TypeScript、Node.js；FastAPI、SQLAlchemy、PostgreSQL；React；Docker；AWS CDK/ECS；Electron；Nginx/PM2</span>
             <span class="k">语言</span>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe-Trading：金融研究 Agent 与多 Agent 协作团队</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Times New Roman', 'Songti SC', serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 60px;
+        }
+        .language-switch { text-align: right; margin-bottom: 10px; font-size: 0.9rem; }
+        .language-switch a {
+            color: #0066cc; text-decoration: none; padding: 5px 10px;
+            border: 1px solid #0066cc; border-radius: 3px;
+        }
+        .language-switch a:hover { background-color: #0066cc; color: white; }
+        .header {
+            text-align: center; margin-bottom: 40px;
+            border-bottom: 2px solid #333; padding-bottom: 20px;
+        }
+        .project-name { font-size: 2.2rem; font-weight: bold; margin-bottom: 10px; }
+        .project-subtitle { font-size: 1.1rem; font-style: italic; margin-bottom: 15px; color: #666; }
+        .project-links { font-size: 0.95rem; margin-bottom: 10px; }
+        .project-links a { color: #0066cc; text-decoration: none; }
+        .project-links a:hover { text-decoration: underline; }
+        .section { margin-bottom: 35px; }
+        .section-title {
+            font-size: 1.3rem; font-weight: bold;
+            border-bottom: 1px solid #333; margin-bottom: 20px; padding-bottom: 5px;
+        }
+        .abstract {
+            background-color: #f8f9fa; border-left: 4px solid #0066cc;
+            padding: 20px; margin: 25px 0; font-size: 0.95rem; line-height: 1.7;
+        }
+        .feature-item { margin-bottom: 25px; }
+        .feature-title { font-weight: bold; font-size: 1.05rem; margin-bottom: 8px; }
+        .feature-description { font-size: 0.95rem; line-height: 1.6; }
+        .workflow-comparison {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin: 25px 0;
+        }
+        .workflow-card {
+            border: 1px solid #ddd; padding: 20px; border-radius: 5px; background-color: #fafafa;
+        }
+        .workflow-title { font-weight: bold; font-size: 1rem; margin-bottom: 15px; text-align: center; }
+        .workflow-features { font-size: 0.9rem; margin-left: 20px; }
+        .workflow-features li { margin-bottom: 6px; }
+        .code-block {
+            background-color: #f5f5f5; border: 1px solid #ddd; padding: 15px;
+            margin: 10px 0; border-radius: 3px; font-family: 'Courier New', monospace;
+            font-size: 0.85rem; overflow-x: auto;
+        }
+        .highlight-box {
+            background-color: #f0f8ff; border: 1px solid #b0d4f1;
+            padding: 20px; margin: 20px 0; border-radius: 5px;
+        }
+        .nav-back { margin-bottom: 20px; font-size: 0.9rem; }
+        .nav-back a { color: #0066cc; }
+        @media (max-width: 768px) {
+            body { padding: 20px 30px; }
+            .workflow-comparison { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switch">
+        <a href="Vibe-Trading-Project-Highlight_en.html">English Version</a>
+    </div>
+    <div class="nav-back"><a href="index_zh_industrial.html">← 返回简历</a></div>
+
+    <div class="header">
+        <h1 class="project-name">Vibe-Trading</h1>
+        <div class="project-subtitle">开源金融研究 Agent · 多 Agent 协作团队</div>
+        <div class="project-links">
+            <strong>Wiki：</strong> <a href="https://vibetrading.wiki/home/" target="_blank">vibetrading.wiki</a> |
+            <strong>GitHub：</strong> <a href="https://github.com/HKUDS/Vibe-Trading" target="_blank">HKUDS/Vibe-Trading</a> |
+            <strong>PyPI：</strong> <a href="https://pypi.org/project/vibe-trading-ai/" target="_blank">vibe-trading-ai</a>
+        </div>
+    </div>
+
+    <div class="abstract">
+        <strong>概述。</strong> Vibe-Trading 将自然语言市场问题转化为可执行研究：路由技能与数据源、接入实时行情或券商流水、运行回测与因子分析，并输出带证据链、指标与风险提示的可复现 run card。我的实践重点是编排预设 swarm 团队、设计 Agent harness 工作流，并将该金融 Agent 栈与更广泛的 Agent 工具链研究（Cursor、Codex、Hermes Agent）打通。
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">研究闭环</h2>
+        <div class="workflow-comparison">
+            <div class="workflow-card">
+                <div class="workflow-title">路由 →  grounding</div>
+                <ul class="workflow-features">
+                    <li>从用户 prompt 选择技能、数据源、工具与 swarm 团队</li>
+                    <li>运行时拉取股票、 crypto、期货、外汇、文档、URL 或券商流水</li>
+                </ul>
+            </div>
+            <div class="workflow-card">
+                <div class="workflow-title">测试 → 交付</div>
+                <ul class="workflow-features">
+                    <li>回测、因子分析、期权校验与报告生成</li>
+                    <li>返回 run card、导出文件、工具 trace 与 caveat，供下一轮会话使用</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">交易研究 Swarm 团队</h2>
+        <div class="feature-item">
+            <div class="feature-title">预设研究团队</div>
+            <div class="feature-description">
+                多个专职 worker 并行协作同一研究问题。预设团队包括 investment committee、quant desk、risk review、macro、crypto、catalyst 等 — 各角色有明确分工、证据要求与汇总步骤。
+            </div>
+        </div>
+        <div class="code-block">$ vibe-trading --swarm-run investment_committee
+workers: macro, quant, risk, catalyst
+report saved with evidence, metrics, and caveats</div>
+        <div class="feature-item">
+            <div class="feature-title">单 Agent 与团队模式</div>
+            <div class="feature-description">
+                简单问题路由到单 Agent 工具批处理；复杂问题启动团队，worker 多空辩论后由 lead 合成报告。这与我在 NL2BP 中探索的多 Agent 编排模式一脉相承，但应用场景从 UML 蓝图生成转向金融研究。
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">我使用的核心能力</h2>
+        <div class="feature-item">
+            <div class="feature-title">Agent harness</div>
+            <div class="feature-description">持久记忆、会话检索、可编辑 skills、上下文压缩与工具批处理研究运行。</div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-title">回测引擎</div>
+            <div class="feature-description">覆盖股票、 crypto、期货、外汇、组合与期权共七类引擎。</div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-title">Shadow account</div>
+            <div class="feature-description">解析券商流水、抽取隐含规则、反事实回测与审计报告。</div>
+        </div>
+        <div class="code-block">$ vibe-trading run -p "Backtest BTC-USDT 20/50 MA for 2024"
+route: crypto data -> strategy -> backtest -> run card
+return +18.6%  max drawdown -7.4%</div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">相关 Agent 工具链</h2>
+        <div class="highlight-box">
+            <p><strong>AI 开发工具：</strong> 日常使用 Cursor、Claude Code、Codex、OpenCode 做 harness 工程、skill 编写与可复现 Agent 运行 — 不仅是 prompt，还包括工具接线、trace 与评测闭环。</p>
+            <p style="margin-top: 12px;"><strong>Hermes Agent：</strong> 深入研究 <a href="https://github.com/NousResearch/hermes-agent" target="_blank">NousResearch/hermes-agent</a> 的 gateway/会话路由、消息适配与模型切换架构 — 并应用于 <a href="https://github.com/MarkfuGod/KithAgent" target="_blank">KithAgent</a> 本地 Agent 基础设施。</p>
+            <p style="margin-top: 12px;"><strong>线上产品数据：</strong> <a href="https://testflight.apple.com/join/FVfXajpn" target="_blank">Skillios TestFlight</a> · 作品集：<a href="https://github.com/MarkfuGod" target="_blank">github.com/MarkfuGod</a></p>
+        </div>
+    </div>
+</body>
+</html>
