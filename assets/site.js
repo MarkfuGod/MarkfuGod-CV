@@ -20,39 +20,33 @@
 
   /* ---------------- static strings ---------------- */
   var I18N = {
-    'nav.work': { en: 'Experience', zh: '经历' },
+    'nav.work': { en: 'Work', zh: '经历' },
     'nav.projects': { en: 'Projects', zh: '项目' },
-    'nav.skills': { en: 'Skills', zh: '技能' },
-    'hero.eyebrow': { en: 'HKU MSc Computer Science · Hong Kong', zh: '香港大学计算机科学硕士 · 香港' },
-    'hero.name': { en: 'Gai Yifan', zh: '盖一帆' },
-    'hero.alt': { en: '盖一帆', zh: 'Gai Yifan' },
-    'hero.role': { en: 'Backend + AI Agent / LLM Engineer', zh: '后端 + AI Agent / LLM 工程师' },
-    'hero.lede': {
-      en: 'I build backend systems and AI agents that behave predictably when real money, real patients or long training runs are on the line — durable agent workflows in Go, grounded RAG, and multi-GPU model training.',
-      zh: '我做后端系统和 AI Agent，重点是在真金白银、真实患者或长时间训练任务面前依然可靠：Go 写的可恢复 Agent 工作流、有出处的 RAG，以及多卡模型训练。'
+    'nav.dark': { en: 'Dark', zh: '深色' },
+    'nav.light': { en: 'Light', zh: '浅色' },
+    'hero.role': { en: 'Backend and AI-agent engineer · Hong Kong', zh: '后端与 AI Agent 工程师 · 香港' },
+    'hero.p1': {
+      en: 'I finished an MSc in Computer Science at the University of Hong Kong in 2026. Most recently I built the Go platform behind Matchii, a services marketplace, where the hard part was making payments and long-running agent jobs safe to retry.',
+      zh: '我 2026 年在香港大学读完计算机科学硕士。最近一份工作是在 Matchii 搭建 Go 后端平台（一个服务交易平台），最难的部分是让支付和长时间运行的 Agent 任务在重试时依然安全。'
     },
-    'hero.resume': { en: 'View resume', zh: '查看简历' },
-    'hero.email': { en: 'Email me', zh: '发邮件' },
-    'sec.work': { en: 'Experience', zh: '经历' },
+    'hero.p2': {
+      en: 'I also work on a WhatsApp assistant for a clinical exercise programme, and I spent my MSc reproducing and post-training a vision-language-action model on four GPUs. Before that I ran research workloads on the Zhengzhou supercomputing cluster.',
+      zh: '我还在做一个临床运动项目的 WhatsApp 助手；硕士期间在四张 GPU 上复现并后训练了一个视觉-语言-动作模型。再往前，我在郑州超算中心为科研用户运维计算任务。'
+    },
+    'hero.resume': { en: 'Resume', zh: '简历' },
+    'sec.work': { en: 'Work', zh: '经历' },
     'sec.projects': { en: 'Projects', zh: '项目' },
-    'sec.projectsHint': { en: 'Click a card for the case study — diagrams, numbers and screenshots.', zh: '点击卡片查看案例：架构图、数据与截图。' },
-    'sec.skills': { en: 'Skills', zh: '技能' },
-    'sec.more': { en: 'More', zh: '更多' },
-    'more.profile': { en: 'Long-form write-ups of every project →', zh: '每个项目的详细长文（英文）→' },
+    'sec.skills': { en: 'Tools I use', zh: '常用技术' },
+    'sec.more': { en: 'Elsewhere', zh: '其他' },
+    'more.profile': { en: 'Long-form notes on each project', zh: '每个项目的详细笔记（英文）' },
     'm.problem': { en: 'Problem', zh: '问题' },
     'm.built': { en: 'What I built', zh: '我做了什么' },
     'm.result': { en: 'Result', zh: '结果' },
-    'viz.click': { en: 'Click a component to see what it does.', zh: '点击组件查看说明。' },
-    'play': { en: 'PLAY IN PAGE', zh: '在页面里玩' }
+    'm.close': { en: 'Close', zh: '关闭' },
+    'm.more': { en: 'Details', zh: '详情' },
+    'viz.click': { en: 'Select a component to read what it does.', zh: '点选组件查看说明。' },
+    'play': { en: 'Load the game (it runs in this page)', zh: '加载游戏（在本页运行）' }
   };
-
-  var STATS = [
-    { v: '+42%', l: { en: 'throughput from a Redis cache (6.1k → 8.6k req/s)', zh: 'Redis 缓存带来的吞吐提升（6.1k → 8.6k req/s）' } },
-    { v: '1,599', l: { en: 'Go tests in CI, plus 8,192 permission combinations', zh: '个 Go 测试进 CI，另测 8,192 种权限组合' } },
-    { v: '500', l: { en: 'cancer survivors served by a grounded WhatsApp RAG', zh: '名癌症康复者使用的有出处 WhatsApp RAG' } },
-    { v: '95–98.6%', l: { en: 'reproduced VLA success over 2,000 LIBERO episodes', zh: '2,000 个 LIBERO 回合复现的 VLA 成功率' } },
-    { v: '40→78%', l: { en: 'retrieval recall in KithAgent memory', zh: 'KithAgent 记忆检索召回率' } }
-  ];
 
   var WORK = [
     {
@@ -107,11 +101,10 @@
 
   var P = [
     {
-      id: 'matchii', cats: ['backend', 'agents'], kind: { en: 'Industry · 2026', zh: '工作 · 2026' },
+      id: 'matchii', cover: 'assets/covers/matchii.svg', cats: ['backend', 'agents'], kind: { en: 'Industry · 2026', zh: '工作 · 2026' },
       title: { en: 'Matchii platform', zh: 'Matchii 平台' },
       line: { en: 'Go + Next.js marketplace with ledgers, idempotency and a durable agent runtime.', zh: 'Go + Next.js 服务交易平台：账本、幂等与可恢复 Agent 运行时。' },
       metric: { en: '+42% throughput · p95 −35%', zh: '吞吐 +42% · p95 −35%' },
-      poster: { big: '8.6k req/s', small: { en: 'Go · PostgreSQL · Redis · Stripe', zh: 'Go · PostgreSQL · Redis · Stripe' }, bg: 'linear-gradient(135deg,#0b3b66,#1677c9)' },
       sum: { en: 'An AI-native services marketplace. I designed the platform as a Go modular monolith with a Next.js front end, keeping deterministic domain kernels apart from orchestration and I/O.', zh: '一个 AI 驱动的服务交易平台。我把平台设计为 Go 模块化单体 + Next.js 前端，把确定性业务内核与编排、I/O 分开。' },
       problem: { en: 'Payments and workflow steps must never run twice, even with retries, multiple instances and restarts.', zh: '在重试、多实例和重启下，支付与流程步骤都绝不能执行两次。' },
       built: { en: 'Ledger-based schema with idempotency keys and SQL CAS; a lease-based agent runtime; a connector boundary for credentials; CI with real Postgres/Redis.', zh: '基于账本与幂等键、SQL 条件更新的数据模型；基于租约的 Agent 运行时；隔离凭证的连接器边界；接真实 Postgres/Redis 的 CI。' },
@@ -129,11 +122,10 @@
       links: []
     },
     {
-      id: 'mpac', cats: ['agents', 'backend'], kind: { en: 'Industry · Healthcare AI', zh: '工作 · 医疗 AI' },
+      id: 'mpac', cover: 'assets/covers/mpac.svg', cats: ['agents', 'backend'], kind: { en: 'Industry · Healthcare AI', zh: '工作 · 医疗 AI' },
       title: { en: 'M-PAC WhatsApp RAG', zh: 'M-PAC WhatsApp RAG' },
       line: { en: 'Grounded clinical assistant for 500 cancer survivors, in Cantonese and Traditional Chinese.', zh: '面向 500 名癌症康复者的有出处临床助手，粤语与繁体中文。' },
       metric: { en: '~720 msgs/day · citations required', zh: '日均约 720 条消息 · 强制引用' },
-      poster: { big: '500', small: { en: 'patients · 12-week programme', zh: '名患者 · 12 周项目' }, bg: 'linear-gradient(135deg,#0f5132,#25a36f)' },
       sum: { en: 'A WhatsApp assistant for a 12-week exercise programme. In a clinical setting a confident wrong answer is worse than no answer, so every reply must be grounded and checked before it is sent.', zh: '12 周运动项目的 WhatsApp 助手。在临床场景里，自信的错误回答比不回答更糟，所以每条回复都必须有出处并在发送前经过校验。' },
       problem: { en: 'Reduce hallucination risk for patients while handling predictable bilingual message volume.', zh: '在稳定处理双语消息量的同时，降低对患者的幻觉风险。' },
       built: { en: 'Hybrid retrieval, mandatory [S1] citations, dialogue-state routing, a faithfulness validator and safety guardrails, split into six backend modules.', zh: '混合检索、强制 [S1] 引用、对话状态路由、忠实度校验与安全护栏，拆为六个后端模块。' },
@@ -175,11 +167,10 @@
       links: [['GitHub', 'https://github.com/MarkfuGod/KithAgent']]
     },
     {
-      id: 'being', cats: ['ml'], kind: { en: 'MSc research · HKU', zh: '硕士研究 · 港大' },
+      id: 'being', cover: 'assets/covers/being.svg', cats: ['ml'], kind: { en: 'MSc research · HKU', zh: '硕士研究 · 港大' },
       title: { en: 'Being-H0.5 VLA', zh: 'Being-H0.5 VLA' },
-      line: { en: 'Reproducing a frontier robot policy, and testing what pre-training buys.', zh: '复现前沿机器人策略模型，并检验预训练到底带来了什么。' },
+      line: { en: 'Reproducing a robot policy model, then testing what pre-training buys.', zh: '复现前沿机器人策略模型，并检验预训练到底带来了什么。' },
       metric: { en: '95–98.6% reproduced on LIBERO', zh: 'LIBERO 复现 95–98.6%' },
-      poster: { big: '2,000', small: { en: 'LIBERO episodes · 4× GPU FSDP', zh: '个 LIBERO 回合 · 4 卡 FSDP' }, bg: 'linear-gradient(135deg,#3b1d6e,#7a4bd1)' },
       sum: { en: 'I brought the released vision-language-action model up from a fresh clone, reproduced its results, recreated post-training from base weights, and ported the stack to NVIDIA Blackwell.', zh: '我从零拉起开源的视觉-语言-动作模型，复现其结果，从基座权重复刻后训练，并把整套训练栈移植到 NVIDIA Blackwell。' },
       problem: { en: 'Can a bigger backbone with post-training alone replace human-centric pre-training?', zh: '更大的骨干加上后训练，能否替代以人为中心的预训练？' },
       built: { en: 'ZeroMQ inference server, headless MuJoCo/EGL evaluation, 4-GPU FSDP training of InternVL3.5-4B + Qwen3-4B, a port to sm_120 / CUDA 12.8.', zh: 'ZeroMQ 推理服务、无界面 MuJoCo/EGL 评测、InternVL3.5-4B + Qwen3-4B 的 4 卡 FSDP 训练、移植到 sm_120 / CUDA 12.8。' },
@@ -194,11 +185,10 @@
       links: [[{ en: 'Full write-up', zh: '完整长文' }, 'profile.html']]
     },
     {
-      id: 'skillios', cats: ['agents', 'backend'], kind: { en: 'Team lead · TestFlight', zh: '组长 · TestFlight' },
+      id: 'skillios', cover: 'assets/covers/skillios.svg', cats: ['agents', 'backend'], kind: { en: 'Team lead · TestFlight', zh: '组长 · TestFlight' },
       title: { en: 'Skillios (ItsMyGoal)', zh: 'Skillios（ItsMyGoal）' },
       line: { en: 'Natural-language goals → runnable agent tasks, on iOS with a FastAPI backend.', zh: '自然语言目标 → 可运行的 Agent 任务；iOS 客户端 + FastAPI 后端。' },
       metric: { en: 'Latency ~8.2 s → ~3.4 s', zh: '延迟约 8.2 秒 → 约 3.4 秒' },
-      poster: { big: '2.4×', small: { en: 'faster multi-tool runs · SwiftUI · AWS', zh: '多工具调用提速 · SwiftUI · AWS' }, bg: 'linear-gradient(135deg,#7a2e0e,#e0702a)' },
       sum: { en: 'A gamified goal planner: an agent decomposes a goal into a skill tree of quests, and a chat agent plans real-world activities. AI-created tasks always need user confirmation before they touch the database.', zh: '游戏化目标规划应用：Agent 把目标拆成技能树任务，聊天 Agent 规划现实活动。AI 创建的任务写入数据库前一律需要用户确认。' },
       problem: { en: 'Multi-tool agent runs were slow, but parallel writes would conflict.', zh: '多工具 Agent 调用太慢，但并行写入会冲突。' },
       built: { en: 'iOS client, FastAPI/PostgreSQL backend on AWS (CDK, ECS Fargate, RDS); ~10 function-calling tools; read-only tools in parallel, writes serialized.', zh: 'iOS 客户端、AWS 上的 FastAPI/PostgreSQL 后端（CDK、ECS Fargate、RDS）；约 10 个函数调用工具；只读工具并行、写操作串行。' },
@@ -208,11 +198,10 @@
       links: [['GitHub', 'https://github.com/MarkfuGod/skillios'], ['TestFlight', 'https://testflight.apple.com/join/FVfXajpn']]
     },
     {
-      id: 'vibe', cats: ['agents'], kind: { en: 'Open source · HKUDS', zh: '开源 · HKUDS' },
+      id: 'vibe', cover: 'assets/covers/vibe.svg', cats: ['agents'], kind: { en: 'Open source · HKUDS', zh: '开源 · HKUDS' },
       title: { en: 'Vibe-Trading', zh: 'Vibe-Trading' },
-      line: { en: 'Finance research agent with swarm teams — merged reliability fixes upstream.', zh: '带 swarm 团队的金融研究 Agent —— 向上游贡献已合并的可靠性修复。' },
+      line: { en: 'Finance research agent with swarm teams. I contributed merged reliability fixes.', zh: '带 swarm 团队的金融研究 Agent，我贡献了已合并的可靠性修复。' },
       metric: { en: 'Merged PRs upstream', zh: '上游已合并 PR' },
-      poster: { big: 'Swarm', small: { en: 'committee · quant · risk · macro', zh: '投委会 · 量化 · 风控 · 宏观' }, bg: 'linear-gradient(135deg,#1f2937,#4b5563)' },
       sum: { en: 'Vibe-Trading turns plain-language market questions into reproducible research: routed skills, live data, backtests and run cards with evidence and caveats. Preset swarm teams debate and synthesize one report.', zh: 'Vibe-Trading 把自然语言市场问题变成可复现的研究：技能路由、实时数据、回测，以及带证据与风险提示的 run card。预设 swarm 团队讨论后汇总成一份报告。' },
       problem: { en: 'Swarm runs and external data sources failed in ways that broke reports.', zh: 'swarm 运行与外部数据源的异常会导致报告出错。' },
       built: { en: 'Fixes for strict run-card JSON, search-connector retries, yfinance end-date handling and timeout configuration.', zh: '修复严格的 run card JSON、搜索连接器重试、yfinance 截止日期处理与超时配置。' },
@@ -222,11 +211,10 @@
       links: [['HKUDS/Vibe-Trading', 'https://github.com/HKUDS/Vibe-Trading'], ['PR #296', 'https://github.com/HKUDS/Vibe-Trading/pull/296'], [{ en: 'Project notes', zh: '项目说明' }, 'Vibe-Trading-Project-Highlight_en.html']]
     },
     {
-      id: 'nl2bp', cats: ['agents', 'ml'], kind: { en: 'BEng thesis · ZZU', zh: '本科毕设 · 郑大' },
+      id: 'nl2bp', cover: 'assets/covers/nl2bp.svg', cats: ['agents', 'ml'], kind: { en: 'BEng thesis · ZZU', zh: '本科毕设 · 郑大' },
       title: { en: 'NL2BP', zh: 'NL2BP' },
       line: { en: 'Natural-language requirements → validated PlantUML blueprints, by 9 agents.', zh: '自然语言需求 → 经过校验的 PlantUML 蓝图，由 9 个 Agent 协作完成。' },
       metric: { en: '7 roles / 9 agents', zh: '7 个角色 / 9 个 Agent' },
-      poster: { big: '9 agents', small: { en: 'CrewAI · PlantUML', zh: 'CrewAI · PlantUML' }, bg: 'linear-gradient(135deg,#134e4a,#0d9488)' },
       sum: { en: 'A CrewAI pipeline that turns ambiguous requirements into reviewable architecture: each role owns one part of the design and the output is validated PlantUML.', zh: '把模糊需求转成可评审架构的 CrewAI 流水线：每个角色负责设计的一部分，最终输出经过校验的 PlantUML。' },
       problem: { en: 'Requirements written in prose are hard to review as architecture.', zh: '文字需求很难直接当作架构来评审。' },
       built: { en: 'Single-agent role-switching and multi-agent collaboration workflows with prompt templates; 7 roles / 9 agents.', zh: '单 Agent 角色切换与多 Agent 协作两套工作流及提示模板；7 个角色 / 9 个 Agent。' },
@@ -236,25 +224,23 @@
       links: [['GitHub', 'https://github.com/MarkfuGod/NL2BP-Natural-Language-to-UML-Blueprints'], [{ en: 'Project notes', zh: '项目说明' }, 'NL2BP-Project-Highlight_en.html']]
     },
     {
-      id: 'atari', cats: ['fun'], kind: { en: 'Personal · 2025', zh: '个人项目 · 2025' },
+      id: 'atari', cover: 'assets/covers/atari.svg', cats: ['fun'], kind: { en: 'Personal · 2025', zh: '个人项目 · 2025' },
       title: { en: 'Atari Portal', zh: 'Atari Portal' },
       line: { en: 'Nine arcade games linked by portals. Every sprite and sound generated at runtime.', zh: '九款街机游戏由传送门串联，所有画面与音效都在运行时生成。' },
       metric: { en: 'Playable on this page', zh: '可在本页直接游玩' },
-      poster: { big: 'PLAY ▸', small: 'Phaser 3 · Three.js · Web Audio', bg: 'radial-gradient(circle at 50% 40%,#0e3a4a,#05070b 70%)' },
       sum: { en: 'Pac-Man, Breakout, Space Invaders, Frogger, Asteroids, Tetris and three originals, connected by portals that open when you meet each game\'s trigger. No image or audio files ship with the build.', zh: '吃豆人、打砖块、太空侵略者、青蛙过河、小行星、俄罗斯方块和三款原创游戏，满足各自条件即可打开传送门进入下一款。构建产物里没有任何图片或音频文件。' },
       problem: { en: 'Make one coherent game out of nine different mechanics.', zh: '把九种不同玩法做成一个连贯的游戏。' },
       built: { en: 'Phaser 3 gameplay, a Three.js overlay for portal and glitch effects, Canvas-drawn textures and Web Audio synthesis; GitHub Actions deploy and an Electron build.', zh: 'Phaser 3 实现玩法，Three.js 叠加层做传送门与故障特效，纹理用 Canvas 绘制、音效用 Web Audio 合成；GitHub Actions 部署，另有 Electron 桌面版。' },
-      result: { en: 'Story, arcade and free-play modes with a coin shop and a difficulty curve — try it below.', zh: '剧情、街机、自由三种模式，带金币商店与难度曲线——下面可以直接玩。' },
+      result: { en: 'Story, arcade and free-play modes with a coin shop and a difficulty curve. You can play it below.', zh: '剧情、街机、自由三种模式，带金币商店与难度曲线，下面可以直接玩。' },
       viz: { type: 'embed', src: 'https://markfugod.github.io/atari-portal/' },
       tags: ['Phaser 3', 'Three.js', 'Canvas', 'Web Audio', 'Electron', 'GitHub Actions'],
       links: [['GitHub', 'https://github.com/MarkfuGod/atari-portal'], [{ en: 'Open full screen', zh: '全屏打开' }, 'https://markfugod.github.io/atari-portal/']]
     },
     {
-      id: 'piasm', cats: ['fun', 'agents'], kind: { en: 'Personal · 2026', zh: '个人项目 · 2026' },
+      id: 'piasm', cover: 'assets/covers/piasm.svg', cats: ['fun', 'agents'], kind: { en: 'Personal · 2026', zh: '个人项目 · 2026' },
       title: { en: 'pi-asm', zh: 'pi-asm' },
       line: { en: 'A coding agent written in ARM64 assembly, with a sandboxed multi-user server.', zh: '用 ARM64 汇编写的编程 Agent，附带沙箱化多用户服务端。' },
       metric: { en: 'macOS + Linux', zh: 'macOS + Linux' },
-      poster: { big: 'ARM64', small: { en: 'a port of the Pi coding agent', zh: 'Pi 编程 Agent 的移植' }, bg: 'linear-gradient(135deg,#111827,#065f46)' },
       sum: { en: 'A port of the Pi coding agent to ARM64 assembly, running on macOS and Linux, with a sandboxed multi-user server.', zh: '把 Pi 编程 Agent 移植到 ARM64 汇编，支持 macOS 与 Linux，并提供沙箱化的多用户服务端。' },
       problem: { en: 'How small and close to the metal can a working coding agent be?', zh: '一个能用的编程 Agent 能做到多小、多贴近硬件？' },
       built: { en: 'The agent loop in ARM64 assembly for macOS and Linux, plus a sandboxed server for multiple users.', zh: '用 ARM64 汇编实现 Agent 循环（macOS 与 Linux），外加多用户沙箱服务端。' },
@@ -278,59 +264,63 @@
   function renderStatic() {
     document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
     document.querySelectorAll('[data-i18n]').forEach(function (n) { n.textContent = T(I18N[n.dataset.i18n]); });
-    document.getElementById('langBtn').textContent = lang === 'zh' ? 'EN' : '中文';
+    document.getElementById('langBtn').textContent = lang === 'zh' ? 'English' : '中文';
     document.getElementById('resumeBtn').href = lang === 'zh' ? 'index_zh_industrial.html' : 'index_en_industrial.html';
-    document.title = lang === 'zh' ? '盖一帆 — 后端 + AI Agent 工程师' : 'Gai Yifan — Backend + AI Agent Engineer';
-  }
-
-  function renderStats() {
-    var box = document.getElementById('stats'); box.innerHTML = '';
-    STATS.forEach(function (s) { box.appendChild(el('div', { class: 'stat' }, [el('b', { text: s.v }), el('span', { text: T(s.l) })])); });
+    document.getElementById('mClose').textContent = T(I18N['m.close']);
+    syncThemeLabel();
   }
 
   function renderWork() {
     var box = document.getElementById('timeline'); box.innerHTML = '';
     WORK.forEach(function (w) {
       var ul = el('ul', {}, T(w.pts).map(function (p) { return el('li', { text: p }); }));
-      var more = el('li', {}, [el('a', { href: '#p=' + w.open, text: lang === 'zh' ? '查看案例 →' : 'See the case study →' })]);
-      ul.appendChild(more);
-      box.appendChild(el('li', { class: 'tl' }, [el('details', {}, [
-        el('summary', {}, [el('span', { class: 't-role', text: T(w.role) }), el('span', { class: 't-when', text: T(w.when) }), el('span', { class: 't-org', text: T(w.org) }), el('span', { class: 't-hook', text: T(w.hook) })]),
-        ul
-      ])]));
+      ul.appendChild(el('li', {}, [el('a', { href: '#p=' + w.open, text: lang === 'zh' ? '对应项目' : 'Related project' })]));
+      box.appendChild(el('li', { class: 'job' }, [
+        el('span', { class: 'when', text: T(w.when) }),
+        el('div', { class: 'what' }, [
+          el('b', { text: T(w.role) }), el('span', { class: 'org', text: ', ' + T(w.org) }),
+          el('p', { class: 'hook', text: T(w.hook) }),
+          el('details', {}, [el('summary', { text: T(I18N['m.more']) }), ul])
+        ])
+      ]));
     });
   }
 
   function renderFilters() {
     var box = document.getElementById('filters'); box.innerHTML = '';
     CATS.forEach(function (c) {
-      box.appendChild(el('button', { class: 'chip', type: 'button', role: 'tab', 'aria-selected': String(c.id === current), onclick: function () { current = c.id; renderFilters(); applyFilter(); } }, [T(c.l)]));
+      box.appendChild(el('button', { type: 'button', 'aria-pressed': String(c.id === current), onclick: function () { current = c.id; renderFilters(); applyFilter(); } }, [T(c.l)]));
     });
-  }
-
-  function thumb(p) {
-    if (p.img) return el('div', { class: 'thumb' }, [el('img', { src: p.img, alt: '', loading: 'lazy', style: p.imgFit ? 'object-fit:contain;background:#fff;padding:8px' : '' })]);
-    return el('div', { class: 'thumb' }, [el('div', { class: 'poster', style: 'background:' + p.poster.bg }, [el('span', { class: 'big', text: p.poster.big }), el('span', { class: 'small', text: T(p.poster.small) })])]);
   }
 
   function renderGrid() {
     var box = document.getElementById('grid'); box.innerHTML = '';
     P.forEach(function (p) {
-      box.appendChild(el('button', { class: 'card', type: 'button', 'data-cats': p.cats.join(' '), onclick: function () { location.hash = 'p=' + p.id; } }, [
-        thumb(p),
-        el('div', { class: 'c-body' }, [el('span', { class: 'c-kind', text: T(p.kind) }), el('span', { class: 'c-title', text: T(p.title) }), el('span', { class: 'c-line', text: T(p.line) }), el('span', { class: 'c-metric', text: T(p.metric) })])
+      box.appendChild(el('li', { class: 'proj', 'data-cats': p.cats.join(' ') }, [
+        el('button', { type: 'button', onclick: function () { location.hash = 'p=' + p.id; } }, [
+          el('img', { src: p.cover || p.img, alt: '', loading: 'lazy', width: '640', height: '360' }),
+          el('div', {}, [
+            el('div', { class: 'meta', text: T(p.kind) }),
+            el('div', { class: 't', text: T(p.title) }),
+            el('div', { class: 'l', text: T(p.line) }),
+            el('div', { class: 'n', text: T(p.metric) })
+          ])
+        ])
       ]));
     });
     applyFilter();
   }
 
   function applyFilter() {
-    document.querySelectorAll('.card').forEach(function (c) { c.classList.toggle('hide', current !== 'all' && c.dataset.cats.split(' ').indexOf(current) < 0); });
+    document.querySelectorAll('.proj').forEach(function (c) { c.classList.toggle('hide', current !== 'all' && c.dataset.cats.split(' ').indexOf(current) < 0); });
   }
 
   function renderSkills() {
     var box = document.getElementById('skillList'); box.innerHTML = '';
-    SKILLS.forEach(function (s) { box.appendChild(el('div', { class: 'sk' }, [el('h4', { text: T(s[0]) }), el('div', {}, s[1].map(function (x) { return el('span', { text: T(x) }); }))])); });
+    SKILLS.forEach(function (s) {
+      box.appendChild(el('dt', { text: T(s[0]) }));
+      box.appendChild(el('dd', { text: s[1].map(T).join(', ') }));
+    });
   }
 
   /* ---------------- visualisations ---------------- */
@@ -409,12 +399,12 @@
     var box = el('div', { class: 'embed' });
     box.appendChild(el('button', { type: 'button', onclick: function () {
       box.innerHTML = ''; box.appendChild(el('iframe', { src: v.src, title: 'Atari Portal', allow: 'autoplay; fullscreen', allowfullscreen: '' }));
-    } }, [T(I18N.play) + ' ▸']));
+    } }, [T(I18N.play)]));
     return box;
   }
 
   function viz(p) {
-    var v = p.viz; if (!v) return null;
+    var v = p.viz; if (!v) return p.cover ? el('img', { class: 'cover-big', src: p.cover, alt: '' }) : null;
     if (v.type === 'arch') return archViz(v);
     if (v.type === 'flow') return flowViz(v);
     if (v.type === 'gallery') return galleryViz(v);
@@ -433,9 +423,9 @@
     var vz = document.getElementById('mViz'); vz.innerHTML = ''; var node = viz(p); if (node) vz.appendChild(node); vz.style.display = node ? '' : 'none';
     var body = document.getElementById('mBody'); body.innerHTML = '';
     [['m.problem', p.problem], ['m.built', p.built], ['m.result', p.result]].forEach(function (c) { body.appendChild(el('section', {}, [el('h5', { text: T(I18N[c[0]]) }), el('p', { text: T(c[1]) })])); });
-    var tags = document.getElementById('mTags'); tags.innerHTML = ''; p.tags.forEach(function (t) { tags.appendChild(el('span', { text: t })); });
+    document.getElementById('mTags').textContent = p.tags.join(', ');
     var links = document.getElementById('mLinks'); links.innerHTML = '';
-    p.links.forEach(function (l) { var ext = /^https?:/.test(l[1]); links.appendChild(el('a', ext ? { href: l[1], target: '_blank', rel: 'noopener' } : { href: l[1] }, [T(l[0]) + (ext ? ' ↗' : ' →')])); });
+    p.links.forEach(function (l) { var ext = /^https?:/.test(l[1]); links.appendChild(el('a', ext ? { href: l[1], target: '_blank', rel: 'noopener' } : { href: l[1] }, [T(l[0])])); });
     if (!modal.open) modal.showModal();
     modal.querySelector('.m-in').scrollTop = 0;
     requestAnimationFrame(function () { requestAnimationFrame(function () {
@@ -462,12 +452,15 @@
   });
   document.getElementById('themeBtn').addEventListener('click', function () {
     var root = document.documentElement;
-    var dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
-    root.dataset.theme = dark ? 'light' : 'dark';
+    root.dataset.theme = isDark() ? 'light' : 'dark';
     try { localStorage.setItem('theme', root.dataset.theme); } catch (e) {}
+    syncThemeLabel();
   });
 
-  function renderAll() { renderStatic(); renderStats(); renderWork(); renderFilters(); renderGrid(); renderSkills(); }
+  function isDark() { var r = document.documentElement; return r.dataset.theme ? r.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches; }
+  function syncThemeLabel() { document.getElementById('themeBtn').textContent = T(I18N[isDark() ? 'nav.light' : 'nav.dark']); }
+
+  function renderAll() { renderStatic(); renderWork(); renderFilters(); renderGrid(); renderSkills(); }
   renderAll();
   route();
 })();

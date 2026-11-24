@@ -3,93 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gai Yifan — Backend + AI Agent Engineer</title>
-    <meta name="description" content="Gai Yifan (盖一帆) — Backend + AI Agent / LLM Engineer, HKU MSc Computer Science. Projects, experience and case studies.">
+    <title>Gai Yifan</title>
+    <meta name="description" content="Gai Yifan, backend and AI-agent engineer in Hong Kong. Experience, projects and case studies.">
     <link rel="stylesheet" href="assets/site.css">
     <script>
         try { var th = localStorage.getItem('theme'); if (th) document.documentElement.dataset.theme = th; } catch (e) {}
     </script>
 </head>
 <body>
-    <header class="topbar">
-        <div class="wrap topbar-in">
-            <a class="brand" href="#top">Gai Yifan</a>
-            <nav class="topnav">
-                <a href="#work" data-i18n="nav.work">Experience</a>
-                <a href="#projects" data-i18n="nav.projects">Projects</a>
-                <a href="#skills" data-i18n="nav.skills">Skills</a>
-            </nav>
-            <div class="tools">
-                <button class="tool" id="langBtn" type="button" aria-label="Switch language">中文</button>
-                <button class="tool" id="themeBtn" type="button" aria-label="Toggle dark mode">◐</button>
-            </div>
-        </div>
+    <header class="top wrap">
+        <a class="name" href="#">Gai Yifan</a>
+        <nav>
+            <a href="#work" data-i18n="nav.work">Work</a>
+            <a href="#projects" data-i18n="nav.projects">Projects</a>
+            <button type="button" id="langBtn">中文</button>
+            <button type="button" id="themeBtn" data-i18n="nav.dark">Dark</button>
+        </nav>
     </header>
 
-    <main id="top">
-        <section class="hero wrap">
-            <p class="eyebrow" data-i18n="hero.eyebrow">HKU MSc Computer Science · Hong Kong</p>
-            <h1><span data-i18n="hero.name">Gai Yifan</span> <span class="alt" data-i18n="hero.alt">盖一帆</span></h1>
-            <p class="role" data-i18n="hero.role">Backend + AI Agent / LLM Engineer</p>
-            <p class="lede" data-i18n="hero.lede">I build backend systems and AI agents that behave predictably when real money, real patients or long training runs are on the line — durable agent workflows in Go, grounded RAG, and multi-GPU model training.</p>
-            <div class="cta">
-                <a class="btn primary" id="resumeBtn" href="index_en_industrial.html" data-i18n="hero.resume">View resume</a>
-                <a class="btn" href="mailto:MarkfuGod@outlook.com" data-i18n="hero.email">Email me</a>
-                <a class="btn" href="https://www.linkedin.com/in/gai-yifan/" target="_blank" rel="noopener">LinkedIn</a>
-            </div>
-            <div class="stats" id="stats"></div>
+    <main class="wrap">
+        <section class="intro">
+            <h1>Gai Yifan</h1>
+            <p class="role" data-i18n="hero.role">Backend and AI-agent engineer · Hong Kong</p>
+            <p data-i18n="hero.p1">I finished an MSc in Computer Science at the University of Hong Kong in 2026. Most recently I built the Go platform behind Matchii, a services marketplace, where the hard part was making payments and long-running agent jobs safe to retry.</p>
+            <p data-i18n="hero.p2">I also work on a WhatsApp assistant for a clinical exercise programme, and I spent my MSc reproducing and post-training a vision-language-action model on four GPUs. Before that I ran research workloads on the Zhengzhou supercomputing cluster.</p>
+            <p class="links">
+                <a id="resumeBtn" href="index_en_industrial.html" data-i18n="hero.resume">Resume</a>
+                <a href="mailto:MarkfuGod@outlook.com">MarkfuGod@outlook.com</a>
+                <a href="https://www.linkedin.com/in/gai-yifan/" target="_blank" rel="noopener">LinkedIn</a>
+            </p>
         </section>
 
-        <section class="wrap block" id="work">
-            <h2 data-i18n="sec.work">Experience</h2>
-            <ol class="timeline" id="timeline"></ol>
+        <section id="work">
+            <h2 data-i18n="sec.work">Work</h2>
+            <ol class="work" id="timeline"></ol>
         </section>
 
-        <section class="wrap block" id="projects">
+        <section id="projects">
             <div class="sec-head">
                 <h2 data-i18n="sec.projects">Projects</h2>
-                <div class="filters" id="filters" role="tablist"></div>
+                <div class="filters" id="filters"></div>
             </div>
-            <p class="hint" data-i18n="sec.projectsHint">Click a card for the case study — diagrams, numbers and screenshots.</p>
-            <div class="grid" id="grid"></div>
+            <ul class="projects" id="grid"></ul>
         </section>
 
-        <section class="wrap block" id="skills">
-            <h2 data-i18n="sec.skills">Skills</h2>
-            <div class="skills" id="skillList"></div>
+        <section id="skills">
+            <h2 data-i18n="sec.skills">Tools I use</h2>
+            <dl class="skills" id="skillList"></dl>
         </section>
 
-        <section class="wrap block">
-            <h2 data-i18n="sec.more">More</h2>
+        <section>
+            <h2 data-i18n="sec.more">Elsewhere</h2>
             <ul class="more">
-                <li><a href="profile.html" data-i18n="more.profile">Long-form write-ups of every project →</a></li>
-                <li><a href="index_en_industrial.html">Resume — Industry (EN)</a> · <a href="index_zh_industrial.html">简历 — 工业向</a></li>
-                <li><a href="index_en.html">Resume — Academic (EN)</a> · <a href="index_zh.html">简历 — 学术向</a></li>
+                <li><a href="profile.html" data-i18n="more.profile">Long-form notes on each project</a></li>
+                <li><a href="index_en_industrial.html">Resume (industry, EN)</a> · <a href="index_zh_industrial.html">简历（工业向）</a></li>
+                <li><a href="index_en.html">Resume (academic, EN)</a> · <a href="index_zh.html">简历（学术向）</a></li>
+                <li><a href="https://github.com/MarkfuGod" target="_blank" rel="noopener">GitHub</a></li>
             </ul>
         </section>
     </main>
 
-    <footer class="foot">
-        <div class="wrap foot-in">
-            <span>© 2026 Gai Yifan</span>
-            <span><a href="mailto:MarkfuGod@outlook.com">MarkfuGod@outlook.com</a> · <a href="https://www.linkedin.com/in/gai-yifan/" target="_blank" rel="noopener">LinkedIn</a></span>
-        </div>
+    <footer class="wrap foot">
+        <span>Gai Yifan, 2026</span>
+        <span><a href="mailto:MarkfuGod@outlook.com">Email</a> · <a href="https://www.linkedin.com/in/gai-yifan/" target="_blank" rel="noopener">LinkedIn</a></span>
     </footer>
 
     <dialog id="modal" aria-labelledby="mTitle">
         <div class="m-in">
-            <button class="m-close" id="mClose" type="button" aria-label="Close">×</button>
+            <button class="m-close" id="mClose" type="button" aria-label="Close">Close</button>
             <p class="m-meta" id="mMeta"></p>
             <h3 id="mTitle"></h3>
             <p class="m-sum" id="mSum"></p>
             <div class="m-viz" id="mViz"></div>
             <div class="m-cols" id="mBody"></div>
-            <div class="m-tags" id="mTags"></div>
-            <div class="m-links" id="mLinks"></div>
+            <p class="m-tags" id="mTags"></p>
+            <p class="m-links" id="mLinks"></p>
         </div>
     </dialog>
 
-    <noscript><p class="wrap">This page needs JavaScript for the project cards. The <a href="index_en_industrial.html">resume</a> and <a href="profile.html">long-form profile</a> work without it.</p></noscript>
+    <noscript><p class="wrap">The project list needs JavaScript. The <a href="index_en_industrial.html">resume</a> and <a href="profile.html">long-form notes</a> work without it.</p></noscript>
     <script src="assets/site.js"></script>
 </body>
 </html>
