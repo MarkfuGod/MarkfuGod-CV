@@ -301,6 +301,47 @@ def piasm():
     c.save()
 
 
+# ---------------------------------------------------------------- KithAgent (public repo version): files -> triage -> summaries -> daemon API
+def kith():
+    c = Cover("kith", "", "")
+    # folders
+    for i, name in enumerate(("Projects", "Documents", "Downloads")):
+        y = 52 + i * 58
+        c.add(f'<path d="M30 {y} h40 l8 8 h62 v38 h-110 z" fill="#ffffff" stroke="{INK}" stroke-width="1.5"/>')
+        c.text(85, y + 32, name, 13, INK, 600, "middle")
+    c.line(150, 136, 186, 136, arrow=True)
+    # triage
+    c.text(250, 46, "LLM triage", 14, MUTED, 600, "middle")
+    for i, (lab, w, col) in enumerate((("high", 92, ACC), ("medium", 66, ACC), ("low", 40, RULE), ("skip", 110, RULE))):
+        y = 62 + i * 36
+        op = 1 if i == 0 else (.55 if i == 1 else 1)
+        c.text(196, y + 17, lab, 13, MUTED, 500)
+        c.add(f'<rect x="248" y="{y + 4}" width="{w * .62}" height="18" rx="3" fill="{col}" opacity="{op}"/>')
+    c.line(326, 136, 362, 136, arrow=True)
+    # summaries + retrieval
+    c.box(372, 64, 120, 60, fill="#ffffff", stroke=INK)
+    c.text(432, 90, "summaries", 14, INK, 700, "middle")
+    c.text(432, 110, "by priority", 12, MUTED, 500, "middle")
+    c.box(372, 148, 120, 60, fill="#ffffff", stroke=INK)
+    c.text(432, 174, "exact lookup", 13, INK, 700, "middle")
+    c.text(432, 194, "+ RAG", 12, MUTED, 500, "middle")
+    c.line(492, 136, 524, 136, arrow=True)
+    # daemon
+    c.box(532, 84, 82, 104, fill=SOFT, stroke=ACC, sw=2)
+    c.text(573, 130, "daemon", 14, ACC, 700, "middle")
+    c.text(573, 150, "API", 14, ACC, 700, "middle")
+    # agents
+    for i, a in enumerate(("Cursor", "Claude Code", "Codex", "your scripts")):
+        x = 40 + i * 146
+        c.box(x, 268, 130, 40, fill="none", stroke=RULE, r=20)
+        c.text(x + 65, 293, a, 14, INK, 600, "middle")
+    c.add(f'<path d="M573 188 V236 H105 V262" fill="none" stroke="{INK}" stroke-width="1.5" stroke-dasharray="5 4"/>')
+    for i in range(1, 4):
+        x = 105 + i * 146
+        c.line(x, 236, x, 262, stroke=INK, sw=1.5, dash="5 4")
+    c.save()
+
+
 if __name__ == "__main__":
-    for fn in (matchii, mpac, being, skillios, vibe, nl2bp, atari, piasm):
+    for fn in (matchii, mpac, being, skillios, vibe, nl2bp, atari, piasm, kith):
         fn()
