@@ -20,7 +20,8 @@
         </div>
         <div class="contact">
             <a href="mailto:MarkfuGod@outlook.com">MarkfuGod@outlook.com</a> · github.com/MarkfuGod<br>
-            WhatsApp/Phone: +852 98251473 · WeChat: markfugod2003
+            WhatsApp/Phone: +852 98251473 · WeChat: markfugod2003<br>
+            Hong Kong · IANG
         </div>
     </header>
 
@@ -29,7 +30,7 @@
         <div class="item">
             <div class="head">
                 <span class="title">The University of Hong Kong</span>
-                <span class="date">2025 – present</span>
+                <span class="date">2025 – 2026</span>
             </div>
             <div class="sub">MSc, Computer Science (AI / ML / NLP) · GPA 3.52/4.3</div>
         </div>
@@ -48,13 +49,14 @@
         <div class="item">
             <div class="head">
                 <span class="title">Being-H0.5 VLA — reproduction and post-training experiments</span>
-                <span class="date">2025 – 2026</span>
+                <span class="date">Sep 2025 – Jun 2026</span>
             </div>
             <div class="sub">HKU MSc project, supervised by Prof. Taku Komura.</div>
             <ul>
                 <li>Reproduced the first public release and verified the official 2B checkpoint at 95.0–98.6% over 2,000 LIBERO episodes.</li>
                 <li>Recreated post-training from base weights: full fine-tune of InternVL3.5-4B with a Qwen3-4B action expert (mixture-of-transformers, flow matching) on 4 GPUs with FSDP.</li>
-                <li>Ported the original training stack to NVIDIA Blackwell on RTX 6000 Pro: modified the codebase to fit the latest GPU architecture, with fixes for attention, gradient checkpointing, flex-attention kernels, and multi-GPU device binding.</li>
+                <li>Ported the original training stack to NVIDIA Blackwell on RTX 6000 Pro: modified the codebase to fit the latest GPU architecture, with fixes for attention, gradient checkpointing, flex-attention kernels, and multi-GPU device binding; stable 4-GPU training at ~0.3 steps/s, ~92 GB/card.</li>
+                <li>Trained the 4B model from base weights and compared it with the pre-trained 2B checkpoint: 37.8% vs 95–98.6% on LIBERO, showing that a larger backbone with post-training alone does not replace the pre-training stage.</li>
             </ul>
         </div>
 
@@ -73,13 +75,13 @@
 
         <div class="item">
             <div class="head">
-                <span class="title"><a href="https://github.com/MarkfuGod/KithAgent" target="_blank">KithAgent</a> — local AI assistant runtime</span>
-                <span class="date">2025 – 2026</span>
+                <span class="title"><a href="https://github.com/MarkfuGod/KithAgent" target="_blank">KithAgent</a> — self-hosted agent gateway &amp; filesystem-native memory</span>
+                <span class="date">Jun 2025 – present</span>
             </div>
-            <div class="sub">Sole developer · Inspired by Claude Memory</div>
+            <div class="sub">Sole developer · built on OpenClaw + Hermes Agent + Pi Agent, orchestrated with Herdr</div>
             <ul>
-                <li>Local AI assistant runtime that indexes user-chosen folders, LLM-triages files by priority, and summarizes the important ones in order while the user is idle; exposes the system via Python and web.</li>
-                <li>Provides a compatible syscall API with a Python SDK for general AI agent platforms like Cursor, Claude Code, and Codex; also an Electron frontend app for normal users and a dashboard to debug functions.</li>
+                <li>Adapted Karpathy's LLM Wiki pattern: immutable raw sources, an LLM-maintained interlinked Markdown wiki, and schema-governed ingestion; &gt;90% non-text triage accuracy.</li>
+                <li>Hybrid retrieval over rebuildable FTS5 / vector / graph indexes with cross-encoder reranking and second-pass retrieval: recall ~40% → ~78% (+38 pp), tracked across 19 pytest suites.</li>
             </ul>
         </div>
 
@@ -96,21 +98,25 @@
         <div class="item">
             <div class="head">
                 <span class="title"><a href="Vibe-Trading-Project-Highlight_en.html">Vibe-Trading</a> — finance research agent with swarm teams</span>
-                <span class="date">2026</span>
+                <span class="date">Jan 2026 – present</span>
             </div>
             <div class="sub"><a href="https://vibetrading.wiki/home/" target="_blank">vibetrading.wiki</a> · HKUDS open source</div>
             <ul>
                 <li>Natural-language market questions → routed skills, live data, backtests, and reproducible run cards with tool traces.</li>
                 <li>Preset swarm teams (investment committee, quant desk, risk, macro, crypto) for parallel finance research.</li>
+                <li>Open-source contributor: 5 merged PRs (#226 / #227 / #238 / #239 / #240) on strict run-card JSON, search-connector retries, yfinance end-date handling and timeouts.</li>
             </ul>
         </div>
 
         <div class="item">
             <div class="head">
-                <span class="title">Other projects</span>
+                <span class="title">Industry &amp; other work</span>
             </div>
             <ul>
-                <li><a href="NL2BP-Project-Highlight_en.html">NL2BP</a> — multi-agent pipeline (CrewAI) turning requirements into PlantUML blueprints (2025).</li>
+                <li>Matchii (Jul – Aug 2026) — Full-Stack / AI Platform Engineer: Go + Next.js platform, 115-table PostgreSQL schema with ledgers and idempotency, durable agent workflow engine, CI with 1,599 Go tests.</li>
+                <li>M-PAC (Jan 2026 – present) — AI Engineer: WhatsApp RAG for a 12-week programme serving 500 cancer survivors, with mandatory citations, faithfulness checks and physician escalation.</li>
+                <li>Research Assistant, National Supercomputing Center in Zhengzhou (Prof. Bo Ji, 2023 – 2025) — Slurm jobs, module/conda environments and cluster workflows.</li>
+                <li><a href="NL2BP-Project-Highlight_en.html">NL2BP</a> — CrewAI pipeline of 7 roles / 9 agents turning requirements into validated PlantUML blueprints (2025).</li>
                 <li>Hand rehabilitation system — gesture-tracked rehab training with MediaPipe and OpenCV.</li>
             </ul>
         </div>
@@ -120,21 +126,22 @@
         <h2>Skills</h2>
         <div class="skill-grid">
             <span class="k">ML &amp; training</span>
-            <span>PyTorch; multi-GPU training</span>
+            <span>PyTorch; multi-GPU training (FSDP); flow matching; evaluation pipelines</span>
             <span class="k">Agents &amp; LLM apps</span>
-            <span>tool calling, RAG, agentic loop; Cursor, Codex, OpenCode; Hermes Agent architecture</span>
+            <span>tool calling, agentic RAG, multi-agent systems, MCP; OpenClaw, Hermes Agent, Pi Agent, CrewAI; vLLM, LiteLLM, Chroma</span>
             <span class="k">Engineering &amp; infra</span>
-            <span>Python, Swift, TypeScript, C, C++; FastAPI, SQLAlchemy, PostgreSQL; Docker, Electron</span>
+            <span>Python, Go, Swift, TypeScript, C, C++; FastAPI, PostgreSQL, Redis; Docker, AWS, GCP Cloud Run</span>
         </div>
     </section>
 
     <section>
         <h2>Awards</h2>
         <ul>
-            <li>Robotics, Automation &amp; IoT Programme — Best Presenting Team &amp; Distinction (2024)</li>
+            <li>Robotics, Automation &amp; IoT Programme — Best Presenting Team &amp; Distinction, highest personal rank (2024)</li>
+            <li>Zhongguancun Innovation Contest — First Prize, Zhengzhou University division (2024)</li>
             <li>University scholarship, Zhengzhou University (2022, 2023, 2025)</li>
             <li>Internet<sup>+</sup> Competition — University 1st Prize, Provincial 3rd Prize (2023)</li>
-            <li>Registered software copyright — Hand Rehabilitation Platform</li>
+            <li>Registered software copyright — Agile Fingertip hand-rehabilitation platform</li>
         </ul>
     </section>
 </body>

@@ -12,4 +12,4 @@ GitHub Pages site for resume and project write-ups.
 
 ## Local preview
 
-Open `index.html`, `index_en.html`, or `index_zh.html` in a browser.
+Open any `index*.html` file in a browser.

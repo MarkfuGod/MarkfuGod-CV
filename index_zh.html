@@ -16,11 +16,12 @@
     <header class="masthead">
         <div>
             <h1>盖一帆</h1>
-            <div class="tagline">Gai Yifan · 香港大学 计算机科学硕士在读</div>
+            <div class="tagline">Gai Yifan · 香港大学 计算机科学硕士</div>
         </div>
         <div class="contact">
             <a href="mailto:MarkfuGod@outlook.com">MarkfuGod@outlook.com</a> · github.com/MarkfuGod<br>
-            WhatsApp/电话：+852 98251473 · 微信：markfugod2003
+            WhatsApp/电话：+852 98251473 · 微信：markfugod2003<br>
+            香港 · 持 IANG 签证
         </div>
     </header>
 
@@ -29,7 +30,7 @@
         <div class="item">
             <div class="head">
                 <span class="title">香港大学</span>
-                <span class="date">2025 – 至今</span>
+                <span class="date">2025 – 2026</span>
             </div>
             <div class="sub">计算机科学硕士（人工智能 / 机器学习 / NLP）· GPA 3.52/4.3</div>
         </div>
@@ -48,13 +49,14 @@
         <div class="item">
             <div class="head">
                 <span class="title">Being-H0.5 VLA — 复现与后训练实验</span>
-                <span class="date">2025 – 2026</span>
+                <span class="date">2025.09 – 2026.06</span>
             </div>
             <div class="sub">港大硕士课题，导师 Taku Komura 教授。</div>
             <ul>
                 <li>复现首个公开发布版本，并在 2000 个 LIBERO episode 上验证官方 2B checkpoint 达到 95.0–98.6%。</li>
                 <li>从 base 权重复刻后训练：InternVL3.5-4B + Qwen3-4B 动作专家（mixture-of-transformers、flow matching）4 卡 FSDP 全量微调。</li>
-                <li>将原有训练栈迁移至 NVIDIA Blackwell（RTX 6000 Pro）：修改代码以适配最新 GPU 架构，修复注意力、梯度检查点、flex-attention kernel 与多卡设备绑定等问题。</li>
+                <li>将原有训练栈迁移至 NVIDIA Blackwell（RTX 6000 Pro）：修改代码以适配最新 GPU 架构，修复注意力、梯度检查点、flex-attention kernel 与多卡设备绑定等问题；4 卡稳定训练约 0.3 步/秒、单卡约 92 GB。</li>
+                <li>从基座权重训练 4B 模型并与预训练 2B 检查点对比：LIBERO 上 37.8% 对 95–98.6%，说明仅靠更大骨干加后训练无法替代预训练阶段。</li>
             </ul>
         </div>
 
@@ -73,13 +75,13 @@
 
         <div class="item">
             <div class="head">
-                <span class="title"><a href="https://github.com/MarkfuGod/KithAgent" target="_blank">KithAgent</a> — 本地 AI 助手运行时</span>
-                <span class="date">2025 – 2026</span>
+                <span class="title"><a href="https://github.com/MarkfuGod/KithAgent" target="_blank">KithAgent</a> — 自托管 Agent 网关与基于文件的记忆</span>
+                <span class="date">2025.06 – 至今</span>
             </div>
-            <div class="sub">独立开发 · 受 Claude Memory 启发</div>
+            <div class="sub">独立开发 · 基于 OpenClaw + Hermes Agent + Pi Agent 构建，以 Herdr 编排</div>
             <ul>
-                <li>本地 AI 助手运行时：索引用户指定目录，LLM 按优先级分诊文件，在用户空闲时按优先级依次总结重要内容；通过 Python 与 Web 对外暴露系统能力。</li>
-                <li>提供兼容的 syscall API 与 Python SDK，接入 Cursor、Claude Code、Codex 等通用 AI Agent 平台；另有 Electron 前端供普通用户使用，以及用于调试功能的 dashboard。</li>
+                <li>借鉴 Karpathy 的 LLM Wiki 模式：原始文件不可改、由 LLM 维护互链 Markdown 知识库、按规则入库；非文本文件识别准确率 &gt;90%。</li>
+                <li>基于可重建的 FTS5 / 向量 / 图索引做混合检索，经 cross-encoder 重排与二次检索，召回率约 40% → 约 78%（+38 个百分点），由 19 个 pytest 套件持续跟踪。</li>
             </ul>
         </div>
 
@@ -96,21 +98,25 @@
         <div class="item">
             <div class="head">
                 <span class="title"><a href="Vibe-Trading-Project-Highlight_zh.html">Vibe-Trading</a> — 金融研究 Agent 与 Swarm 团队</span>
-                <span class="date">2026</span>
+                <span class="date">2026.01 – 至今</span>
             </div>
             <div class="sub"><a href="https://vibetrading.wiki/home/" target="_blank">vibetrading.wiki</a> · HKUDS 开源</div>
             <ul>
                 <li>自然语言市场问题 → 技能路由、实时数据、回测与可复现 run card（含工具 trace）。</li>
                 <li>预设 swarm 团队（investment committee、quant desk、risk、macro、crypto）并行金融研究。</li>
+                <li>开源贡献：5 个已合并 PR（#226 / #227 / #238 / #239 / #240），涉及严格的 run card JSON、搜索连接器重试、yfinance 截止日期处理与超时配置。</li>
             </ul>
         </div>
 
         <div class="item">
             <div class="head">
-                <span class="title">其他项目</span>
+                <span class="title">工业经历与其他工作</span>
             </div>
             <ul>
-                <li><a href="NL2BP-Project-Highlight_zh.html">NL2BP</a> — 多 Agent 流水线（CrewAI），将需求转为 PlantUML 蓝图（2025）。</li>
+                <li>Matchii（2026.07 – 2026.08）— 全栈 / AI 平台工程师：Go + Next.js 平台，115 张表的 PostgreSQL 模型（账本、幂等），可恢复的 Agent 工作流引擎，含 1,599 个 Go 测试的 CI。</li>
+                <li>M-PAC（2026.01 – 至今）— AI 工程师：面向 500 名癌症康复者的 12 周 WhatsApp RAG，强制引用、忠实度校验、敏感话题转医师。</li>
+                <li>研究助理，国家超级计算郑州中心（姬波教授，2023 – 2025）— Slurm 作业、module/conda 环境与集群工作流。</li>
+                <li><a href="NL2BP-Project-Highlight_zh.html">NL2BP</a> — 由 7 个角色 / 9 个 Agent 组成的 CrewAI 流水线，将需求转为经过校验的 PlantUML 蓝图（2025）。</li>
                 <li>手部康复系统 — 基于 MediaPipe 与 OpenCV 的手势识别康复训练。</li>
             </ul>
         </div>
@@ -120,21 +126,22 @@
         <h2>技能</h2>
         <div class="skill-grid">
             <span class="k">机器学习与训练</span>
-            <span>PyTorch；多卡训练</span>
+            <span>PyTorch；多卡训练（FSDP）；flow matching；评测流水线</span>
             <span class="k">Agent 与 LLM 应用</span>
-            <span>Tool calling、RAG、Agentic loop；Cursor、Codex、OpenCode；Hermes Agent 架构</span>
+            <span>工具调用、Agentic RAG、多 Agent 系统、MCP；OpenClaw、Hermes Agent、Pi Agent、CrewAI；vLLM、LiteLLM、Chroma</span>
             <span class="k">工程与基础设施</span>
-            <span>Python、Swift、TypeScript、C、C++；FastAPI、SQLAlchemy、PostgreSQL；Docker、Electron</span>
+            <span>Python、Go、Swift、TypeScript、C、C++；FastAPI、PostgreSQL、Redis；Docker、AWS、GCP Cloud Run</span>
         </div>
     </section>
 
     <section>
         <h2>获奖</h2>
         <ul>
-            <li>机器人、自动化与物联网项目 — 最佳展示团队 &amp; Distinction（2024）</li>
+            <li>机器人、自动化与物联网项目 — 最佳展示团队 &amp; Distinction，个人最高名次（2024）</li>
+<li>中关村创客大赛 — 郑州大学赛区一等奖（2024）</li>
             <li>郑州大学校级奖学金（2022、2023、2025）</li>
             <li>「互联网<sup>+</sup>」大赛 — 校级一等奖、省级三等奖（2023）</li>
-            <li>软件著作权 — 手部康复平台</li>
+            <li>软件著作权 — 灵动指尖手部康复平台</li>
         </ul>
     </section>
 </body>

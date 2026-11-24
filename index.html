@@ -20,30 +20,49 @@
 
     <header class="hero">
         <h1>Gai Yifan</h1>
-        <p class="tagline">盖一帆 · MSc Computer Science, The University of Hong Kong</p>
+        <p class="tagline">盖一帆 · Backend + AI Agent / LLM Engineer · MSc Computer Science, The University of Hong Kong</p>
         <p class="links">
             <a href="mailto:MarkfuGod@outlook.com">MarkfuGod@outlook.com</a>
             &nbsp;·&nbsp; <a href="https://github.com/MarkfuGod" target="_blank">github.com/MarkfuGod</a>
             &nbsp;·&nbsp; WhatsApp/Phone: +852 98251473
             &nbsp;·&nbsp; WeChat: markfugod2003
+            &nbsp;·&nbsp; Hong Kong · IANG
         </p>
     </header>
 
     <section class="intro">
-        <p>I am an MSc student in Computer Science at the University of Hong Kong. Before that I studied software engineering at Zhengzhou University, and since 2023 most of my time has gone into machine learning: transformers, diffusion models, and the training and evaluation pipelines around them.</p>
-        <p>This page is the long version of my <a href="index_en.html">resume</a>. For each project I try to explain what the thing is, what I personally did, and what came out of it. One question runs through the recent work: how much of current progress in ML comes from careful design, and how much from compute? The first project below is where that question became concrete for me.</p>
+        <p>I build backend and AI-agent systems. I finished my MSc in Computer Science at the University of Hong Kong in 2026, after a BEng in software engineering at Zhengzhou University. My path went from research computing and multi-agent pipelines, through training and evaluating large VLA models on multi-GPU clusters, to shipping production services: a Go + Next.js platform with durable agent workflows, and a clinical RAG chatbot on WhatsApp.</p>
+        <p>This page is the long version of my <a href="index_en_industrial.html">resume</a>. For each project I try to explain what the thing is, what I personally did, and what came out of it. The thread through the recent work is reliability: how to make agents and the systems around them behave predictably when there is real money, real patients, or a long-running training job on the line.</p>
     </section>
 
     <section>
         <h2>Projects</h2>
 
         <article class="project">
+            <h3>Matchii — a Go platform for an AI-native services marketplace</h3>
+            <div class="when">Full-Stack / AI Platform Engineer · Jul – Aug 2026</div>
+            <p>Matchii is an AI-native services marketplace. I designed the platform as a Go modular monolith with a Next.js front end, and kept one rule throughout: deterministic domain kernels stay separate from orchestration and I/O, so the parts that move money and state can be tested without the infrastructure around them.</p>
+            <p>Most of the work was about not doing things twice. The PostgreSQL schema grew to 115 tables over 89 migrations, with 185 foreign keys and 68 partial indexes; financial and workflow transitions go through append-only ledgers, idempotency keys, row locks and SQL compare-and-swap, so a retried request cannot push a payment or a booking forward a second time. Indexed pagination over 100k rows held 922 req/s at 64 ms p95. On a hot read endpoint I added a 60-second Redis cache and measured it with a reproducible A/B test (3 × 10k requests, 50 clients): throughput went from 6.1k to 8.6k req/s (+42%) and p95 latency from 11.1 to 7.2 ms (−35%).</p>
+            <p>Agents on the platform run on a six-state runtime and a DAG engine that is safe across multiple instances and restarts: tools are validated, approvals are durable, and runs are claimed with leases and heartbeats. A sweep every 30 seconds recovers up to 200 open runs per tick, and a 24-capability connector boundary keeps credentials out of agent code and gates every write.</p>
+            <p>To catch regressions before deployment I set up CI with 1,599 Go tests, 25 front-end contract checks, real Postgres and Redis, race detection, vulnerability scanning, and 8,192 permission combinations. Failure modes are explicit too: losing Postgres drains traffic, losing Redis degrades visibly while core jobs keep running.</p>
+            <div class="chips"><span>Go</span><span>Next.js</span><span>PostgreSQL</span><span>Redis</span><span>Stripe</span><span>Prometheus / Grafana</span><span>GCP Cloud Run</span><span>CI</span></div>
+        </article>
+
+        <article class="project">
+            <h3>M-PAC — a WhatsApp RAG assistant for a clinical programme</h3>
+            <div class="when">AI Engineer · Healthcare AI · Jan 2026 – present · Cantonese &amp; Traditional Chinese</div>
+            <p>M-PAC is a 12-week exercise programme for 500 cancer survivors, delivered over WhatsApp in Cantonese and Traditional Chinese. The assistant answers participants' questions, and in a clinical setting a confident wrong answer is worse than no answer. So the RAG pipeline uses hybrid retrieval, requires an [S1]-style citation for every claim, routes by dialogue state, and runs a faithfulness check before any message is sent. Sensitive topics never get an AI answer; they are escalated to physicians.</p>
+            <p>The backend is split into six modules — scheduling, dialogue state, answer validation, retrieval, LLM access, and safety guardrails — in Node.js/TypeScript with Chroma and GPT-4o. It handles about 720 outbound and 360 inbound messages a day and 3,000–5,000 LLM calls a week, with a React admin console for monitoring conversations and managing enrolment, deployed on DigitalOcean/AWS.</p>
+            <div class="chips"><span>RAG</span><span>Node.js / TypeScript</span><span>Chroma</span><span>GPT-4o</span><span>WhatsApp</span><span>React</span><span>Guardrails</span></div>
+        </article>
+
+        <article class="project">
             <h3>Being-H0.5 — reproducing a frontier VLA model, and testing what pre-training buys</h3>
-            <div class="when">MSc project at HKU, supervised by Prof. Taku Komura · 2025 – 2026</div>
+            <div class="when">MSc Research Engineer at HKU, supervised by Prof. Taku Komura · Sep 2025 – Jun 2026</div>
             <p>The first stage was reproduction. I brought the released codebase up from a fresh clone on a rented GPU server: the ZeroMQ inference server, the LIBERO benchmark under MuJoCo with headless EGL rendering, and later RoboCasa v0.2 with its pinned mujoco and numpy versions and mirrored assets. The released code had a few breakages along the way (an endpoint registered with the wrong signature, a missing <code>modality_config</code> method, float64 states crashing the server-side transforms), which I fixed and wrote up as an upstream patch. With the chain working, I evaluated the official 2B LIBERO checkpoint over 2,000 episodes: 98.6% on spatial, 97.0% on object, 98.0% on goal, and 95.0% on libero-10, in line with the paper.</p>
             <p>The second stage was recreating post-training from base weights, without touching the released checkpoint. That meant a full fine-tune of InternVL3.5-4B (Qwen3-4B language backbone) with a Qwen3-4B action expert in the mixture-of-transformers layout and a flow-matching action head, on 4 GPUs with FSDP and gradient checkpointing. I wrote the launch scripts and runbooks myself, including auto-resume and checkpoint-saving policies, because rented instances can be stopped at any moment and an unsaved run is a lost run. I learned that one the hard way, once.</p>
             <p>Midway through, the server moved to 4× RTX PRO 6000 Blackwell cards (compute capability sm_120), which the stock environment could not use at all. I migrated the stack to PyTorch 2.8 with CUDA 12.8 and changed five places in the model and training code to make it run on the new architecture: flash-attn became optional, attention switched to SDPA, the packed Qwen3 model got a gradient-checkpointing implementation it never had, flex-attention kernels got smaller block sizes to fit Blackwell's smaller shared memory, and a missing <code>set_device</code> call that put every rank on GPU 0 was fixed. After that, 4-card FSDP training ran stably at about 0.3 steps/s with roughly 92 GB in use per card.</p>
-            <p>The experiment I care most about came last. I wanted to test whether a larger backbone can make up for skipping the original human-centric pre-training, so I trained the 4B model from base weights and compared it with the official pre-trained 2B checkpoint. At 6k steps the from-base 4B reached 37.8% on LIBERO spatial; the pre-trained 2B sits at 95–98.6%. Doubling the parameters did not close the gap. My reading is that post-training alone cannot substitute for the pre-training stage, and I proposed follow-ups to separate the two effects cleanly: moving the comparison to RoboCasa, where scores are far from saturated, and measuring data-efficiency curves instead of a single end point. That RoboCasa run is in progress now.</p>
+            <p>The experiment I care most about came last. I wanted to test whether a larger backbone can make up for skipping the original human-centric pre-training, so I trained the 4B model from base weights and compared it with the official pre-trained 2B checkpoint. At 6k steps the from-base 4B reached 37.8% on LIBERO spatial; the pre-trained 2B sits at 95–98.6%. Doubling the parameters did not close the gap. My reading is that post-training alone cannot substitute for the pre-training stage, and I proposed follow-ups to separate the two effects cleanly: moving the comparison to RoboCasa, where scores are far from saturated, and measuring data-efficiency curves instead of a single end point.</p>
             <p>On the side I also built a small proof of concept with Gemma-4-E2B as a frozen backbone plus a trained state encoder and action head. It settled two questions quickly: a prompt-only VLM is not a robot policy, and a small bolted-on action head is not enough either.</p>
             <div class="chips"><span>PyTorch</span><span>FSDP</span><span>DeepSpeed</span><span>Transformers</span><span>Flow matching</span><span>LIBERO</span><span>RoboCasa</span><span>MuJoCo / EGL</span><span>ZeroMQ</span><span>Linux server ops</span></div>
         </article>
@@ -58,21 +77,21 @@
         </article>
 
         <article class="project">
-            <h3><a href="https://github.com/MarkfuGod/KithAgent" target="_blank">KithAgent</a> — a local memory layer for agents</h3>
-            <div class="when">Personal project · 2025 – 2026</div>
-            <p>Kith comes from a daily annoyance: tools like Cursor and Claude Code forget who you are between sessions, while the context that actually describes you lives in files on your machine. Kith is a memory system that runs locally. You choose which folders it may scan; it indexes them, asks an LLM to triage every file into high, medium, low, or skip, and then spends its summarization budget by priority. Files that reveal your projects and preferences get understood first; caches, build artifacts, and vendor code get skipped instead of wasting tokens.</p>
-            <p>The daemon watches whether you are active and schedules its own background work, so the heavy summarization runs while you are away from the machine. Memory lives in a local SQLite store under <code>~/.agent_sys</code>, and retrieval is hybrid: exact file lookup when you know what you want, RAG when you do not. Everything is exposed through a local syscall API over Unix socket and HTTP with token auth, plus a Python client SDK, so any agent can ask what you have been working on and what matters now. I also wrote Cursor and Claude Code skills that plug into it, a web dashboard for triage and RAG control, and an Electron companion app.</p>
-            <p>It works with local Ollama models or any OpenAI-compatible or Anthropic API. Nothing leaves the machine except the model calls you configure, and the optional browser ingestion reads only titles and bookmarks, never cookies, sessions, or passwords.</p>
-            <div class="chips"><span>Python</span><span>asyncio</span><span>SQLite</span><span>HTTP + Unix socket API</span><span>Electron</span><span>React</span><span>Ollama / OpenAI-compatible APIs</span></div>
+            <h3><a href="https://github.com/MarkfuGod/KithAgent" target="_blank">KithAgent</a> — a self-hosted agent gateway with filesystem-native memory</h3>
+            <div class="when">Personal project · Jun 2025 – present · built on OpenClaw + Hermes Agent + Pi Agent, orchestrated with Herdr</div>
+            <p>Kith comes from a daily annoyance: coding agents forget who you are between sessions, while the context that actually describes you lives in files on your machine. KithAgent is a self-hosted gateway that gives agents a memory made of those files.</p>
+            <p>Ingestion follows Andrej Karpathy's LLM Wiki pattern: raw sources stay immutable, an LLM maintains an interlinked Markdown wiki on top of them, and a schema governs what gets ingested and how. Each source is compiled into reusable knowledge once, instead of being re-chunked for every query. Non-text files are triaged by an LLM first, with over 90% routed correctly.</p>
+            <p>The human-readable files are the source of truth; the FTS5, vector and graph indexes are rebuildable from them. Retrieval fuses lexical, embedding and graph signals, reranks with a cross-encoder and does a second retrieval pass. That lifted recall from about 40% to about 78% (+38 pp), with precision, recall and F1 tracked across 19 pytest suites.</p>
+            <p>For long coding tasks I evaluated Herdr + Pi Agent for persistent parallel sessions and subagent decomposition, then added structured compaction and branch summaries so goals, decisions and file operations survive from one session to the next. It runs with Docker and local models through vLLM / LiteLLM.</p>
+            <div class="chips"><span>Python</span><span>SQLite FTS5</span><span>Vector + graph retrieval</span><span>Cross-encoder rerank</span><span>Docker</span><span>vLLM / LiteLLM</span><span>Hermes Agent</span><span>Pi Agent</span></div>
         </article>
 
         <article class="project">
             <h3><a href="Vibe-Trading-Project-Highlight_en.html">Vibe-Trading</a> — finance research agent with swarm teams</h3>
-            <div class="when">Hands-on training · 2026 · <a href="https://vibetrading.wiki/home/" target="_blank">vibetrading.wiki</a> · <a href="https://github.com/HKUDS/Vibe-Trading" target="_blank">HKUDS/Vibe-Trading</a></div>
+            <div class="when">Open-source contributor · Jan 2026 – present · <a href="https://vibetrading.wiki/home/" target="_blank">vibetrading.wiki</a> · <a href="https://github.com/HKUDS/Vibe-Trading" target="_blank">HKUDS/Vibe-Trading</a></div>
             <p>Vibe-Trading is an open-source finance research agent from HKUDS. You ask a market question in plain language; the system routes skills and data sources, pulls live market data or broker journals, runs backtests and factor analysis, and returns a reproducible run card with evidence, metrics, tool traces, and caveats. It is built for research and simulation, not brokerage execution.</p>
-            <p>My work focuses on orchestrating preset swarm teams — investment committee, quant desk, risk review, macro, crypto — where parallel specialist workers debate and synthesize a single research report. Simple prompts stay on a single agent with tool-batched runs; complex questions spawn a team. This is the same multi-agent orchestration mindset I explored in NL2BP, applied to finance instead of UML blueprint generation.</p>
-            <p>I also connect this stack to broader agent tooling: daily use of Cursor, Claude Code, Codex, and OpenCode for harness engineering; a deep architecture study of <a href="https://github.com/NousResearch/hermes-agent" target="_blank">Hermes Agent</a> (gateway/session routing, messaging adapters) that feeds back into <a href="https://github.com/MarkfuGod/KithAgent" target="_blank">KithAgent</a>. Live product proof points: <a href="https://testflight.apple.com/join/FVfXajpn" target="_blank">Skillios on TestFlight</a>.</p>
-            <div class="chips"><span>Swarm teams</span><span>Backtesting</span><span>Agent harness</span><span>Shadow account</span><span>Hermes Agent</span><span>Cursor / Codex</span></div>
+            <p>Its preset swarm teams — investment committee, quant desk, risk review, macro, crypto — run parallel specialist workers that debate and synthesize a single report. That is the same multi-agent mindset I explored in NL2BP, applied to finance. I used the system hands-on, then contributed reliability fixes upstream: 5 merged pull requests (#226, #227, #238, #239, #240) covering strict run-card JSON, retries for search connectors, yfinance end-date handling, and configurable timeouts.</p>
+            <div class="chips"><span>Swarm teams</span><span>Backtesting</span><span>Agent harness</span><span>Open source</span><span>Python</span></div>
         </article>
 
         <article class="project">
@@ -87,7 +106,8 @@
     <section>
         <h2>Earlier work</h2>
         <ul>
-            <li><a href="NL2BP-Project-Highlight_en.html">NL2BP</a> — BEng thesis with Prof. Bo Ji: a multi-agent pipeline (CrewAI) that turns natural-language requirements into PlantUML blueprints.</li>
+            <li>Research Assistant, National Supercomputing Center in Zhengzhou (Prof. Bo Ji, Sep 2023 – Jun 2025) — maintained Slurm jobs, module/conda environments and cluster workflows for research users on shared GPU/CPU resources.</li>
+            <li><a href="NL2BP-Project-Highlight_en.html">NL2BP</a> — BEng thesis with Prof. Bo Ji: a CrewAI pipeline of 7 roles / 9 agents that turns natural-language requirements into validated PlantUML blueprints.</li>
             <li><a href="https://github.com/MarkfuGod/Hand-Recovery-And-Fatigue-Relief-Using-Mediapipe" target="_blank">Hand rehabilitation system</a> — MediaPipe + OpenCV + Pygame; registered software copyright in China.</li>
             <li><a href="https://github.com/MarkfuGod/Commissaire" target="_blank">Commissaire</a> — a small browser roguelike in plain JavaScript and Canvas.</li>
         </ul>
@@ -98,7 +118,7 @@
         <div class="item">
             <div class="head">
                 <span class="title">The University of Hong Kong</span>
-                <span class="date">2025 – present</span>
+                <span class="date">2025 – 2026</span>
             </div>
             <div class="sub">MSc, Computer Science (AI / ML / NLP) · GPA 3.52/4.3</div>
         </div>
@@ -107,7 +127,7 @@
                 <span class="title">Zhengzhou University</span>
                 <span class="date">2021 – 2025</span>
             </div>
-            <div class="sub">BEng, Software Engineering · GPA 3.44/4.0 · IELTS 7.5</div>
+            <div class="sub">BEng, Software Engineering · GPA 3.44/4.0 (86.12/100) · IELTS 7.5</div>
         </div>
     </section>
 </body>
