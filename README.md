@@ -4,7 +4,8 @@ GitHub Pages site for resume and project write-ups.
 
 ## Pages
 
-- **[Personal profile](https://markfugod.github.io/MarkfuGod-CV/)** — detailed project descriptions (`index.html`)
+- **[Portfolio](https://markfugod.github.io/MarkfuGod-CV/)** — interactive homepage: experience timeline, filterable project cards, case studies with diagrams and screenshots, EN/中文, dark mode (`index.html` + `assets/`)
+- **[Long-form profile](https://markfugod.github.io/MarkfuGod-CV/profile.html)** — detailed project write-ups (`profile.html`)
 - **[Resume — Industry (English)](https://markfugod.github.io/MarkfuGod-CV/index_en_industrial.html)** — backend + AI agent / LLM engineering (updated Oct 2026)
 - **[简历 — 工业向 (中文)](https://markfugod.github.io/MarkfuGod-CV/index_zh_industrial.html)**
 - **[Resume — Academic (English)](https://markfugod.github.io/MarkfuGod-CV/index_en.html)**
