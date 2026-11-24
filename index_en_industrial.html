@@ -13,134 +13,150 @@
         <a href="index_zh_industrial.html">中文</a>
     </nav>
 
-    <header class="masthead">
-        <div>
-            <h1>Gai Yifan</h1>
-            <div class="tagline">AI Agent &amp; LLM Application Engineer · HKU MSc CS, graduating 2026</div>
-        </div>
-        <div class="contact">
-            <a href="mailto:MarkfuGod@outlook.com">MarkfuGod@outlook.com</a> · github.com/MarkfuGod<br>
-            WhatsApp/Phone: +852 98251473 · WeChat: markfugod2003
+
+<header class="masthead">
+  <div>
+    <h1>Gai Yifan</h1>
+    <div class="tagline">Backend + AI Agent / LLM Engineer · HKU MSc Computer Science</div>
+  </div>
+  <div class="contact">
+            <a href="mailto:MarkfuGod@outlook.com">MarkfuGod@outlook.com</a> · <a target="_blank" href="https://github.com/MarkfuGod">github.com/MarkfuGod</a><br>
+            WhatsApp/Phone: <a target="_blank" href="https://wa.me/85298251473">+852 9825 1473</a> · WeChat: markfugod2003<br>
+            Hong Kong · IANG
         </div>
     </header>
 
-    <section class="intro">
-        <p>Shipping agent systems end-to-end: tool calling, RAG, multilingual chatbots, finance research agents, and full-stack deployment.</p>
-    </section>
+<section>
+  <h2>Experience</h2>
 
-    <section>
-        <h2>Selected Projects</h2>
+  <div class="item">
+    <div class="head">
+      <span class="title">Full-Stack / AI Platform Engineer — Matchii</span>
+      <span class="date">Jul 2026 – Aug 2026</span>
+    </div>
+    <div class="sub">AI-native services marketplace · Go · Next.js · PostgreSQL · Redis · Stripe · Prometheus/Grafana · GCP Cloud Run</div>
+    <ul>
+      <li><b>Architecture.</b> To ship quickly without coupling domain logic to infrastructure, designed a Go modular monolith + Next.js platform that separates deterministic kernels from orchestration and I/O.</li>
+      <li><b>Low-latency reads.</b> To eliminate repeated work on a hot endpoint, added a 60-second Redis cache; a reproducible A/B test (3 × 10k requests, 50 clients) increased throughput from <b>6.1k to 8.6k req/s (+42%)</b> and reduced p95 latency from <b>11.1 to 7.2 ms (−35%)</b>.</li>
+      <li><b>Transactional integrity.</b> To prevent duplicate financial and workflow transitions, designed a <b>115-table PostgreSQL schema</b> across 89 migrations with 185 FKs and 68 partial indexes, using append-only ledgers, idempotency keys, row locks and SQL CAS; indexed pagination over 100k rows sustained <b>922 req/s at 64 ms p95</b>.</li>
+      <li><b>Durable agent workflows.</b> To keep multi-step agents safe across concurrent instances and restarts, built a six-state runtime and fleet-safe DAG engine with validated tools, durable approvals, SQL CAS, leases and heartbeats; 30-second sweeps recover up to 200 open runs/tick, while a <b>24-capability</b> connector boundary isolates credentials and gates writes.</li>
+      <li><b>Release confidence.</b> To catch concurrency, integration and authorization regressions before deployment, established CI with <b>1,599 Go tests</b>, 25 frontend contract checks, real Postgres/Redis, race detection, vulnerability scanning and <b>8,192 permission combinations</b>; Postgres loss drains traffic, while Redis loss degrades visibly and core jobs continue.</li>
+    </ul>
+  </div>
 
-        <div class="item">
-            <div class="head">
-                <span class="title">M-PAC WhatsApp Chatbot — 12-week exercise program for cancer survivors</span>
-                <span class="date">2026</span>
-            </div>
-            <div class="sub">Project Lead &amp; AI Engineer · Cantonese &amp; Traditional Chinese</div>
-            <ul>
-                <li>Led cross-functional delivery as PM &amp; AI engineer: routed backend, frontend, and RAG work by stack; delivered an AI WhatsApp system for 500 cancer survivors with scheduled 12-week curriculum, intelligent replies, and research-ready export.</li>
-                <li>Architected six backend modules (Node.js/TypeScript, PostgreSQL, Chroma, GPT-4o): scheduler, dialogue state manager, answer validator, RAG retriever, LLM gateway, and clinical safety guardrails that redirect sensitive questions to physicians.</li>
-                <li>Built React admin dashboard for conversation monitoring, patient enrol/opt-out, and CSV/Excel export; production target ~720 outbound and ~360 inbound messages/day, 3,000–5,000 LLM calls/week at &lt;50 QPS peak.</li>
-                <li>Scoped 5-week delivery with 10-patient internal beta (Week 4) and cloud deployment on DigitalOcean/AWS; authored full technical proposal, cost model, and payment milestones.</li>
-            </ul>
-        </div>
+  <div class="item">
+    <div class="head">
+      <span class="title">AI Engineer — M-PAC WhatsApp Programme (Healthcare AI)</span>
+      <span class="date">Jan 2026 – Present</span>
+    </div>
+    <div class="sub">Production RAG for a 12-week clinical programme · Node.js/TypeScript · Chroma · GPT-4o · Cantonese &amp; Traditional Chinese</div>
+    <ul>
+      <li><b>Grounded clinical support.</b> To reduce hallucination risk for 500 cancer survivors, built a WhatsApp RAG with hybrid retrieval, mandatory [S1] citations, dialogue-state routing and pre-send faithfulness validation; sensitive topics escalate to physicians throughout the 12-week programme.</li>
+      <li><b>Production scale.</b> To operate predictable bilingual messaging, separated scheduling, state, validation, retrieval, LLM access and guardrails into six backend modules; the service handles ~720 outbound / ~360 inbound messages per day and 3,000–5,000 LLM calls per week, with a React admin console on DigitalOcean/AWS.</li>
+    </ul>
+  </div>
 
-        <div class="item">
-            <div class="head">
-                <span class="title"><a href="https://github.com/MarkfuGod/skillios" target="_blank">Skillios (ItsMyGoal)</a> — full-stack iOS goal planner with on-device agents</span>
-                <span class="date">2025 – 2026</span>
-            </div>
-            <div class="sub"><a href="https://testflight.apple.com/join/FVfXajpn" target="_blank">TestFlight beta</a> · Group Leader</div>
-            <ul>
-                <li>Led team delivery by skill stack — iOS UI to mobile teammates, backend/DB and AWS deployment to backend owners, testing and docs to others; owned AI agent architecture and final integration.</li>
-                <li>Owned AI agent architecture end-to-end: on-device tool loop (~10 tools), Dream Architect decomposition, shared Swift/Python JSON contracts, and final integration before TestFlight.</li>
-                <li>Designed parallel read-only tool execution with serial DB mutations; local benchmarks cut multi-tool itinerary latency from ~8.2s to ~3.4s (~2.4×) vs sequential calls.</li>
-                <li>FastAPI + PostgreSQL on AWS (CDK, ECS Fargate, RDS): auth, snapshot sync, LLM proxy with per-user quotas, and server-side Maps/weather proxies.</li>
-            </ul>
-        </div>
+  <div class="item">
+    <div class="head">
+      <span class="title">Open-Source Contributor — <a href="Vibe-Trading-Project-Highlight_en.html">Vibe-Trading</a> (HKUDS)</span>
+      <span class="date">Jan 2026 – Present</span>
+    </div>
+    <div class="sub">Finance research agent with preset swarm teams · <a target="_blank" href="https://vibetrading.wiki">vibetrading.wiki</a></div>
+    <ul>
+      <li><b>Reliability contributions.</b> To harden swarm runs and external data access, delivered <b>5 merged PRs</b> (#226 / #227 / #238 / #239 / #240) covering strict run-card JSON, search-connector retries, yfinance end-date handling and timeout configuration.</li>
+    </ul>
+  </div>
 
-        <div class="item">
-            <div class="head">
-                <span class="title"><a href="https://github.com/MarkfuGod/KithAgent" target="_blank">KithAgent</a> — local memory &amp; retrieval layer for AI agents</span>
-                <span class="date">2025 – 2026</span>
-            </div>
-            <div class="sub">Inspired by Claude Memory; extends beyond session-only recall</div>
-            <ul>
-                <li>Problem: chunk-based RAG handles text poorly across video, images, and mixed repos; session memory tools reset context on every new agent chat. Built a local daemon that indexes user-chosen folders, LLM-triages files by priority, and summarizes high-value context while the user is idle.</li>
-                <li>Hybrid retrieval: exact file lookup + lightweight graph-style RAG (LightRAG-inspired entity linking over LLM-generated summaries, Karpathy-style Obsidian knowledge base via rolling summarization); supports Ollama and OpenAI-compatible APIs.</li>
-                <li>Exposes syscall API (Unix socket + HTTP), Python SDK, Cursor/Claude Code skills, and Electron dashboard; cross-session context retrieval ~78% relevant-hit rate in local eval vs ~40% for session-only baselines on the same file sets.</li>
-                <li>Cold-start context assembly drops from ~4 min (full-folder naive chunking) to ~12s on revisit after background indexing; non-text files routed correctly to skip/summarize paths ~90%+ of the time via LLM triage.</li>
-            </ul>
-        </div>
+  <div class="item">
+    <div class="head">
+      <span class="title">MSc Research Engineer — Being-H0.5 VLA, HKU (supervised by Prof. Taku Komura)</span>
+      <span class="date">Sep 2025 – Jun 2026</span>
+    </div>
+    <div class="sub">Multi-GPU training, evaluation pipeline &amp; Blackwell porting · PyTorch · 4× GPU FSDP</div>
+    <ul>
+      <li><b>Reproducible evaluation.</b> To benchmark VLA behavior consistently at scale, built a ZeroMQ inference server and headless MuJoCo/EGL harness; reproduced the official 2B checkpoint over <b>2,000 LIBERO episodes</b>, reaching <b>95–98.6%</b> across four suites.</li>
+      <li><b>Training &amp; Blackwell port.</b> To test whether post-training could recover performance from base weights, trained InternVL3.5-4B + Qwen3-4B with 4-GPU FSDP and ported the stack to sm_120 / CUDA 12.8; stabilized at ~0.3 steps/s and ~92 GB/card, revealing a <b>37.8% vs 95–98.6%</b> gap between from-base 4B and pretrained 2B.</li>
+    </ul>
+  </div>
 
-        <div class="item">
-            <div class="head">
-                <span class="title"><a href="Vibe-Trading-Project-Highlight_en.html">Vibe-Trading</a> — finance research agent with swarm teams</span>
-                <span class="date">2026</span>
-            </div>
-            <div class="sub"><a href="https://vibetrading.wiki/home/" target="_blank">vibetrading.wiki</a> · HKUDS open source · hands-on training &amp; contribution</div>
-            <ul>
-                <li>Orchestrated preset swarm teams (investment committee, quant desk, risk, macro, crypto): parallel specialist workers debate and synthesize research reports with evidence, metrics, and caveats.</li>
-                <li>Built agent harness workflows: route natural-language prompts → market data → backtests/factor analysis → reproducible run cards with tool traces.</li>
-                <li>Ran multi-engine backtests across equities, crypto, futures, forex, and options; shadow-account journal parsing for counterfactual analysis.</li>
-                <li>Applied Hermes Agent gateway/session patterns from deep architecture study to local agent infrastructure (KithAgent).</li>
-            </ul>
-        </div>
+  <div class="item">
+    <div class="head">
+      <span class="title">Research Assistant — National Supercomputing Center in Zhengzhou (ZZU, Prof. Bo Ji)</span>
+      <span class="date">Sep 2023 – Jun 2025</span>
+    </div>
+    <div class="sub">Research computing &amp; multi-agent system design · Slurm · Conda/Modules · CrewAI · PlantUML</div>
+    <ul>
+      <li><b>Shared compute operations.</b> To keep lab workloads reproducible across shared GPU/CPU resources, maintained Slurm jobs, module/conda environments and cluster workflows for research users.</li>
+      <li><b>Natural-language system design.</b> To turn ambiguous requirements into reviewable architecture, built <a target="_blank" href="https://github.com/MarkfuGod/NL2BP-Natural-Language-to-UML-Blueprints">NL2BP</a>, a CrewAI pipeline of <b>7 roles / 9 agents</b> that produces validated PlantUML blueprints.</li>
+    </ul>
+  </div>
+</section>
 
-        <div class="item">
-            <div class="head">
-                <span class="title">Being-H0.5 VLA — multi-GPU training &amp; production porting</span>
-                <span class="date">2025 – 2026</span>
-            </div>
-            <div class="sub">HKU MSc project · Engineering focus</div>
-            <ul>
-                <li>Reproduced and evaluated official 2B checkpoint at 95–98.6% over 2,000 LIBERO episodes; recreated post-training from base weights on 4 GPUs with FSDP.</li>
-                <li>Ported training stack to NVIDIA Blackwell (RTX 6000 Pro): PyTorch 2.8/CUDA 12.8 migration, SDPA attention, gradient checkpointing, flex-attention kernel tuning — stable 4-GPU training at ~0.3 steps/s, ~92 GB/card.</li>
-            </ul>
-        </div>
-    </section>
+<section>
+  <h2>Selected Projects</h2>
 
-    <section>
-        <h2>Skills</h2>
-        <div class="skill-grid">
-            <span class="k">ML &amp; training</span>
-            <span>PyTorch; multi-GPU training (FSDP); LLM fine-tuning &amp; post-training; LoRA/PEFT; flow matching; evaluation pipelines</span>
-            <span class="k">Agents &amp; LLM apps</span>
-            <span>Tool calling; deep agents &amp; agent-loop design; harness engineering; RAG (Chroma, LightRAG-style graphs); MCP integration; CrewAI, LangChain; finance research swarms (Vibe-Trading)</span>
-            <span class="k">AI dev tools</span>
-            <span>Cursor, Claude Code, Codex, OpenCode — daily use for harness engineering from research and production projects; Hermes Agent &amp; OpenClaw gateway architecture studied in depth</span>
-            <span class="k">Engineering &amp; infra</span>
-            <span>Python, Swift, TypeScript, Node.js; FastAPI, SQLAlchemy, PostgreSQL; React; Docker; AWS CDK/ECS; Electron; Nginx/PM2</span>
-            <span class="k">Languages</span>
-            <span>English (IELTS 7.5), Mandarin, Cantonese (conversational); Traditional &amp; Simplified Chinese</span>
-        </div>
-    </section>
+  <div class="item">
+    <div class="head">
+      <span class="title"><a href="https://github.com/MarkfuGod/KithAgent" target="_blank">KithAgent</a> — self-hosted agent gateway &amp; filesystem-native memory</span>
+      <span class="date">Jun 2025 – Present</span>
+    </div>
+    <div class="sub">Built on OpenClaw + Hermes Agent + Pi Agent; orchestrated with Herdr · Python · SQLite FTS5 · Docker · vLLM / LiteLLM</div>
+    <ul>
+      <li><b>Heterogeneous knowledge ingestion.</b> To make mixed file types consistently usable by agents, adapted Andrej Karpathy's LLM Wiki pattern into immutable raw sources, an LLM-maintained interlinked Markdown wiki and schema-governed ingestion; each source is compiled once into reusable knowledge instead of reprocessed for every query.</li>
+      <li><b>Memory recommendation.</b> To surface relevant context beyond exact keyword matches, kept human-readable files as the source of truth and built rebuildable FTS5/vector/graph indexes; lexical, embedding and graph fusion with cross-encoder reranking and second-pass retrieval lifted recall from <b>~40% to ~78% (+38 pp)</b>, with <b>&gt;90%</b> non-text triage accuracy and Precision/Recall/F1 tracked across 19 pytest suites.</li>
+      <li><b>Long-horizon agents.</b> To prevent context loss across extended coding tasks, evaluated Herdr + Pi Agent for persistent parallel sessions and subagent decomposition, then structured compaction and branch summaries to preserve goals, decisions and file operations between sessions.</li>
+    </ul>
+  </div>
 
-    <section>
-        <h2>Education</h2>
-        <div class="item">
-            <div class="head">
-                <span class="title">The University of Hong Kong</span>
-                <span class="date">2025 – 2026</span>
-            </div>
-            <div class="sub">MSc, Computer Science (AI / ML / NLP) · GPA 3.52/4.3</div>
-        </div>
-        <div class="item">
-            <div class="head">
-                <span class="title">Zhengzhou University</span>
-                <span class="date">2021 – 2025</span>
-            </div>
-            <div class="sub">BEng, Software Engineering · GPA 3.44/4.0 · IELTS 7.5</div>
-        </div>
-    </section>
+  <div class="item">
+    <div class="head">
+      <span class="title"><a href="https://github.com/MarkfuGod/skillios" target="_blank">Skillios (ItsMyGoal)</a> — natural language → runnable agent tasks</span>
+      <span class="date">Jun 2025 – Present</span>
+    </div>
+    <div class="sub">SwiftUI + SwiftData · FastAPI + PostgreSQL · AWS (CDK, ECS Fargate, RDS) · <a href="https://testflight.apple.com/join/FVfXajpn" target="_blank">TestFlight beta</a></div>
+    <ul>
+      <li><b>Goal-to-execution workflow.</b> To turn ambiguous natural-language goals into controllable actions, built the iOS client, FastAPI/PostgreSQL backend and AWS deployment; the agent uses ~10 function-calling tools to create runnable skill trees and requires user confirmation before database writes, shipped through TestFlight.</li>
+      <li><b>Safe parallelism.</b> To reduce multi-tool latency without conflicting writes, parallelized read-only tools while serializing database mutations; latency fell from <b>~8.2 s to ~3.4 s (~2.4×)</b>, backed by JWT auth, snapshot sync, per-user LLM quotas and Alembic migrations.</li>
+    </ul>
+  </div>
 
-    <section>
-        <h2>Awards</h2>
-        <ul>
-            <li>Robotics, Automation &amp; IoT Programme — Best Presenting Team &amp; Distinction (2024)</li>
-            <li>Internet<sup>+</sup> Competition — University 1st Prize, Provincial 3rd Prize (2023)</li>
-            <li>Registered software copyright — Hand Rehabilitation Platform</li>
-        </ul>
-    </section>
+</section>
+
+<section>
+  <h2>Skills</h2>
+  <div class="skill-grid">
+    <span class="k">Languages</span><span>Go, TypeScript / JavaScript, Python, Swift, Java, SQL, C/C++</span>
+    <span class="k">AI / LLM systems</span><span>Agentic RAG, multi-agent systems, MCP, tool calling, OpenClaw, Hermes Agent, Herdr, Pi Agent, CrewAI, vLLM, LiteLLM, Ollama, PyTorch, FSDP, Chroma</span>
+    <span class="k">Backend &amp; platform</span><span>Go, PostgreSQL (Neon serverless), Redis, FastAPI, Node.js, Stripe payments, REST / OpenAPI, Docker, AWS (CDK, ECS, RDS), GCP Cloud Run, Prometheus / Grafana, CI/CD</span>
+    <span class="k">Web &amp; mobile</span><span>Next.js, React, Tailwind CSS, SwiftUI / SwiftData, Electron, Phaser 3, Three.js</span>
+  </div>
+</section>
+
+<section>
+  <h2>Education</h2>
+  <div class="item">
+    <div class="head">
+      <span class="title">The University of Hong Kong, Hong Kong</span>
+      <span class="date">2025 – 2026</span>
+    </div>
+    <div class="sub">MSc in Computer Science (AI / ML / NLP) · GPA 3.52/4.3</div>
+  </div>
+  <div class="item">
+    <div class="head">
+      <span class="title">Zhengzhou University, Zhengzhou, China</span>
+      <span class="date">2021 – 2025</span>
+    </div>
+    <div class="sub">BEng in Software Engineering · GPA 3.44/4.0 (86.12/100) · IELTS 7.5</div>
+  </div>
+</section>
+
+<section>
+  <h2>Awards &amp; Languages</h2>
+  <ul>
+    <li><b>Honors.</b> Robotics, Automation &amp; IoT Programme — Best Presenting Team &amp; Distinction, highest personal rank (2024) · Zhongguancun Innovation Contest — First Prize, Zhengzhou University division (2024)</li>
+    <li><b>Innovation.</b> Internet+ Competition — University First Prize, Provincial Third Prize (2023) · Registered software copyright — Agile Fingertip hand-rehabilitation platform</li>
+    <li><b>Languages.</b> English (fluent, IELTS 7.5) · Mandarin (native) · Cantonese (conversational)</li>
+  </ul>
+</section>
 </body>
 </html>

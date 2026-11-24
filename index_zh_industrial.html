@@ -13,134 +13,150 @@
         <a href="index_zh.html">学术简历</a>
     </nav>
 
-    <header class="masthead">
-        <div>
-            <h1>盖一帆</h1>
-            <div class="tagline">AI Agent / LLM 应用工程师 · 港大 CS 硕士，2026 毕业</div>
-        </div>
-        <div class="contact">
-            <a href="mailto:MarkfuGod@outlook.com">MarkfuGod@outlook.com</a> · github.com/MarkfuGod<br>
-            WhatsApp/电话：+852 98251473 · 微信：markfugod2003
+
+<header class="masthead">
+  <div>
+    <h1>盖一帆</h1>
+    <div class="tagline">后端 + AI Agent / LLM 工程师 · 香港大学计算机科学硕士</div>
+  </div>
+  <div class="contact">
+            <a href="mailto:MarkfuGod@outlook.com">MarkfuGod@outlook.com</a> · <a target="_blank" href="https://github.com/MarkfuGod">github.com/MarkfuGod</a><br>
+            WhatsApp/电话：<a target="_blank" href="https://wa.me/85298251473">+852 9825 1473</a> · 微信：markfugod2003<br>
+            香港 · 持 IANG 签证
         </div>
     </header>
 
-    <section class="intro">
-        <p>端到端交付 Agent 系统：工具调用、RAG、多语言聊天机器人、金融研究 Agent 与全栈部署。</p>
-    </section>
+<section>
+  <h2>工作经历</h2>
 
-    <section>
-        <h2>精选项目</h2>
+  <div class="item">
+    <div class="head">
+      <span class="title">全栈 / AI 平台工程师 — Matchii</span>
+      <span class="date">2026.07 – 2026.08</span>
+    </div>
+    <div class="sub">AI 驱动的服务交易平台 · Go · Next.js · PostgreSQL · Redis · Stripe · Prometheus/Grafana · GCP Cloud Run</div>
+    <ul>
+      <li><b>架构。</b> 为在快速交付的同时避免业务逻辑绑死在基础设施上，设计 Go 模块化单体 + Next.js 平台，把确定性业务内核与编排、I/O 分开。</li>
+      <li><b>低延迟读取。</b> 为避免热点接口反复做同样的事，增加 60 秒 Redis 缓存；可复现 A/B 压测（3 × 1 万请求、50 客户端）使吞吐从 <b>6.1k 提升至 8.6k req/s（+42%）</b>，p95 延迟从 <b>11.1 ms 降至 7.2 ms（−35%）</b>。</li>
+      <li><b>事务完整性。</b> 为防止资金和流程被重复推进，设计 <b>115 张表的 PostgreSQL 模型</b>，经 89 次迁移落地 185 个外键与 68 个部分索引，并采用只追加账本、幂等键、行锁与 SQL 条件更新；10 万行索引分页稳定达到 <b>922 req/s、p95 64 ms</b>。</li>
+      <li><b>可恢复 Agent 工作流。</b> 为保证多步骤 Agent 在多实例并发与重启后仍安全，构建六状态运行时与多实例安全的 DAG 引擎，加入工具校验、持久化审批、SQL 条件更新、认领过期回收和存活探测；每 30 秒一轮扫描最多收回 200 条未完成任务，并以 <b>24 项能力</b>的连接器边界隔离凭证，写操作必须经过该边界。</li>
+      <li><b>上线质量。</b> 为在部署前抓住并发、集成和权限问题，建立覆盖 <b>1,599 个 Go 测试</b>、25 项前端契约检查、真实 Postgres/Redis、竞态检测、漏洞扫描及 <b>8,192 种权限组合</b>的 CI；Postgres 故障时自动切断流量，Redis 故障时明确降级，核心任务继续执行。</li>
+    </ul>
+  </div>
 
-        <div class="item">
-            <div class="head">
-                <span class="title">M-PAC WhatsApp 聊天机器人 — 癌症患者 12 周运动促进项目</span>
-                <span class="date">2026</span>
-            </div>
-            <div class="sub">项目负责人 &amp; AI 工程师 · 粤语 &amp; 繁体中文</div>
-            <ul>
-                <li>作为 PM 与 AI 工程师带领跨职能交付：按技能栈分工（后端、前端、RAG）；向 500 名癌症患者交付 AI WhatsApp 系统 — 12 周课程推送、智能回复与可导出研究数据。</li>
-                <li>设计六大后端模块（Node.js/TypeScript、PostgreSQL、Chroma、GPT-4o）：定时调度、对话状态管理、答案校验、RAG 检索、LLM 网关，以及将敏感临床问题转介主治医师的安全护栏。</li>
-                <li>搭建 React 管理后台，支持会话监控、患者入组/退订与 CSV/Excel 导出；生产目标约每日 720 条出站、360 条入站消息，每周 3,000–5,000 次 LLM 调用，峰值 &lt;50 QPS。</li>
-                <li>规划 5 周交付节奏，第 4 周完成 10 人内测 beta，并部署至 DigitalOcean/AWS；撰写完整技术方案、成本模型与分期付款节点。</li>
-            </ul>
-        </div>
+  <div class="item">
+    <div class="head">
+      <span class="title">AI 工程师 — M-PAC WhatsApp 项目（医疗 AI）</span>
+      <span class="date">2026.01 – 至今</span>
+    </div>
+    <div class="sub">面向 12 周临床项目的生产级 RAG · Node.js/TypeScript · Chroma · GPT-4o · 粤语与繁体中文</div>
+    <ul>
+      <li><b>有出处的临床支持。</b> 为降低面向 500 名癌症康复者时的幻觉风险，构建 WhatsApp RAG，结合混合检索、强制 [S1] 引用、对话状态路由与发送前忠实度校验；12 周内敏感话题一律转给医师处理。</li>
+      <li><b>线上规模。</b> 为稳定处理双语消息，将调度、状态、校验、检索、LLM 访问和安全护栏拆为六个后端模块；日均处理约 720 条发出 / 360 条接收消息、每周 3,000–5,000 次 LLM 调用，并配套 React 管理台及 DigitalOcean/AWS 部署。</li>
+    </ul>
+  </div>
 
-        <div class="item">
-            <div class="head">
-                <span class="title"><a href="https://github.com/MarkfuGod/skillios" target="_blank">Skillios（ItsMyGoal）</a> — 端侧 Agent 全栈 iOS 目标规划应用</span>
-                <span class="date">2025 – 2026</span>
-            </div>
-            <div class="sub"><a href="https://testflight.apple.com/join/FVfXajpn" target="_blank">TestFlight 内测</a> · 组长</div>
-            <ul>
-                <li>按技能栈带领团队交付 — iOS 界面交给移动端同学，后端/数据库与 AWS 部署交给后端同学，测试与文档交给其他同学；负责 AI Agent 架构与最终集成。</li>
-                <li>端到端负责 AI Agent 架构：端侧工具循环（约 10 个工具）、Dream Architect 分解、Swift/Python 共享 JSON 契约，以及 TestFlight 前最终集成。</li>
-                <li>设计只读工具并行、数据库写操作串行的 Agent 循环；本地基准测试将多工具行程规划延迟从约 8.2s 降至约 3.4s（约 2.4×）。</li>
-                <li>FastAPI + PostgreSQL 部署于 AWS（CDK、ECS Fargate、RDS）：认证、快照同步、带用户配额的 LLM 代理，以及服务端 Maps/天气代理。</li>
-            </ul>
-        </div>
+  <div class="item">
+    <div class="head">
+      <span class="title">开源贡献者 — <a href="Vibe-Trading-Project-Highlight_zh.html">Vibe-Trading</a>（HKUDS）</span>
+      <span class="date">2026.01 – 至今</span>
+    </div>
+    <div class="sub">带预设 swarm 团队的金融研究 Agent · <a target="_blank" href="https://vibetrading.wiki">vibetrading.wiki</a></div>
+    <ul>
+      <li><b>可靠性贡献。</b> 为提高 swarm 运行和外部数据访问的稳定性，提交 <b>5 个已合并 PR</b>（#226 / #227 / #238 / #239 / #240），覆盖严格的运行卡片 JSON、搜索连接器重试、yfinance 截止日期处理及超时配置。</li>
+    </ul>
+  </div>
 
-        <div class="item">
-            <div class="head">
-                <span class="title"><a href="https://github.com/MarkfuGod/KithAgent" target="_blank">KithAgent</a> — AI Agent 本地记忆与检索层</span>
-                <span class="date">2025 – 2026</span>
-            </div>
-            <div class="sub">受 Claude Memory 启发，突破单次会话记忆局限</div>
-            <ul>
-                <li>痛点：分块 RAG 难以处理视频、图片与混合仓库；会话记忆工具每次新开对话即丢失上下文。构建本地守护进程，索引用户指定目录，LLM 按优先级分诊文件，并在用户空闲时总结高价值上下文。</li>
-                <li>混合检索：精确文件查找 + 轻量图式 RAG（借鉴 LightRAG 的实体关联，基于 LLM 摘要；Karpathy 式 Obsidian 知识库滚动摘要）；支持 Ollama 与 OpenAI 兼容 API。</li>
-                <li>对外提供 syscall API（Unix socket + HTTP）、Python SDK、Cursor/Claude Code Skills 与 Electron 面板；本地评测跨会话上下文检索相关命中率约 78%，同文件集下单会话基线约 40%。</li>
-                <li>冷启动上下文组装从全目录朴素分块的约 4 分钟降至后台索引后再次访问的约 12 秒；LLM 分诊对非文本文件正确路由至跳过/摘要路径的比例约 90%+。</li>
-            </ul>
-        </div>
+  <div class="item">
+    <div class="head">
+      <span class="title">硕士研究工程师 — Being-H0.5 VLA，香港大学（导师：Taku Komura 教授）</span>
+      <span class="date">2025.09 – 2026.06</span>
+    </div>
+    <div class="sub">多卡训练、评测流水线与 Blackwell 移植 · PyTorch · 4× GPU FSDP</div>
+    <ul>
+      <li><b>可复现评测。</b> 为在较大规模下稳定对比 VLA 行为，搭建 ZeroMQ 推理服务器与无界面 MuJoCo/EGL 评测框架；在 <b>2,000 个 LIBERO 回合</b> 上复现官方 2B 检查点，四个套件达到 <b>95–98.6%</b>。</li>
+      <li><b>训练与 Blackwell 移植。</b> 为验证从基座权重继续训练能否恢复性能，以 4 卡 FSDP 训练 InternVL3.5-4B + Qwen3-4B，并移植至 sm_120 / CUDA 12.8；稳定达到约 0.3 步/秒、单卡约 92 GB，测得从基座训起的 4B 与预训练 2B 之间存在 <b>37.8% 对 95–98.6%</b> 的差距。</li>
+    </ul>
+  </div>
 
-        <div class="item">
-            <div class="head">
-                <span class="title"><a href="Vibe-Trading-Project-Highlight_zh.html">Vibe-Trading</a> — 金融研究 Agent 与 Swarm 团队</span>
-                <span class="date">2026</span>
-            </div>
-            <div class="sub"><a href="https://vibetrading.wiki/home/" target="_blank">vibetrading.wiki</a> · HKUDS 开源 · 动手训练与实践</div>
-            <ul>
-                <li>编排预设 swarm 团队（investment committee、quant desk、risk、macro、crypto）：专职 worker 并行协作，多空辩论后合成带证据链、指标与风险提示的研究报告。</li>
-                <li>搭建 Agent harness 工作流：自然语言 prompt → 行情数据 → 回测/因子分析 → 可复现 run card 与工具 trace。</li>
-                <li>运行多引擎回测（股票、 crypto、期货、外汇、期权）；Shadow account 流水解析与反事实分析。</li>
-                <li>将 Hermes Agent gateway/会话架构的深入研究应用于本地 Agent 基础设施（KithAgent）。</li>
-            </ul>
-        </div>
+  <div class="item">
+    <div class="head">
+      <span class="title">研究助理 — 国家超级计算郑州中心（郑州大学，姬波教授）</span>
+      <span class="date">2023.09 – 2025.06</span>
+    </div>
+    <div class="sub">科研计算与多 Agent 系统设计 · Slurm · Conda/Modules · CrewAI · PlantUML</div>
+    <ul>
+      <li><b>共享算力运维。</b> 为保证实验室任务在共享 GPU/CPU 资源上可复现，面向科研用户维护 Slurm 作业、module/conda 环境及集群工作流。</li>
+      <li><b>自然语言系统设计。</b> 为将模糊需求转为可评审架构，构建 <a target="_blank" href="https://github.com/MarkfuGod/NL2BP-Natural-Language-to-UML-Blueprints">NL2BP</a>：由 <b>7 个角色 / 9 个 Agent</b> 组成的 CrewAI 流水线，输出经过校验的 PlantUML 蓝图。</li>
+    </ul>
+  </div>
+</section>
 
-        <div class="item">
-            <div class="head">
-                <span class="title">Being-H0.5 VLA — 多卡训练与生产环境移植</span>
-                <span class="date">2025 – 2026</span>
-            </div>
-            <div class="sub">港大硕士课题 · 工程导向</div>
-            <ul>
-                <li>复现并评测官方 2B checkpoint，2000 个 LIBERO episode 达 95–98.6%；在 4 卡 FSDP 上从 base 权重复刻后训练流程。</li>
-                <li>将训练栈移植至 NVIDIA Blackwell（RTX 6000 Pro）：PyTorch 2.8/CUDA 12.8 迁移、SDPA 注意力、梯度检查点与 flex-attention kernel 调优 — 4 卡训练稳定约 0.3 steps/s，每卡约 92 GB 显存占用。</li>
-            </ul>
-        </div>
-    </section>
+<section>
+  <h2>精选项目</h2>
 
-    <section>
-        <h2>技能</h2>
-        <div class="skill-grid">
-            <span class="k">机器学习与训练</span>
-            <span>PyTorch；多卡训练（FSDP）；LLM 微调与后训练；LoRA/PEFT；flow matching；评测流水线</span>
-            <span class="k">Agent 与 LLM 应用</span>
-            <span>Tool calling；Deep Agent 与 Agent 循环设计；Harness 工程；RAG（Chroma、LightRAG 式图谱）；MCP 集成；CrewAI、LangChain；金融研究 swarm（Vibe-Trading）</span>
-            <span class="k">AI 开发工具</span>
-            <span>Cursor、Claude Code、Codex、OpenCode — 日常用于 harness 工程，来自研究与真实项目经验；Hermes Agent、OpenClaw gateway 架构深入研究</span>
-            <span class="k">工程与基础设施</span>
-            <span>Python、Swift、TypeScript、Node.js；FastAPI、SQLAlchemy、PostgreSQL；React；Docker；AWS CDK/ECS；Electron；Nginx/PM2</span>
-            <span class="k">语言</span>
-            <span>英语（IELTS 7.5）、普通话、粤语（日常交流）；繁体与简体中文</span>
-        </div>
-    </section>
+  <div class="item">
+    <div class="head">
+      <span class="title"><a href="https://github.com/MarkfuGod/KithAgent" target="_blank">KithAgent</a> — 自托管 Agent 网关与基于文件的记忆</span>
+      <span class="date">2025.06 – 至今</span>
+    </div>
+    <div class="sub">基于 OpenClaw + Hermes Agent + Pi Agent 构建，以 Herdr 编排 · Python · SQLite FTS5 · Docker · vLLM / LiteLLM</div>
+    <ul>
+      <li><b>多种文件统一入库。</b> 为让不同类型的文件都能被 Agent 稳定使用，将 Andrej Karpathy 的 LLM Wiki 模式改造成不可改的原始文件、由 LLM 维护的互链 Markdown 知识库，以及按规则入库；每份材料只整理一次，之后直接复用，不必每次提问都重新解析。</li>
+      <li><b>记忆推荐。</b> 为在精确关键词之外找出相关上下文，以可读文件为唯一事实来源，并构建可重建的 FTS5 / 向量 / 图索引；融合关键词、向量与图信号，经 cross-encoder 重排和二次检索后，召回率从 <b>约 40% 提升至约 78%（高 38 个百分点）</b>，非文本文件识别准确率 <b>&gt;90%</b>，并通过 19 个 pytest 套件持续跟踪精确率 / 召回率 / F1。</li>
+      <li><b>长任务上下文。</b> 为避免长时间写代码时丢掉目标和进度，评估 Herdr + Pi Agent 的持久并行会话与子 Agent 拆分，再用结构化压缩和分支摘要，在会话之间保留目标、决策与文件操作。</li>
+    </ul>
+  </div>
 
-    <section>
-        <h2>教育背景</h2>
-        <div class="item">
-            <div class="head">
-                <span class="title">香港大学</span>
-                <span class="date">2025 – 2026</span>
-            </div>
-            <div class="sub">计算机科学硕士（AI / ML / NLP）· GPA 3.52/4.3</div>
-        </div>
-        <div class="item">
-            <div class="head">
-                <span class="title">郑州大学</span>
-                <span class="date">2021 – 2025</span>
-            </div>
-            <div class="sub">软件工程学士 · GPA 3.44/4.0 · IELTS 7.5</div>
-        </div>
-    </section>
+  <div class="item">
+    <div class="head">
+      <span class="title"><a href="https://github.com/MarkfuGod/skillios" target="_blank">Skillios（ItsMyGoal）</a>— 自然语言 → 可运行的 Agent 任务</span>
+      <span class="date">2025.06 – 至今</span>
+    </div>
+    <div class="sub">SwiftUI + SwiftData · FastAPI + PostgreSQL · AWS（CDK、ECS Fargate、RDS）· <a href="https://testflight.apple.com/join/FVfXajpn" target="_blank">TestFlight 测试版</a></div>
+    <ul>
+      <li><b>从目标到执行。</b> 为将模糊的自然语言目标变成可控操作，构建 iOS 客户端、FastAPI/PostgreSQL 后端与 AWS 部署；Agent 通过约 10 个函数调用工具生成可运行技能树，写入数据库前必须由用户确认，并通过 TestFlight 发布。</li>
+      <li><b>安全并行。</b> 为在避免写冲突的同时降低多工具延迟，将只读工具并行化、数据库写操作串行化；延迟从 <b>约 8.2 秒降至约 3.4 秒（约 2.4×）</b>，并配套 JWT 认证、快照同步、用户级 LLM 配额及 Alembic 迁移。</li>
+    </ul>
+  </div>
 
-    <section>
-        <h2>获奖</h2>
-        <ul>
-            <li>机器人、自动化与物联网项目 — 最佳展示团队 &amp; Distinction（2024）</li>
-            <li>「互联网<sup>+</sup>」大赛 — 校级一等奖、省级三等奖（2023）</li>
-            <li>软件著作权 — 手部康复平台</li>
-        </ul>
-    </section>
+</section>
+
+<section>
+  <h2>技能</h2>
+  <div class="skill-grid">
+    <span class="k">编程语言</span><span>Go、TypeScript / JavaScript、Python、Swift、Java、SQL、C/C++</span>
+    <span class="k">AI / LLM 系统</span><span>Agentic RAG、多 Agent 系统、MCP、工具调用、OpenClaw、Hermes Agent、Herdr、Pi Agent、CrewAI、vLLM、LiteLLM、Ollama、PyTorch、FSDP、Chroma</span>
+    <span class="k">后端与平台</span><span>Go、PostgreSQL（Neon serverless）、Redis、FastAPI、Node.js、Stripe 支付、REST / OpenAPI、Docker、AWS（CDK、ECS、RDS）、GCP Cloud Run、Prometheus / Grafana、CI/CD</span>
+    <span class="k">Web 与移动端</span><span>Next.js、React、Tailwind CSS、SwiftUI / SwiftData、Electron、Phaser 3、Three.js</span>
+  </div>
+</section>
+
+<section>
+  <h2>教育背景</h2>
+  <div class="item">
+    <div class="head">
+      <span class="title">香港大学，香港</span>
+      <span class="date">2025 – 2026</span>
+    </div>
+    <div class="sub">计算机科学硕士（人工智能 / 机器学习 / 自然语言处理）· GPA 3.52/4.3</div>
+  </div>
+  <div class="item">
+    <div class="head">
+      <span class="title">郑州大学，中国郑州</span>
+      <span class="date">2021 – 2025</span>
+    </div>
+    <div class="sub">软件工程学士 · GPA 3.44/4.0（均分 86.12/100）· 雅思 7.5</div>
+  </div>
+</section>
+
+<section>
+  <h2>奖项与语言</h2>
+  <ul>
+    <li><b>荣誉。</b> 机器人、自动化与物联网项目 — 最佳展示团队及优异成绩，个人最高名次（2024）· 中关村创客大赛郑州大学赛区一等奖（2024）</li>
+    <li><b>创新成果。</b> 互联网+ 竞赛校级一等奖、省级三等奖（2023）· 登记软件著作权：灵动指尖手部康复平台</li>
+    <li><b>语言。</b> 英语（流利，雅思 7.5）· 普通话（母语）· 粤语（日常会话）</li>
+  </ul>
+</section>
 </body>
 </html>
